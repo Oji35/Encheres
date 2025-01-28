@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Détail de l'Enchère</title>
+<!--    <script>-->
+<!--        function validateBid() {-->
+<!--            var meilleureOffre = parseInt(document.getElementById("meilleureOffre").innerText);-->
+<!--            var montant = parseInt(document.getElementById("montant").value);-->
+
+<!--            if (montant <= meilleureOffre) {-->
+<!--                alert("Votre enchère doit être supérieure à la meilleure offre actuelle.");-->
+<!--                return false;-->
+<!--            }-->
+<!--            return true;-->
+<!--        }-->
+<!--    </script>-->
+</head>
+<body>
+<h1>Détail vente</h1>
+<h2 th:text="${article.nom}"></h2>
+<p><strong>Description :</strong> <span th:text="${article.description}"></span></p>
+<p><strong>Catégorie :</strong> <span th:text="${article.categorie}"></span></p>
+<p><strong>Meilleure offre :</strong> <span id="meilleureOffre" th:text="${article.meilleureOffre}"></span> pts par <span th:text="${article.nomOffreur}"></span></p>
+<p><strong>Mise à prix :</strong> <span th:text="${article.miseAPrix} + ' points'"></span></p>
+<p><strong>Fin de l'enchère :</strong> <span th:text="${article.dateFin}"></span></p>
+<p><strong>Retrait :</strong> <span th:text="${article.adresseRetrait}"></span></p>
+<p><strong>Vendeur :</strong> <span th:text="${article.vendeur}"></span></p>
+
+<form action="/encherir" method="post" onsubmit="return validateBid()">
+    <input type="hidden" name="articleId" th:value="${article.id}"/>
+    <label>Ma proposition :</label>
+    <input type="number" id="montant" name="montant" required/>
+    <button type="submit">Enchérir</button>
+</form>
+</body>
+</html>
