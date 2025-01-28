@@ -13,7 +13,6 @@ public class EnchereController {
 
     private final EnchereService enchereService;
 
-
     public EnchereController(EnchereService enchereService) {
         this.enchereService = enchereService;
     }

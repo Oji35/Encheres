@@ -6,6 +6,15 @@ public class Enchere {
 
     private Date dateEnchere;
     private int montantEnchere;
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getMontantEnchere() {
         return montantEnchere;
