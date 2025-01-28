@@ -12,11 +12,11 @@ public interface UtilisateurDAO {
 
     List<Utilisateur> readAllUtilisateurs();
 
+    void CallIDForDelete(Utilisateur utilisateur);
+
     void updateUtilisateur(Utilisateur utilisateur);
 
-    void deleteUtilisateur(int id);
-
-    void deleteUtilisateur(Utilisateur utilisateur);
+    void deleteUtilisateur(long id);
 
 
 
