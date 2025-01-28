@@ -29,4 +29,3 @@ public class Categorie {
         this.libelle = libelle;
     }
 }
-
