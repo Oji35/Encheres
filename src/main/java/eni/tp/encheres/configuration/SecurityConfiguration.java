@@ -52,7 +52,7 @@ public class SecurityConfiguration {
         http
                 .authorizeHttpRequests(auth -> {
 
-                    auth.anyRequest().denyAll();
+                    auth.anyRequest().permitAll();
                 })
                 .formLogin(withDefaults())
 

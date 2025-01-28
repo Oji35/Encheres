@@ -21,4 +21,6 @@ public interface EnchereService {
     Enchere getEncherebyID(int id);
 
     void update(Enchere enchere);
+
+    List<Enchere> getAllArticles();
 }
