@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html  xmlns:th="http://www.thymeleaf.org" lang="fr" data-th-fragment="layout(entete)" >
+<html xmlns:th="http://www.thymeleaf.org" lang="fr" data-th-fragment="layout(title,main)">>
 
 <head>
   <meta charset="UTF-8">
@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<header data-th-replace="${entete}"> </header>
+<header data-th-replace="${main}"> </header>
 <div class="container">
 
   <h1>Nouvelle vente</h1>

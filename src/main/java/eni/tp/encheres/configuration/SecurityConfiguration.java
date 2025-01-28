@@ -3,9 +3,12 @@ package eni.tp.encheres.configuration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
@@ -15,6 +18,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+import static org.springframework.security.config.Customizer.withDefaults;
 
 import javax.sql.DataSource;
 import java.util.Locale;
@@ -26,49 +30,41 @@ public class SecurityConfiguration {
     @Bean
     UserDetailsManager userDetailsManager(DataSource dataSource) {
         JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
-        jdbcUserDetailsManager.setUsersByUsernameQuery("select pseudo,password,1 from utilisateur where pseudo=?");
-        jdbcUserDetailsManager.setAuthoritiesByUsernameQuery("select pseudo,role from roles where pseudo=?");
+        jdbcUserDetailsManager.setUsersByUsernameQuery("SELECT pseudo, mot_de_passe, administrateur FROM UTILISATEURS WHERE pseudo=?");
+        jdbcUserDetailsManager.setAuthoritiesByUsernameQuery(
+                "SELECT pseudo, 'ROLE_USER' FROM UTILISATEURS WHERE pseudo=?");
 
         return jdbcUserDetailsManager;
     }
 
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
     /**
      * Restriction des URLs selon la connexion utilisateur et leurs rôles
      */
+
+
     @Bean
-    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests( auth -> {
+    SecurityFilterChain filterChain(HttpSecurity http, DataSourceTransactionManager dataSourceTransactionManager) throws Exception {
 
-            auth.requestMatchers(HttpMethod.GET,"/creer").hasRole("ADMIN");
-            auth.requestMatchers(HttpMethod.POST,"/creer").hasRole("ADMIN");
-            auth.requestMatchers(HttpMethod.GET,"/").permitAll();
-            auth.requestMatchers(HttpMethod.GET,"/Liste").permitAll();
-            auth.requestMatchers(HttpMethod.GET,"/detail").hasRole("ADMIN");
-            auth.requestMatchers(HttpMethod.POST,"/Liste").hasRole("ADMIN");
-            auth.requestMatchers(HttpMethod.POST,"/modifier").hasRole("ADMIN");
-            auth.requestMatchers(HttpMethod.GET,"/modifier").hasRole("ADMIN");
+        http
+                .authorizeHttpRequests(auth -> {
 
-            //Permettre à tous les utilisateurs d'afficher correctement les images et la css
-            auth.requestMatchers("/css/*").permitAll();
-            auth.requestMatchers("/images/*").permitAll();
+                    auth.anyRequest().denyAll();
+                })
+                .formLogin(withDefaults())
 
-            auth.anyRequest().permitAll();
-        });
-        //formulaire de connexion par défaut
-        http.formLogin(Customizer.withDefaults()).formLogin(f -> f
-                        .loginPage("/mylogin")
-                        .defaultSuccessUrl("/")
+                .logout((logout) -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/Liste")
                         .permitAll()
-                        .failureUrl("/error"))
-                .logout(logout -> logout
-                        .invalidateHttpSession(true).clearAuthentication(true)
-                        .deleteCookies("JSESSIONID")
-                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                        .logoutSuccessUrl("/").permitAll());
+                ); // Custom login page URL
 
         return http.build();
-
-
     }
+
 }
+
 
