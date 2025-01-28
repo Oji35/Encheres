@@ -5,7 +5,9 @@ import eni.tp.encheres.bo.Enchere;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping
@@ -27,5 +29,11 @@ public class EnchereController {
         var enchere = enchereService.getEnchere();
         model.addAttribute("enchere", enchere);
         return "ListeEnchere";
+    }
+
+    @PostMapping("/liste")
+    public String supprimerEnchere(@RequestParam int id) {
+        enchereService.removeEnchere(id); //va sup lobjet de la liste a mettre seulment pour le vendeur
+        return "redirect:/liste";
     }
 }

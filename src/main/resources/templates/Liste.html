@@ -1,0 +1,40 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Liste des objets en vente</title>
+</head>
+<body>
+
+<main>
+
+  <div class="liste">
+    <table>
+      <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="e : ${enchere}">
+        <td th:text="${e.nomObjet}"></td>
+        <td>
+            <span class="action">
+              <a th:href="@{/detail(id=${e.id})}">Détail</a>
+              <a th:href="@{/modifier(id=${e.id})}">Modifier</a>
+
+
+              <form method="post" th:action="@{/liste}" style="display:inline;">
+                <input type="hidden" name="id" th:value="${e.id}">
+                <button type="submit" class="link-button">Supprimer</button>
+              </form>
+            </span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</main>
+
+</body>
+</html>

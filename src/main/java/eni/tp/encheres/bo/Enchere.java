@@ -7,6 +7,11 @@ public class Enchere {
     private Date dateEnchere;
     private int montantEnchere;
     private int id;
+    private String nomObjet;
+
+    public String getNomObjet() {return nomObjet;}
+
+    public void setNomObjet(String nomObjet) {this.nomObjet = nomObjet;}
 
     public int getId() {
         return id;
