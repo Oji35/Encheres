@@ -1,4 +1,4 @@
-package eni.tp.encheres.dao;
+package eni.tp.encheres.dal;
 
 import eni.tp.encheres.bo.Utilisateur;
 
@@ -12,7 +12,7 @@ public interface UtilisateurDAO {
 
     List<Utilisateur> readAllUtilisateurs();
 
-    void CallIDForDelete(Utilisateur utilisateur);
+    void CallIDAndDelete(Utilisateur utilisateur);
 
     void updateUtilisateur(Utilisateur utilisateur);
 

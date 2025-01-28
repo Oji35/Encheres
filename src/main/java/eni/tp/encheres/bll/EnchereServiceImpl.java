@@ -40,4 +40,9 @@ public class EnchereServiceImpl implements EnchereService {
             }
         }
     }
+
+    @Override
+    public List<Enchere> getAllArticles() {
+        return List.of();
+    }
 }

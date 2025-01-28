@@ -2,7 +2,7 @@ package eni.tp.encheres.bo;
 import java.time.*;
 
 public class ArticleVendu {
-    private String noArticle;
+    private long noArticle;
     private String nomArticle;
     private String description;
     private LocalDate dateDebutEncheres;
@@ -10,22 +10,22 @@ public class ArticleVendu {
     private String prix_initial;
     private String prixVente;
 
-    public ArticleVendu(String noArticle, String nomArticle, String description, LocalDate dateFinEncheres, LocalDate dateDebutEncheres, String miseAPrix, String prixVente) {
+    public ArticleVendu(long noArticle, String nomArticle, String description, LocalDate dateFinEncheres, LocalDate dateDebutEncheres, String prix_initial, String prixVente) {
         this.noArticle = noArticle;
         this.nomArticle = nomArticle;
         this.description = description;
         this.dateFinEncheres = dateFinEncheres;
         this.dateDebutEncheres = dateDebutEncheres;
-        this.prix_initial = miseAPrix;
+        this.prix_initial = prix_initial;
         this.prixVente = prixVente;
     }
 
 
-    public String getNoArticle() {
+    public long getNoArticle() {
         return noArticle;
     }
 
-    public void setNoArticle(String noArticle) {
+    public void setNoArticle(long noArticle) {
         this.noArticle = noArticle;
     }
 
@@ -61,12 +61,12 @@ public class ArticleVendu {
         this.dateFinEncheres = dateFinEncheres;
     }
 
-    public String getMiseAPrix() {
+    public String getPrix_initial() {
         return prix_initial;
     }
 
-    public void setMiseAPrix(String miseAPrix) {
-        this.prix_initial = miseAPrix;
+    public void setPrix_initial(String prix_initial) {
+        this.prix_initial = prix_initial;
     }
 
     public String getPrixVente() {
