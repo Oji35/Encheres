@@ -7,7 +7,7 @@ public class ArticleVendu {
     private String description;
     private LocalDate dateDebutEncheres;
     private LocalDate dateFinEncheres;
-    private String miseAPrix;
+    private String prix_initial;
     private String prixVente;
 
     public ArticleVendu(String noArticle, String nomArticle, String description, LocalDate dateFinEncheres, LocalDate dateDebutEncheres, String miseAPrix, String prixVente) {
@@ -16,9 +16,10 @@ public class ArticleVendu {
         this.description = description;
         this.dateFinEncheres = dateFinEncheres;
         this.dateDebutEncheres = dateDebutEncheres;
-        this.miseAPrix = miseAPrix;
+        this.prix_initial = miseAPrix;
         this.prixVente = prixVente;
     }
+
 
     public String getNoArticle() {
         return noArticle;
@@ -61,11 +62,11 @@ public class ArticleVendu {
     }
 
     public String getMiseAPrix() {
-        return miseAPrix;
+        return prix_initial;
     }
 
     public void setMiseAPrix(String miseAPrix) {
-        this.miseAPrix = miseAPrix;
+        this.prix_initial = miseAPrix;
     }
 
     public String getPrixVente() {

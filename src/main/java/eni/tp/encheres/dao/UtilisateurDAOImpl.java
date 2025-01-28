@@ -16,7 +16,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 
     static final String SELECT_ALL = "SELECT * from UTILISATEURS";
     static final String SELECT_BY_ID = "SELECT * from UTILISATEURS where no_utilisateur=?";
-    static final String INSERT = "INSERT  INTO UTILISATEURS ([pseudo],[nom],[prenom],[email],[telephone],[rue],[code_postal],[ville],[mot_de_passe],[credit],[administrateur]) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+    static final String INSERT = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
     static final String DELETE = "DELETE FROM UTILISATEURS where no_utilisateur=?";
     static final String UPDATE = "UPDATE UTILISATEURS SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?, credit=?, administrateur=? WHERE no_utilisateur=?";
     static final String SELECT_ALL_USERS = "SELECT * from UTILISATEURS";
