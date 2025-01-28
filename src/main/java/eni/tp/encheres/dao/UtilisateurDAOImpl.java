@@ -75,8 +75,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 
         var keyHolder = new GeneratedKeyHolder();
         namedParameterJdbcTemplate.update(
-                "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) " +
-                        "VALUES (:pseudo, :nom, :prenom, :email, :telephone, :rue, :code_postal, :ville, :mot_de_passe, :credit, :administrateur)",
+                INSERT,
                 namedparameters,
                 keyHolder
         );
