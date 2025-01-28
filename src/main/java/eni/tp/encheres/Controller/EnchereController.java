@@ -1,7 +1,9 @@
 package eni.tp.encheres.Controller;
 
 import eni.tp.encheres.bll.EnchereService;
+import eni.tp.encheres.bll.UtilisateurService;
 import eni.tp.encheres.bo.Enchere;
+import eni.tp.encheres.bo.Utilisateur;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,14 +29,14 @@ public class EnchereController {
     }
 
 
-        @GetMapping("/accueil-encheres")
-        public String accueil(Model model) {
-            List<Enchere> articles = enchereService.getAllArticles();
-            model.addAttribute("articles", articles);
-            model.addAttribute("keyword", "");
-            model.addAttribute("category", "Toutes");
-            return "accueil-encheres";
-        }
+    @GetMapping("/accueil-encheres")
+    public String accueil(Model model) {
+        List<Enchere> articles = enchereService.getAllArticles();
+        model.addAttribute("articles", articles);
+        model.addAttribute("keyword", "");
+        model.addAttribute("category", "Toutes");
+        return "accueil-encheres";
+    }
 
 
     @GetMapping("/view-encheres")
@@ -49,4 +51,7 @@ public class EnchereController {
         enchereService.removeEnchere(id); //va sup lobjet de la liste a mettre seulment pour le vendeur
         return "redirect:/liste";
     }
+
+
+
 }
