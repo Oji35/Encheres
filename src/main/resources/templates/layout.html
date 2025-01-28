@@ -1,10 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="fr" data-th-fragment="layout(entete,main)">>
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
 </head>
+
 <body>
+<header>
+    <a data-th-href="accueil-encheres.htlm"><img src="" alt="image redirection accueil">Accueil</a>
+    <button onclick="window.location.reload();">Raffraichir la page</button>
+    <button onclick="history.back();">Retour</button>
+</header>
+<nav>
+    <ul>
+        <li data-th-if="${!#authorization.expression('isAuthenticated()')}">
+            <a href="/login">Se connecter</a>
+        </li>
+        <li data-th-if="${#authorization.expression('isAuthenticated()')}">
+            <a href="/logout">Se deconnecter</a>
+        </li>
+    </ul>
+</nav>
 
 </body>
 </html>
