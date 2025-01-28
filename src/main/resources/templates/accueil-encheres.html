@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org" lang="fr" data-th-fragment="layout(entete)" >
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+<header data-th-replace="${entete}"> </header>
+<main>
+    <h1>Liste des enchères</h1>
+        <div class="filtres">
+            <input type="text" name="keyword" placeholder="Le nom de l'article contient" th:value="${keyword}">
+            <select name="category">
+                <option value="Toutes" th:selected="${category == null || category == 'Toutes'}">Toutes</option>
+                <option value="Informatique" th:selected="${category == 'Informatique'}">Informatique</option>
+                <option value="Ameublement" th:selected="${category == 'Ameublement'}">Ameublement</option>
+                <option value="Vêtement" th:selected="${category == 'Vêtement'}">Vêtement</option>
+                <option value="Sport&Loisirs" th:selected="${category == 'Sport&Loisirs'}">Sport & Loisirs</option>
+            </select>
+            <input type="submit" value="Rechercher">
+        </div>
+
+            //tentative de creation des article avec chaque parametres
+
+            <div class="listeArticles">
+                <div th:each="article : ${articles}" class="article-item">
+                    <img th:src="@{${article.imageUrl}}" th:alt="${article.title}">
+                    <h2 th:text="${article.title}"></h2>
+                    <p>Prix : <span th:text="${article.price}"></span> points</p>
+                    <p>Fin de l'enchère : <span th:text="${article.endDate}"></span></p>
+                    <p>Vendeur : <span th:text="${article.seller}"></span></p>
+                </div>
+            </div>
+
+</main>
+</body>
+</html>
+
+

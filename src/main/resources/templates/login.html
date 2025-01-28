@@ -1,0 +1,27 @@
+<html  xmlns:th="http://www.thymeleaf.org" lang="fr" data-th-fragment="layout(entete)" >
+<head>
+    <meta charset="UTF-8">
+    <title>Page de connexion</title>
+</head>
+
+<body>
+<main>
+    <form data-th-action="@{/login}" method="post">
+        <h1>Connectez-vous</h1>
+        <ul class="flex-outer">
+            <li>
+                <label for="inputUsername" >Votre adresse mail</label>
+                <input id="inputUsername" type="text" name="username"/>
+            </li>
+            <li>
+                <label for="inputPwd">Votre mot de passe</label>
+                <input id="inputPwd" type="password" name="password"/>
+            </li>
+            <li>
+                <button type="submit">Se connecter</button>
+            </li>
+        </ul>
+    </form>
+</main>
+</body>
+</html>
