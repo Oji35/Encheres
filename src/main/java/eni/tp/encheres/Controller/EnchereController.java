@@ -21,7 +21,7 @@ public class EnchereController {
 
     @GetMapping("/")
     public String Home(Model model) {
-        return "Index";
+        return "index";
     }
 
     @GetMapping("/liste")
@@ -36,4 +36,8 @@ public class EnchereController {
         enchereService.removeEnchere(id); //va sup lobjet de la liste a mettre seulment pour le vendeur
         return "redirect:/liste";
     }
+
+
+
+
 }

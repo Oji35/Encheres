@@ -4,14 +4,15 @@
 <head>
     <meta charset="UTF-8">
 
-    <title Liste_Enchères"></title>
+    <title>Liste Enchères</title>
 </head>
 
 <body>
 <header>
-    <a data-th-href="accueil-encheres.htlm"><img th:src="@{/images/logo_ENI.png}" alt="Photo de Profil" alt="image redirection accueil">Accueil</a>
-    <button onclick="window.location.reload();">Raffraichir la page</button>
-    <button onclick="history.back();">Retour</button>
+    <!-- <img th:src="@{/static/images/logo_ENI.png}" alt="Photo de Profil"> -->
+    <a data-th-href="accueil-encheres.htlm">Accueil</a>
+    <button>Rafraichir la page</button>
+
 </header>
 <main>
     <h1>Liste des enchères</h1>
@@ -27,7 +28,7 @@
             <input type="submit" value="Rechercher">
         </div>
 
-            //tentative de creation des article avec chaque parametres
+<!--            tentative de creation des article avec chaque parametres-->
 
             <div class="listeArticles">
                 <div th:each="article : ${articles}" class="article-item">
