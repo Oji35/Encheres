@@ -5,24 +5,28 @@
 <main>
     <h1>Liste des enchères</h1>
     <div class="filtres">
+        <form action="/submit" method="POST">
         <input type="text" name="keyword" placeholder="Le nom de l'article contient" th:value="${keyword}">
-        <form action="/submit" method="POST">>
+
             <label>
-                <input type="checkbox" value="Toutes"
-                       th:selected="${category == null || category == 'Toutes'}">Toutes</label>
+                <input type="checkbox" name="category" value="Toutes" th:checked="${category == null || category == 'Toutes'}">Toutes
+            </label>
             <label>
-                <input type="checkbox" value="Informatique"
-                       th:selected="${category == 'Informatique'}">Informatique</label>
+                <input type="checkbox" name="category" value="Informatique" th:checked="${category == 'Informatique'}">Informatique
+            </label>
             <label>
-                <input type="checkbox" value="Ameublement"
-                       th:selected="${category == 'Ameublement'}">Ameublement</label>
+                <input type="checkbox" name="category" value="Ameublement" th:checked="${category == 'Ameublement'}">Ameublement
+            </label>
             <label>
-                <input type="checkbox" value="Vêtement" th:selected="${category == 'Vêtement'}">Vêtement</label>
+                <input type="checkbox" name="category" value="Vêtement" th:checked="${category == 'Vêtement'}">Vêtement
+            </label>
             <label>
-                <input type="checkbox" value="Sport&Loisirs" th:selected="${category == 'Sport&Loisirs'}">Sport &
-                Loisirs</label>>
+                <input type="checkbox" name="category" value="Sport&Loisirs" th:checked="${category == 'Sport&Loisirs'}">Sport & Loisirs
+            </label>
+
+            <input type="submit" value="Rechercher">
         </form>
-        <input type="submit" value="Rechercher">
+
     </div>
 
     <!--            tentative de creation des article avec chaque parametres-->
