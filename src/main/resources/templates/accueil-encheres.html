@@ -23,7 +23,7 @@
     <h1>Liste des enchères</h1>
     <div class="filtres">
         <input type="text" name="keyword" placeholder="Le nom de l'article contient" th:value="${keyword}">
-        <select name="category" multiple="multiple" size="5" >
+        <select name="category" multiple="multiple" size="5">
             <option value="Toutes" th:selected="${category == null || category == 'Toutes'}">Toutes</option>
             <option value="Informatique" th:selected="${category == 'Informatique'}">Informatique</option>
             <option value="Ameublement" th:selected="${category == 'Ameublement'}">Ameublement</option>

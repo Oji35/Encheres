@@ -33,7 +33,7 @@
     <h2 th:text="${article.nom}"></h2>
     <p><strong>Description :</strong> <span th:text="${article.description}"></span></p>
     <p><strong>Catégorie :</strong> <span th:text="${article.categorie}"></span></p>
-    <p><strong>Meilleure offre :</strong> <span id="meilleureOffre" th:text="${article.meilleureOffre}+'pts par'+${utilisateur.meilleureOffre}"></span></p>
+    <p><strong>Meilleure offre :</strong> <span id="meilleureOffre"th:text="${article.meilleureOffre}+'pts par'+${utilisateur.meilleureOffre}"></span></p>
     <p><strong>Mise à prix :</strong> <span th:text="${article.miseAPrix} + ' points'"></span></p>
     <p><strong>Fin de l'enchère :</strong> <span th:text="${article.dateFin}"></span></p>
     <p><strong>Retrait :</strong> <span th:text="${article.adresseRetrait}"></span></p>
