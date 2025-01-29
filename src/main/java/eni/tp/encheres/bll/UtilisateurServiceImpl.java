@@ -1,33 +1,46 @@
 package eni.tp.encheres.bll;
 
-import eni.tp.encheres.bo.Enchere;
 import eni.tp.encheres.bo.Utilisateur;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class UtilisateurServiceImpl implements UtilisateurService {
 
-    private final List<Utilisateur> utilisateurList = new ArrayList<>();
+    private List<Utilisateur> utilisateurs = new ArrayList<>();
 
     @Override
     public void addUtilisateur(Utilisateur utilisateur) {
-        utilisateurList.add(utilisateur);
+        utilisateurs.add(utilisateur);
     }
 
     @Override
-    public void removeutilisateur(int numeroUtilisateur) {
-        utilisateurList.removeIf(e -> e.getnumeroUtilisateur() == numeroUtilisateur);
+    public void removeUtilisateur(int id) {
+        utilisateurs.removeIf(u -> u.getNumeroUtilisateur() == id);
     }
 
     @Override
-    public List<Utilisateur> getnumeroUtilisateur() {
-        return utilisateurList;
+    public List<Utilisateur> getUtilisateur() {
+        return utilisateurs;
     }
 
     @Override
-    public Enchere getEncherebyID(int id) {
-        return utilisateurList.stream().filter(e -> e.getnumeroUtilisateur() == numeroUtilisateur).findFirst().orElse(null);
+    public Utilisateur getUtilisateurbyID(int id) {
+        return utilisateurs.stream()
+                .filter(u -> u.getNumeroUtilisateur() == id)
+                .findFirst()
+                .orElse(null);
     }
 
+    @Override
+    public void update(Utilisateur utilisateur) {
+        for (int i = 0; i < utilisateurs.size(); i++) {
+            if (utilisateurs.get(i).getNumeroUtilisateur() == utilisateur.getNumeroUtilisateur()) {
+                utilisateurs.set(i, utilisateur);
+                return;
+            }
+        }
+    }
 }
