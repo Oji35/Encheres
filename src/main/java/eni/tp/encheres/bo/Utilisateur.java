@@ -2,21 +2,21 @@ package eni.tp.encheres.bo;
 
 public class Utilisateur {
 
-    private long numeroUtilisateur;
+    private int numeroUtilisateur;
     private String pseudo;
     private String nom;
     private String prenom;
     private String email;
-    private long numeroTelephone;
+    private int numeroTelephone;
     private String rue;
-    private long codePostal;
+    private int codePostal;
     private String ville;
     private String motDePasse;
     private int credit;
     private boolean admin= false;
 
-    public Utilisateur(long numeroUtilisateur, String pseudo, String nom, String prenom,
-                       String email, long numeroTelephone, String rue, long codePostal,
+    public Utilisateur(int numeroUtilisateur, String pseudo, String nom, String prenom,
+                       String email, int numeroTelephone, String rue, int codePostal,
                        String ville, String motDePasse, int credit, boolean admin) {
 
         this.numeroUtilisateur = numeroUtilisateur;
@@ -33,11 +33,11 @@ public class Utilisateur {
         this.admin = admin;
     }
 
-    public long getNumeroUtilisateur() {
+    public int getNumeroUtilisateur() {
         return numeroUtilisateur;
     }
 
-    public void setNumeroUtilisateur(long numeroUtilisateur) {
+    public void setNumeroUtilisateur(int numeroUtilisateur) {
         this.numeroUtilisateur = numeroUtilisateur;
     }
 
@@ -73,11 +73,11 @@ public class Utilisateur {
         this.email = email;
     }
 
-    public long getNumeroTelephone() {
+    public int getNumeroTelephone() {
         return numeroTelephone;
     }
 
-    public void setNumeroTelephone(long numeroTelephone) {
+    public void setNumeroTelephone(int numeroTelephone) {
         this.numeroTelephone = numeroTelephone;
     }
 
@@ -89,11 +89,11 @@ public class Utilisateur {
         this.rue = rue;
     }
 
-    public long getCodePostal() {
+    public int getCodePostal() {
         return codePostal;
     }
 
-    public void setCodePostal(long codePostal) {
+    public void setCodePostal(int codePostal) {
         this.codePostal = codePostal;
     }
 

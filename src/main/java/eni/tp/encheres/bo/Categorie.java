@@ -2,22 +2,22 @@ package eni.tp.encheres.bo;
 
 public class Categorie {
 
-    private String noCategorie;
+    private int noCategorie;
     private String libelle;
 
 
 
-    public Categorie (String noCategorie, String libelle) {
+    public Categorie (int noCategorie, String libelle) {
         this.noCategorie = noCategorie;
         this.libelle = libelle;
 
     }
 
-    public String getNoCategorie() {
+    public int getNoCategorie() {
         return noCategorie;
     }
 
-    public void setNoCategorie(String noCategorie) {
+    public void setNoCategorie(int noCategorie) {
         this.noCategorie = noCategorie;
     }
 

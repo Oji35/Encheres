@@ -1,4 +1,4 @@
-package eni.tp.encheres.configuration;
+package eni.tp.encheres.Configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

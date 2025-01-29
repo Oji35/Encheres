@@ -2,15 +2,17 @@ package eni.tp.encheres.bo;
 import java.time.*;
 
 public class ArticleVendu {
-    private long noArticle;
+    private int noArticle;
     private String nomArticle;
     private String description;
     private LocalDate dateDebutEncheres;
     private LocalDate dateFinEncheres;
-    private String prix_initial;
-    private String prixVente;
+    private long prix_initial;
+    private long prixVente;
+    Utilisateur utilisateur;
+    Categorie categorie;
 
-    public ArticleVendu(long noArticle, String nomArticle, String description, LocalDate dateFinEncheres, LocalDate dateDebutEncheres, String prix_initial, String prixVente) {
+    public ArticleVendu(int noArticle, String nomArticle, String description, LocalDate dateFinEncheres, LocalDate dateDebutEncheres, long prix_initial, long prixVente) {
         this.noArticle = noArticle;
         this.nomArticle = nomArticle;
         this.description = description;
@@ -20,12 +22,19 @@ public class ArticleVendu {
         this.prixVente = prixVente;
     }
 
+    public int getNoUtilisateur() {
+        return utilisateur.getNumeroUtilisateur();
+    }
 
-    public long getNoArticle() {
+    public int getNoCategorie() {
+        return categorie.getNoCategorie();
+    }
+
+    public int getNoArticle() {
         return noArticle;
     }
 
-    public void setNoArticle(long noArticle) {
+    public void setNoArticle(int noArticle) {
         this.noArticle = noArticle;
     }
 
@@ -61,19 +70,19 @@ public class ArticleVendu {
         this.dateFinEncheres = dateFinEncheres;
     }
 
-    public String getPrix_initial() {
+    public long getPrix_initial() {
         return prix_initial;
     }
 
-    public void setPrix_initial(String prix_initial) {
+    public void setPrix_initial(long prix_initial) {
         this.prix_initial = prix_initial;
     }
 
-    public String getPrixVente() {
+    public long getPrixVente() {
         return prixVente;
     }
 
-    public void setPrixVente(String prixVente) {
+    public void setPrixVente(long prixVente) {
         this.prixVente = prixVente;
     }
 }
