@@ -1,24 +1,10 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<html data-th-replace="~{layout::layout(title=~{::title}, main=~{::main})}">
 
-<head>
-    <meta charset="UTF-8">
 
     <title> Liste_Enchères</title>
-</head>
 
-<body>
-<header>
-    <a data-th-href="accueil-encheres">
-        <div><img th:src="@{/images/logo_ENI.png}" alt="image redirection accueil"></div>
-    </a>
-    <li>
-        <button onclick="window.location.reload();">Raffraichir la page</button>
-    </li>
-    <li>
-        <button onclick="history.back();">Retour</button>
-    </li>
-</header>
+
+
 <main>
     <div class="container">
         <h1>ENI-Enchères</h1>
@@ -37,5 +23,5 @@
         </div>
     </div>
 </main>
-</body>
+
 </html>

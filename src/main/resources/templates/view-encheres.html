@@ -1,39 +1,8 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="fr" >
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html data-th-replace="~{layout::layout(title=~{::title}, main=~{::main})}">
+
   <title>Liste des Enchères</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-<header>
-  <div class="entete-gauche">
-  <a data-th-href="accueil-encheres">
-    <div><img th:src="@{/images/logo_ENI.png}" alt="image redirection accueil"></div>
-      </a>
-      <li>
-        <button onclick="window.location.reload();">Raffraichir la page</button>
-      </li>
-      <li>
-        <button onclick="history.back();">Retour</button>
-      </li>
-    </div>
-    <div class="entete-connexion">
-      <li>
-        <button>Enchères</button>
-      </li>
-      <li>
-        <button>Vendre un article</button>
-      </li>
-      <li>
-        <button>Mon profil</button>
-      </li>
-      <li>
-        <button>Déconnexion</button>
-      </li>
-    </div>
-</header>
+
+  <main>
 <div class="container">
   <h1>Liste des Enchères</h1>
   <form method="get" action="/articles">
@@ -73,5 +42,7 @@
     </div>
   </div>
 </div>
-</body>
+
+  </main>
+
 </html>

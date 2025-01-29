@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Page de connexion</title>
-</head>
+<html data-th-replace="~{layout::layout(title=~{::title}, main=~{::main})}">
 
-<body>
+    <title>Page de connexion</title>
+
+
+
 <main>
     <form data-th-action="@{/login}" method="post">
         <h1>Connectez-vous</h1>
@@ -24,5 +22,5 @@
         </ul>
     </form>
 </main>
-</body>
+
 </html>

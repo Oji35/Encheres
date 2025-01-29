@@ -1,25 +1,44 @@
-<!--<!DOCTYPE html>-->
-<!--<html xmlns:th="http://www.thymeleaf.org" lang="fr" data-th-fragment="layout(entete,main)">>-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--</head>-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr" data-th-fragment="layout(title,main)">>
+<head>
+    <meta charset="UTF-8">
+    <title data-th-replace="${title}"></title>
+</head>
 
-<!--<body>-->
-<!--<header>-->
-<!--    <a data-th-href="accueil-encheres.htlm"><img th:src="@{/static/images/logo_ENI.png}" alt="Photo de Profil" alt="image redirection accueil">Accueil</a>-->
-<!--    <button onclick="window.location.reload();">Raffraichir la page</button>-->
-<!--    <button onclick="history.back();">Retour</button>-->
-<!--</header>-->
-<!--<nav>-->
-<!--    <ul>-->
-<!--        <li data-th-if="${!#authorization.expression('isAuthenticated()')}">-->
-<!--            <a href="/login">Se connecter</a>-->
-<!--        </li>-->
-<!--        <li data-th-if="${#authorization.expression('isAuthenticated()')}">-->
-<!--            <a href="/logout">Se deconnecter</a>-->
-<!--        </li>-->
-<!--    </ul>-->
-<!--</nav>-->
+<body>
+<header>
+    <div class="entete-gauche">
+        <a data-th-href="accueil-encheres">
+            <div><img th:src="@{/images/logo_ENI.png}" alt="image redirection accueil"></div>
+        </a>
+        <ul>
+        <li>
+            <button onclick="window.location.reload();">Rafraichir la page</button>
+        </li>
+        <li>
+            <button onclick="history.back();">Retour</button>
+        </li>
+        </ul>
+    </div>
+    <div class="entete-connexion">
+        <ul>
+        <li>
+            <button>Enchères</button>
+        </li>
+        <li>
+            <button>Vendre un article</button>
+        </li>
+        <li>
+            <button>Mon profil</button>
+        </li>
+        <li>
+            <button>Déconnexion</button>
+        </li>
+        </ul>
+    </div>
+</header>
 
-<!--</body>-->
-<!--</html>-->
+<main data-th-replace="${main}"> </main>
+
+</body>
+</html>

@@ -1,16 +1,12 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="fr" >
+<html data-th-replace="~{layout::layout(title=~{::title}, main=~{::main})}">
 
-<head>
-  <meta charset="UTF-8">
-</head>
 
-<body>
-<header>
-  <a data-th-href="accueil-encheres.htlm"><img th:src="@{/static/logo_ENI.png}" alt="Photo de Profil" alt="image redirection accueil">Accueil</a>
-</header>
+<title>Modifier Profil</title>
+
+
+
   <main>
-    <body>
+
     <h1>Modifier le Profil</h1>
         <form action="/update-profile" method="post">
           <label>Pseudo:</label>
@@ -48,6 +44,7 @@
 
           <button type="submit">Enregistrer</button>
         </form>
-    </body>
+
   </main>
-</body>
+
+</html>

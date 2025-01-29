@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="fr" >
+<html data-th-replace="~{layout::layout(title=~{::title}, main=~{::main})}">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Nouvelle Vente</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-<header data-th-replace="${main}"> </header>
+
+<main>
 <div class="container">
 
   <h1>Nouvelle vente</h1>
@@ -81,5 +76,7 @@
 
   </form>
 </div>
-</body>
+
+</main>
+
 </html>
