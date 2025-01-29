@@ -30,4 +30,52 @@ public class UtilisateurController {
 
         return "ListeEnchere";
     }
+
+    @GetMapping("/modifier-profil")
+    public String modifierProfilForm(@RequestParam("id") int id, Model model) {
+        Utilisateur utilisateur = utilisateurService.getUtilisateurbyID(id);
+                model.addAttribute("utilisateur", utilisateur);
+        return "modifier-profil";
+    }
+
+
+    @PostMapping("/modifier-profil")
+    public String postModifierProfil(@ModelAttribute Utilisateur utilisateur,
+                                     @RequestParam String password,
+                                     @RequestParam String newpassword,
+                                     @RequestParam String confirmPassword,
+                                     Model model) {
+        Utilisateur utilisateurExistant = utilisateurService.getUtilisateurbyID(utilisateur.getNumeroUtilisateur());
+
+       // if (!passwordEncoder.matches(password, utilisateurExistant.getMotDePasse())) {
+        //    model.addAttribute("error", "L'ancien mot de passe est incorrect.");
+         //   return "modifier-profil";
+            //}
+        if (newpassword.equals(password)) {
+            model.addAttribute("error", "Le nouveau mot de passe doit être différent de l'ancien.");
+            return "modifier-profil";
+        }
+        if (!newpassword.equals(confirmPassword)) {
+            model.addAttribute("error", "La confirmation du mot de passe est incorrecte.");
+            return "modifier-profil";
+        }
+        //utilisateurExistant.setMotDePasse(passwordEncoder.encode(newpassword));
+        //utilisateurService.update(utilisateurExistant);
+
+        return "redirect:/utilisateur/profil";
+    }
+//A VOIR SI IL FAUT CREER UNE PAGE D INSCRIPTION OU PAS DONC JE REDIRECT SUR LE PROFIL
+
+    @GetMapping("/inscription")
+    public String inscriptionUtilisateur(Model model) {
+        model.addAttribute("utilisateur", utilisateurService.getUtilisateur());
+        return "redirect:/profil";
+    }
+    @PostMapping("/inscription")
+    public String creerUtilisateur(@ModelAttribute Utilisateur utilisateur,Model model){
+        utilisateurService.addUtilisateur(utilisateur);
+        return "redirect:/profil";
+    }
+
+
 }
