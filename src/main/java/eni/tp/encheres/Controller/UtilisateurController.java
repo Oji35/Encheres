@@ -4,8 +4,7 @@ import eni.tp.encheres.bll.UtilisateurService;
 import eni.tp.encheres.bo.Utilisateur;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping
@@ -28,7 +27,7 @@ public class UtilisateurController {
         model.addAttribute("nomProfil", utilisateur.getNom());
         model.addAttribute("emailProfil", utilisateur.getEmail());
 
-        return "ListeEnchere";
+        return "profil";
     }
 
     @GetMapping("/modifier-profil")
