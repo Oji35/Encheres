@@ -1,9 +1,43 @@
-<html data-th-replace="~{layout::layout(title=~{::title}, main=~{::main})}">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+
+<head>
+    <meta charset="UTF-8">
 
     <title> Liste_Enchères</title>
+</head>
 
+<body>
+<header>
+    <a data-th-href="accueil-encheres">
+        <div><img th:src="@{/images/logo_ENI.png}" alt="image redirection accueil"></div>
+    </a>
+    <li>
+        <button onclick="window.location.reload();">Raffraichir la page</button>
+    </li>
+    <li>
+        <button onclick="history.back();">Retour</button>
+    </li>
+</header>
 <main>
     <h1>Liste des enchères</h1>
+    <table>
+        <tr data-th-each="c : ${article}">
+            <td data-th-text="${c.getNomArticle}"></td>
+            <td>
+            <span class="action">
+                <a th:href="@{/detail(id=${c.id})}">Détail</a>
+                <a th:href="@{/modifier(id=${c.id})}">Modifier</a>
+                <form method="post" th:action="@{/Liste}" style="display:inline;">
+                    <input type="hidden" name="id" th:value="${c.id}">
+                    <button type="submit" class="link-button">Supprimer</button>
+                </form>
+            </span>
+            </td>
+        </tr>
+    </table>
+
+
     <div class="filtres">
         <form action="/submit" method="POST">
         <input type="text" name="keyword" placeholder="Le nom de l'article contient" th:value="${keyword}">
@@ -42,7 +76,7 @@
     </div>
 
 </main>
-
+</body>
 </html>
 
 
