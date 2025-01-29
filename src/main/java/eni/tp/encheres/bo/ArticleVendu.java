@@ -22,6 +22,25 @@ public class ArticleVendu {
         this.prixVente = prixVente;
     }
 
+    public Utilisateur getUtilisateur() {
+        return utilisateur;
+    }
+
+    public void setUtilisateur(Utilisateur utilisateur) {
+        this.utilisateur = utilisateur;
+    }
+
+    public Categorie getCategorie() {
+        return categorie;
+    }
+
+    public void setCategorie(Categorie categorie) {
+        this.categorie = categorie;
+    }
+
+    public ArticleVendu() {
+    }
+
     public int getNoUtilisateur() {
         return utilisateur.getNumeroUtilisateur();
     }

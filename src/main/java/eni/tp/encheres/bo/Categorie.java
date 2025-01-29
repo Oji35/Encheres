@@ -13,6 +13,9 @@ public class Categorie {
 
     }
 
+    public Categorie() {
+    }
+
     public int getNoCategorie() {
         return noCategorie;
     }

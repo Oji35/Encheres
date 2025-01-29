@@ -15,7 +15,27 @@ public class ArticleDAOImpl implements ArticleDAO {
 
     // Variables STRING pour les requêtes SQL
     static final String SELECT_ALL = "SELECT * from ARTICLES_VENDUS";
-    static final String SELECT_BY_ID = "SELECT * from ARTICLES_VENDUS where no_article=?";
+    static final String SELECT_BY_ID =  "SELECT \n" +
+            "    a.no_article,\n" +
+            "    a.nom_article,\n" +
+            "    a.description,\n" +
+            "    a.date_debut_encheres,\n" +
+            "    a.date_fin_encheres,\n" +
+            "    a.prix_initial,\n" +
+            "    a.prix_vente,\n" +
+            "    u.pseudo AS utilisateur_pseudo,\n" +
+            "    u.nom AS utilisateur_nom,\n" +
+            "    u.prenom AS utilisateur_prenom,\n" +
+            "    c.libelle AS categorie_libelle\n" +
+            "FROM \n" +
+            "    ARTICLES_VENDUS a\n" +
+            "JOIN \n" +
+            "    UTILISATEURS u ON a.no_utilisateur = u.no_utilisateur\n" +
+            "JOIN \n" +
+            "    CATEGORIES c ON a.no_categorie = c.no_categorie\n" +
+            "WHERE\n" +
+            "    a.no_article = ?";
+//            "SELECT * from ARTICLES_VENDUS where no_article=?";
     static final String INSERT = "INSERT INTO ARTICLES_VENDUS (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie) VALUES (?,?,?,?,?,?,?)";
     static final String DELETE = "DELETE FROM ARTICLES_VENDUS where no_article=?";
     static final String UPDATE = "UPDATE ARTICLES_VENDUS SET nom_article=?, description=?, date_debut_encheres=?, date_fin_encheres=?, prix_initial=?, prix_vente=?, no_utilisateur=?, no_categorie=? WHERE no_article=?";
@@ -23,23 +43,25 @@ public class ArticleDAOImpl implements ArticleDAO {
 
     NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     JdbcTemplate jdbcTemplate;
+    private ArticleRowMapper articleRowMapper;
 
 
-    public ArticleDAOImpl(JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+    public ArticleDAOImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate, JdbcTemplate jdbcTemplate, ArticleRowMapper articleRowMapper) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+        this.jdbcTemplate = jdbcTemplate;
+        this.articleRowMapper = articleRowMapper;
     }
 
     // READ ALL
     @Override
     public List<ArticleVendu> readAllArticles() {
-        return jdbcTemplate.query(SELECT_ALL, BeanPropertyRowMapper.newInstance(ArticleVendu.class));
+        return jdbcTemplate.query(SELECT_ALL, articleRowMapper);
     }
 
     // READ BY ID
     @Override
     public ArticleVendu readArticle(long id) {
-        return jdbcTemplate.queryForObject(SELECT_BY_ID, BeanPropertyRowMapper.newInstance(ArticleVendu.class), id);
+        return jdbcTemplate.queryForObject(SELECT_BY_ID, articleRowMapper, id);
     }
 
     // UPDATE

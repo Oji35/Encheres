@@ -37,6 +37,9 @@ public class Utilisateur {
         return numeroUtilisateur;
     }
 
+    public Utilisateur() {
+    }
+
     public void setNumeroUtilisateur(int numeroUtilisateur) {
         this.numeroUtilisateur = numeroUtilisateur;
     }
