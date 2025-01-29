@@ -22,6 +22,10 @@ public class ArticleVendu {
         this.prixVente = prixVente;
     }
 
+    public ArticleVendu() {
+        // Constructeur sans argument nécessaire pour Spring
+    }
+
     public int getNoUtilisateur() {
         return utilisateur.getNumeroUtilisateur();
     }

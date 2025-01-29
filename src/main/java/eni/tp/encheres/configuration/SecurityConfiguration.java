@@ -1,8 +1,8 @@
-// SECURITY EN STAND-BY POUR LE MOMENT
-// ON LA REBRANCHERA QUAND ON AURA DEJA TERMINE LA PLUPART DES AUTRES TRUCS
-
-
-
+//// SECURITY EN STAND-BY POUR LE MOMENT
+//// ON LA REBRANCHERA QUAND ON AURA DEJA TERMINE LA PLUPART DES AUTRES TRUCS
+//
+//
+//
 //package eni.tp.encheres.configuration;
 //
 //import org.springframework.context.annotation.Bean;
@@ -71,5 +71,5 @@
 //    }
 //
 //}
-
-
+//
+//
