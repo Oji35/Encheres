@@ -23,13 +23,22 @@
     <h1>Liste des enchères</h1>
     <div class="filtres">
         <input type="text" name="keyword" placeholder="Le nom de l'article contient" th:value="${keyword}">
-        <select name="category" multiple="multiple" size="5" >
-            <option value="Toutes" th:selected="${category == null || category == 'Toutes'}">Toutes</option>
-            <option value="Informatique" th:selected="${category == 'Informatique'}">Informatique</option>
-            <option value="Ameublement" th:selected="${category == 'Ameublement'}">Ameublement</option>
-            <option value="Vêtement" th:selected="${category == 'Vêtement'}">Vêtement</option>
-            <option value="Sport&Loisirs" th:selected="${category == 'Sport&Loisirs'}">Sport & Loisirs</option>
-        </select>
+        <form action="/submit" method="POST">>
+            <label>
+                <input type="checkbox" value="Toutes"
+                       th:selected="${category == null || category == 'Toutes'}">Toutes</label>
+            <label>
+                <input type="checkbox" value="Informatique"
+                       th:selected="${category == 'Informatique'}">Informatique</label>
+            <label>
+                <input type="checkbox" value="Ameublement"
+                       th:selected="${category == 'Ameublement'}">Ameublement</label>
+            <label>
+                <input type="checkbox" value="Vêtement" th:selected="${category == 'Vêtement'}">Vêtement</label>
+            <label>
+                <input type="checkbox" value="Sport&Loisirs" th:selected="${category == 'Sport&Loisirs'}">Sport &
+                Loisirs</label>>
+        </form>
         <input type="submit" value="Rechercher">
     </div>
 
