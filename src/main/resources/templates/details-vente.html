@@ -2,19 +2,25 @@
 
 <title>Détail de l'Enchère</title>
 
-<main>
+<main class="product-detail-container">
     <h1>Détail de la vente</h1>
 
-    <p><strong>Nom de l'article :</strong> <span th:text="${article.nomArticle}"></span></p>
-    <p><strong>Description :</strong> <span th:text="${article.description}"></span></p>
-<!--    <p><strong>Catégorie :</strong> <span th:text="${article.get}"></span></p>-->
-    <p><strong>Meilleure offre :</strong>
-<!--        <span th:text="${article.prixVente} + ' pts par ' + ${article.utilisateur.nom}"></span>-->
-    </p>
-    <p><strong>Mise à prix :</strong> <span th:text="${article.prix_initial} + ' points'"></span></p>
-    <p><strong>Fin de l'enchère :</strong> <span th:text="${article.dateFinEncheres}"></span></p>
-<!--    <p><strong>Retrait :</strong> <span th:text="${article.utilisateur.adresse}"></span></p>-->
-<!--    <p><strong>Vendeur :</strong> <span th:text="${article.utilisateur.nom}"></span></p>-->
+    <!-- Section Image -->
+    <div class="product-image">
+        <!-- Espace réservé pour l'image si elle n'est pas disponible -->
+        <div class="image-placeholder">
+            <span>Aucune image disponible</span>
+        </div>
+    </div>
+
+    <!-- Informations sur l'article -->
+    <div class="product-info">
+        <p><strong>Nom de l'article :</strong> <span th:text="${article.nomArticle}"></span></p>
+        <p><strong>Description :</strong> <span th:text="${article.description}"></span></p>
+        <p><strong>Meilleure offre :</strong></p>
+        <p><strong>Mise à prix :</strong> <span th:text="${article.prix_initial} + ' points'"></span></p>
+        <p><strong>Fin de l'enchère :</strong> <span th:text="${article.dateFinEncheres}"></span></p>
+    </div>
 </main>
 
 </html>
