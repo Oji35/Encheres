@@ -8,7 +8,7 @@
 
   <form method="get" action="/articles">
     <div class="filters">
-      <input type="text" name="keyword" placeholder="Le nom de l'article contient" th:value="${keyword}">
+      <input class="search-input" type="text" name="keyword" placeholder="Le nom de l'article contient" th:value="${keyword}">
       <select name="category">
         <option value="Toutes" th:selected="${category == null || category == 'Toutes'}">Toutes</option>
         <option value="Informatique" th:selected="${category == 'Informatique'}">Informatique</option>

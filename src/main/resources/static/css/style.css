@@ -689,11 +689,14 @@ header ul li a:hover {
 /* Liste des enchères */
 .encheres-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 20px;
     padding: 20px;
     justify-items: center;
 }
+
+
+
 
 /* Carte d'enchère */
 .enchere-card {
@@ -981,4 +984,13 @@ footer {
     color: #888;
     margin-top: 40px;
 }
+.filtres input[type="text"] {
+    width: 150%;  /* Cela devrait faire en sorte que la barre occupe toute la largeur de son parent */
+    padding: 30px;  /* Augmente l'espace à l'intérieur de la barre de recherche */
+    font-size: 1.2em;  /* Agrandit la taille du texte pour le rendre plus lisible */
+    border-radius: 50px;
+    border: 2px solid #ccc;  /* Bordure plus visible */
+    box-sizing: border-box;  /* Assure que le padding est pris en compte dans la largeur */
+}
+
 
