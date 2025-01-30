@@ -12,7 +12,7 @@ public interface UtilisateurService {
 
     void removeUtilisateur(int id);
 
-    List<Utilisateur> getUtilisateur();
+    List<Utilisateur> getAllUtilisateur();
 
     Utilisateur getUtilisateurbyID(int id);
 

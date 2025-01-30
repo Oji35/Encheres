@@ -2,6 +2,7 @@ package eni.tp.encheres.dal;
 
 // Imports notables : JDBCtemplate, Namedparameter, BenPropertyRowMapper
 import eni.tp.encheres.bo.Utilisateur;
+import jakarta.transaction.Transactional;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -51,12 +52,14 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
     }
 
     // REQUETE SQL POUR DELETE
+    @Transactional
     @Override
     public void deleteUtilisateur(long id) {
         jdbcTemplate.update(DELETE, id);
     }
 
     // FONCTION DELETE AVEC APPEL A L'ID
+    @Transactional
     @Override
     public void CallIDAndDelete(Utilisateur utilisateur) {
         deleteUtilisateur(utilisateur.getNumeroUtilisateur());
