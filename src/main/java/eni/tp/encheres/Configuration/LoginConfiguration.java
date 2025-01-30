@@ -1,4 +1,4 @@
-package eni.tp.encheres.configuration;
+package eni.tp.encheres.Configuration;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
