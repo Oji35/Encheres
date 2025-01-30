@@ -1,9 +1,6 @@
 package eni.tp.encheres.Controller;
 
-import eni.tp.encheres.bll.EnchereService;
-import eni.tp.encheres.bll.UtilisateurService;
-import eni.tp.encheres.bo.Enchere;
-import eni.tp.encheres.bo.Utilisateur;
+import eni.tp.encheres.bll.ArticleService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,16 +8,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
-
 @Controller
 @RequestMapping
 public class EnchereController {
 
-    private final EnchereService enchereService;
+    private ArticleService articleService;
 
-    public EnchereController(EnchereService enchereService) {
-        this.enchereService = enchereService;
+    public EnchereController(ArticleService articleService) {
+        this.articleService = articleService;
     }
 
     @GetMapping("/")
@@ -31,8 +26,6 @@ public class EnchereController {
 
     @GetMapping("/accueil-encheres")
     public String accueil(Model model) {
-        List<Enchere> articles = enchereService.getAllArticles();
-        model.addAttribute("articles", articles);
         model.addAttribute("keyword", "");
         model.addAttribute("category", "Toutes");
         return "accueil-encheres";
@@ -41,15 +34,15 @@ public class EnchereController {
 
     @GetMapping("/view-encheres")
     public String afficherListeEnchere(Model model) {
-        var enchere = enchereService.getEnchere();
-        model.addAttribute("enchere", enchere);
-        return "ListeEnchere";
+        var article = articleService.getAllArticles();
+        model.addAttribute("article", article);
+        return "view-encheres";
     }
 
     @PostMapping("/view-encheres")
-    public String supprimerEnchere(@RequestParam int id) {
-        enchereService.removeEnchere(id); //va sup lobjet de la liste a mettre seulment pour le vendeur
-        return "redirect:/liste";
+    public String deleteArticle(@RequestParam(name = "id") int id) {
+        articleService.removeArticleVenduParId(id);
+        return "view-encheres";
     }
 
 

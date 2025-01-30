@@ -1,10 +1,59 @@
-<html data-th-replace="~{layout::layout(title=~{::title}, main=~{::main})}">
-
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Liste des Enchères</title>
-
-  <main>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <div class="entete-gauche">
+  <a data-th-href="accueil-encheres">
+    <div><img th:src="@{/images/logo_ENI.png}" alt="image redirection accueil"></div>
+      </a>
+      <li>
+        <button onclick="window.location.reload();">Raffraichir la page</button>
+      </li>
+      <li>
+        <button onclick="history.back();">Retour</button>
+      </li>
+    </div>
+    <div class="entete-connexion">
+      <li>
+        <button>Enchères</button>
+      </li>
+      <li>
+        <button>Vendre un article</button>
+      </li>
+      <li>
+        <button>Mon profil</button>
+      </li>
+      <li>
+        <button>Déconnexion</button>
+      </li>
+    </div>
+</header>
 <div class="container">
   <h1>Liste des Enchères</h1>
+
+  <table>
+    <tr data-th-each="c : ${articles}">
+      <td data-th-text="${c.nomArticle}"></td>
+      <td>
+            <span class="action">
+                <a th:href="@{/detail(id=${c.id})}">Détail</a>
+                <a th:href="@{/modifier(id=${c.id})}">Modifier</a>
+                <form method="post" th:action="@{/Liste}" style="display:inline;">
+                    <input type="hidden" name="id" th:value="${c.id}">
+                    <button type="submit" class="link-button">Supprimer</button>
+                </form>
+            </span>
+      </td>
+    </tr>
+  </table>
+
+
   <form method="get" action="/articles">
     <div class="filters">
       <input type="text" name="keyword" placeholder="Le nom de l'article contient" th:value="${keyword}">
@@ -42,7 +91,5 @@
     </div>
   </div>
 </div>
-
-  </main>
-
+</body>
 </html>
