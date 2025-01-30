@@ -71,6 +71,7 @@ public class ArticleDAOImpl implements ArticleDAO {
         namedparameters.addValue("prix_initial", article.getPrix_initial());
         namedparameters.addValue("prix_vente", article.getPrixVente());
         namedparameters.addValue("no_utilisateur", article.getNoUtilisateur());
+        namedparameters.addValue("no_utilisateur", article.getNoUtilisateur());
         namedparameters.addValue("no_categorie", article.getNoCategorie());
 
 

@@ -89,4 +89,19 @@ public class ArticleVendu {
     public void setPrixVente(long prixVente) {
         this.prixVente = prixVente;
     }
+
+    @Override
+    public String toString() {
+        return "ArticleVendu{" +
+                "noArticle=" + noArticle +
+                ", nomArticle='" + nomArticle + '\'' +
+                ", description='" + description + '\'' +
+                ", dateDebutEncheres=" + dateDebutEncheres +
+                ", dateFinEncheres=" + dateFinEncheres +
+                ", prix_initial=" + prix_initial +
+                ", prixVente=" + prixVente +
+                ", utilisateur=" + utilisateur +
+                ", categorie=" + categorie +
+                '}';
+    }
 }

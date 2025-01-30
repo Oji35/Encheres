@@ -1,3 +1,207 @@
-body{
-    background-color: cadetblue;
+/* Reset de style par défaut */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e9e9e9;
+    color: #161616;
+    line-height: 1.6;
+}
+
+/* Structure principale de la page */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* En-tête */
+header {
+    background-color: rgb(24, 135, 255);
+    color: #fff;
+    padding: 10px 20px; /* Ajoute plus d'espace à gauche et à droite */
+    text-align: right; /* Garde le texte aligné à droite */
+}
+header ul {
+    list-style-type: none; /* Supprime les puces des éléments de liste */
+    margin: 0; /* Supprime les marges par défaut */
+    padding: 0; /* Supprime les espacements internes par défaut */
+}
+h1 {
+    text-align: center;
+}
+
+header img {
+    width: 50px; /* Réduit la taille de l'image */
+    height: 50px; /* Ajuste la hauteur pour garder la proportion */
+    object-fit: cover; /* Garder l'image bien cadrée */
+    border-radius: 5px; /* Bord arrondi si souhaité */
+    position: absolute; /* Positionne l'image de façon absolue */
+    top: 10px; /* L'image sera en haut */
+    left: 10px; /* L'image sera à gauche */
+}
+
+
+header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.filtres {
+    display: flex;
+    justify-content: flex-start; /* Aligne à gauche mais avec un peu d'espace */
+    align-items: center; /* Aligne verticalement au centre */
+    margin: 0 auto; /* Centrer le formulaire dans son conteneur */
+    padding-left: 30px; /* Ajoute de l'espace à gauche */
+    padding-right: 30px; /* Ajoute de l'espace à droite */
+}
+
+.category-select {
+    display: inline-block;
+    margin-left: 20px; /* Espace entre le texte et le select */
+}
+
+select {
+    padding: 8px;
+    font-size: 1em;
+    border-radius: 5px;
+    border: 1px solid #e6e6e6;
+}
+
+input[type="submit"] {
+    padding: 10px 20px; /* Agrandit le bouton */
+    font-size: 1.1em; /* Augmente la taille du texte du bouton */
+    border-radius: 5px;
+    background-color: #4CAF50; /* Couleur de fond du bouton */
+    color: white; /* Couleur du texte du bouton */
+    border: none; /* Retire la bordure par défaut */
+    cursor: pointer; /* Change le curseur au survol */
+    margin-left: 20px; /* Ajoute un espace entre le select et le bouton */
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049; /* Couleur de fond au survol */
+}
+
+/* Barre de recherche et filtre */
+.filters {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+.filters input[type="text"],
+.filters select,
+.filters button {
+    padding: 10px;
+    font-size: 1em;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.filters button {
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+}
+
+.filters button:hover {
+    background-color: #555;
+}
+
+/* Avertissement pour les catégories */
+.category-warning {
+    background-color: yellow;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+/* Liste des enchères */
+.encheres-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 40px; /* Ajoute un peu d'espace en haut */
+    margin-bottom: 40px; /* Ajoute un peu d'espace en bas */
+    justify-items: center; /* Centre les éléments horizontalement */
+    align-items: start; /* Aligne les éléments en haut verticalement */
+}
+
+
+/* Carte d'enchère */
+.enchere-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.enchere-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.enchere-card h2 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.enchere-card p {
+    font-size: 1em;
+    margin: 5px 0;
+}
+
+.enchere-card .price {
+    font-weight: bold;
+    color: #e74c3c;
+}
+
+.enchere-card .seller {
+    color: #3498db;
+}
+
+.enchere-card .end-date {
+    color: #888;
+}
+
+.enchere-card .bid-button {
+    margin-top: 15px;
+    padding: 10px 15px;
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    display: inline-block;
+    font-weight: bold;
+}
+
+.enchere-card .bid-button:hover {
+    background-color: #555;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 0.9em;
+    color: #888;
+}
+
+.titre-encheres {
+    display: flex;
+    justify-content: center; /* Centre le texte horizontalement */
+    align-items: center; /* Centre le texte verticalement */
+    height: 100px; /* Ajuste la hauteur du conteneur selon tes besoins */
 }

@@ -1,37 +1,20 @@
 <html data-th-replace="~{layout::layout(title=~{::title}, main=~{::main})}">
 
-    <title>Détail de l'Enchère</title>
-    <!--    <script>-->
-    <!--        function validateBid() {-->
-    <!--            var meilleureOffre = parseInt(document.getElementById("meilleureOffre").innerText);-->
-    <!--            var montant = parseInt(document.getElementById("montant").value);-->
-
-    <!--            if (montant <= meilleureOffre) {-->
-    <!--                alert("Votre enchère doit être supérieure à la meilleure offre actuelle.");-->
-    <!--                return false;-->
-    <!--            }-->
-    <!--            return true;-->
-    <!--        }-->
-    <!--    </script>-->
-
+<title>Détail de l'Enchère</title>
 
 <main>
-    <h1>Détail vente</h1>
-    <h2 th:text="${article.nom}"></h2>
-    <p><strong>Description :</strong> <span th:text="${article.description}"></span></p>
-    <p><strong>Catégorie :</strong> <span th:text="${article.categorie}"></span></p>
-    <p><strong>Meilleure offre :</strong> <span id="meilleureOffre"th:text="${article.meilleureOffre}+'pts par'+${utilisateur.meilleureOffre}"></span></p>
-    <p><strong>Mise à prix :</strong> <span th:text="${article.miseAPrix} + ' points'"></span></p>
-    <p><strong>Fin de l'enchère :</strong> <span th:text="${article.dateFin}"></span></p>
-    <p><strong>Retrait :</strong> <span th:text="${article.adresseRetrait}"></span></p>
-    <p><strong>Vendeur :</strong> <span th:text="${article.vendeur}"></span></p>
+    <h1>Détail de la vente</h1>
 
-    <form action="/encherir" method="post" onsubmit="return validateBid()">
-        <input type="hidden" name="articleId" th:value="${article.id}"/>
-        <label>Ma proposition :</label>
-        <input type="number" id="montant" name="montant" required/>
-        <button type="submit">Enchérir</button>
-    </form>
+    <p><strong>Nom de l'article :</strong> <span th:text="${article.nomArticle}"></span></p>
+    <p><strong>Description :</strong> <span th:text="${article.description}"></span></p>
+<!--    <p><strong>Catégorie :</strong> <span th:text="${article.get}"></span></p>-->
+    <p><strong>Meilleure offre :</strong>
+<!--        <span th:text="${article.prixVente} + ' pts par ' + ${article.utilisateur.nom}"></span>-->
+    </p>
+    <p><strong>Mise à prix :</strong> <span th:text="${article.prix_initial} + ' points'"></span></p>
+    <p><strong>Fin de l'enchère :</strong> <span th:text="${article.dateFinEncheres}"></span></p>
+<!--    <p><strong>Retrait :</strong> <span th:text="${article.utilisateur.adresse}"></span></p>-->
+<!--    <p><strong>Vendeur :</strong> <span th:text="${article.utilisateur.nom}"></span></p>-->
 </main>
 
 </html>
