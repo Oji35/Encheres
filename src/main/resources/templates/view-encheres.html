@@ -45,20 +45,29 @@
     </thead>
     <tbody>
     <tr data-th-each="c : ${articles}">
-      <td data-th-text="${c.nomArticle}"></td>
       <td>
-                <span class="action">
-                    <a th:href="@{/detail(id=${c.noArticle})}">Détail</a>
-                    <a th:href="@{/modifier(id=${c.noArticle})}">Modifier</a>
-                    <form method="post" th:action="@{/supprimer}" style="display:inline;">
-                        <input type="hidden" name="id" th:value="${c.noArticle}">
-                        <button type="submit" class="link-button">Supprimer</button>
-                    </form>
-                </span>
+        <div class="product-card">
+          <div class="product-image">
+            <!-- Image de l'article (à ajouter plus tard) -->
+            <span>Aucune image</span>
+          </div>
+          <div class="product-name" data-th-text="${c.nomArticle}"></div>
+        </div>
+      </td>
+      <td>
+        <span class="action">
+          <a th:href="@{/detail(id=${c.noArticle})}">Détail</a>
+          <a th:href="@{/modifier(id=${c.noArticle})}">Modifier</a>
+          <form method="post" th:action="@{/supprimer}" style="display:inline;">
+            <input type="hidden" name="id" th:value="${c.noArticle}">
+            <button type="submit" class="link-button">Supprimer</button>
+          </form>
+        </span>
       </td>
     </tr>
     </tbody>
   </table>
+
 
 
 </main>
