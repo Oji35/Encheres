@@ -37,20 +37,29 @@
 <div class="container">
   <h1>Liste des Enchères</h1>
 
+<!--creation de la table-->
   <table>
+    <thead>
+    <tr>
+      <th>Nom de l'Article</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
     <tr data-th-each="c : ${articles}">
       <td data-th-text="${c.nomArticle}"></td>
       <td>
-            <span class="action">
-                <a th:href="@{/detail(id=${c.id})}">Détail</a>
-                <a th:href="@{/modifier(id=${c.id})}">Modifier</a>
-                <form method="post" th:action="@{/Liste}" style="display:inline;">
-                    <input type="hidden" name="id" th:value="${c.id}">
-                    <button type="submit" class="link-button">Supprimer</button>
-                </form>
-            </span>
+                <span class="action">
+                    <a th:href="@{/detail(id=${c.noArticle})}">Détail</a>
+                    <a th:href="@{/modifier(id=${c.noArticle})}">Modifier</a>
+                    <form method="post" th:action="@{/supprimer}" style="display:inline;">
+                        <input type="hidden" name="id" th:value="${c.noArticle}">
+                        <button type="submit" class="link-button">Supprimer</button>
+                    </form>
+                </span>
       </td>
     </tr>
+    </tbody>
   </table>
 
 
@@ -81,14 +90,6 @@
       <input type="submit" value="Rechercher">
     </div>
   </form>
-  <div class="article-list">
-    <div th:each="article : ${articles}" class="article-item">
-      <img th:src="@{${article.imageUrl}}" th:alt="${article.title}">
-      <h2 th:text="${article.title}"></h2>
-      <p>Prix : <span th:text="${article.price}"></span> points</p>
-      <p>Fin de l'enchère : <span th:text="${article.endDate}"></span></p>
-      <p>Vendeur : <span th:text="${article.seller}"></span></p>
-    </div>
   </div>
 </div>
 </body>
