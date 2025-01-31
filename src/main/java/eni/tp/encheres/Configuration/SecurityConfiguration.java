@@ -53,8 +53,8 @@ public class SecurityConfiguration {
         http
                 .authorizeHttpRequests(auth -> {
 
-                    auth.requestMatchers(HttpMethod.GET,"/modifier-profil").authenticated();
-                    auth.requestMatchers(HttpMethod.GET,"/nouvelle-vente").authenticated();
+                    auth.requestMatchers(HttpMethod.GET,"/modifier-profil").permitAll();
+                    auth.requestMatchers(HttpMethod.GET,"/nouvelle-vente").permitAll();
 
                     //Permettre à tous les utilisateurs d'afficher correctement les images et la css
                     auth.requestMatchers("/").permitAll();
@@ -66,7 +66,8 @@ public class SecurityConfiguration {
                     auth.requestMatchers("/enchere-remporte").permitAll();
                     auth.requestMatchers("/enchere-termine").permitAll();
                     auth.requestMatchers("/inscription").permitAll();
-                    auth.anyRequest().denyAll();
+                    auth.requestMatchers("/nouvelle-vente").permitAll();
+                    auth.anyRequest().permitAll();
                 })
                 .formLogin(form -> form
                         .loginPage("/login")

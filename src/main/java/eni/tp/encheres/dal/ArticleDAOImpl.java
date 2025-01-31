@@ -1,6 +1,7 @@
 package eni.tp.encheres.dal;
 
 import eni.tp.encheres.bo.ArticleVendu;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -14,8 +15,7 @@ import java.util.List;
 public class ArticleDAOImpl implements ArticleDAO {
 
     // Variables STRING pour les requêtes SQL
-    static final String SELECT_ALL = "SELECT * from ARTICLES_VENDUS";
-    static final String SELECT_BY_ID =  "SELECT \n" +
+    static final String SELECT_ALL = "SELECT \n" +
             "    a.no_article,\n" +
             "    a.nom_article,\n" +
             "    a.description,\n" +
@@ -32,11 +32,28 @@ public class ArticleDAOImpl implements ArticleDAO {
             "JOIN \n" +
             "    UTILISATEURS u ON a.no_utilisateur = u.no_utilisateur\n" +
             "JOIN \n" +
-            "    CATEGORIES c ON a.no_categorie = c.no_categorie\n" +
-            "WHERE\n" +
-            "    a.no_article = ?";
+            "    CATEGORIES c ON a.no_categorie = c.no_categorie";
+
+    static final String SELECT_BY_ID =  "SELECT " +
+            "a.no_article, " +
+            "a.nom_article, " +
+            "a.description, " +
+            "a.date_debut_encheres, " +
+            "a.date_fin_encheres, " +
+            "a.prix_initial, " +
+            "a.prix_vente, " +
+            "u.pseudo AS utilisateur_pseudo, " +
+            "u.nom AS utilisateur_nom, " +
+            "u.prenom AS utilisateur_prenom, " +
+            "c.libelle AS categorie_libelle " +
+            "FROM ARTICLES_VENDUS a " +
+            "JOIN " +
+            "UTILISATEURS u ON a.no_utilisateur = u.no_utilisateur " +
+            "JOIN " +
+            "CATEGORIES c ON a.no_categorie = c.no_categorie " +
+            "WHERE a.no_article = ?";
 //            "SELECT * from ARTICLES_VENDUS where no_article=?";
-    static final String INSERT = "INSERT INTO ARTICLES_VENDUS (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie) VALUES (?,?,?,?,?,?,?)";
+    static final String INSERT = "INSERT INTO ARTICLES_VENDUS (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie) VALUES (?,?,?,?,?,?,?,?)";
     static final String DELETE = "DELETE FROM ARTICLES_VENDUS where no_article=?";
     static final String UPDATE = "UPDATE ARTICLES_VENDUS SET nom_article=?, description=?, date_debut_encheres=?, date_fin_encheres=?, prix_initial=?, prix_vente=?, no_utilisateur=?, no_categorie=? WHERE no_article=?";
 
@@ -61,7 +78,12 @@ public class ArticleDAOImpl implements ArticleDAO {
     // READ BY ID
     @Override
     public ArticleVendu readArticle(long id) {
-        return jdbcTemplate.queryForObject(SELECT_BY_ID, articleRowMapper, id);
+        try {
+            return jdbcTemplate.queryForObject(SELECT_BY_ID, articleRowMapper);
+        } catch (EmptyResultDataAccessException e) {
+            // Handle the case where no article was found (could return null or throw a custom exception)
+            return null;
+        }
     }
 
     // UPDATE
@@ -92,7 +114,6 @@ public class ArticleDAOImpl implements ArticleDAO {
         namedparameters.addValue("date_fin_encheres", article.getDateFinEncheres());
         namedparameters.addValue("prix_initial", article.getPrix_initial());
         namedparameters.addValue("prix_vente", article.getPrixVente());
-        namedparameters.addValue("no_utilisateur", article.getNoUtilisateur());
         namedparameters.addValue("no_utilisateur", article.getNoUtilisateur());
         namedparameters.addValue("no_categorie", article.getNoCategorie());
 
