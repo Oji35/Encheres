@@ -35,13 +35,6 @@ public class Utilisateur {
         this.admin = admin;
     }
 
-    //Constructeur pour récupérer le mdp
-    public Utilisateur(int numeroUtilisateur, String email, String motDePasse) {
-        super();
-        this.motDePasse = motDePasse;
-        this.email = email;
-    }
-
     public int getNumeroUtilisateur() {
         return numeroUtilisateur;
     }

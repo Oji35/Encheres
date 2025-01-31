@@ -18,7 +18,8 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
     // Variables STRING pour les requêtes SQL
     static final String SELECT_ALL = "SELECT * from UTILISATEURS";
     static final String SELECT_BY_ID = "SELECT * from UTILISATEURS where no_utilisateur=?";
-    static final String INSERT = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+    static final String INSERT = "INSERT INTO UTILISATEURS (pseudo, mot_de_passe, nom, prenom, email, telephone, rue, code_postal, ville, credit, administrateur) " +
+            "VALUES (:pseudo, :mot_de_passe, :nom, :prenom, :email, :telephone, :rue, :code_postal, :ville, :credit, :administrateur)";
     static final String DELETE = "DELETE FROM UTILISATEURS where no_utilisateur=?";
     static final String UPDATE = "UPDATE UTILISATEURS SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?, credit=?, administrateur=? WHERE no_utilisateur=?";
 
@@ -70,6 +71,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
     public int createUtilisateur(Utilisateur utilisateur) {
         var namedparameters = new MapSqlParameterSource();
         namedparameters.addValue("pseudo", utilisateur.getPseudo());
+        namedparameters.addValue("mot_de_passe", utilisateur.getMotDePasse());
         namedparameters.addValue("nom", utilisateur.getNom());
         namedparameters.addValue("prenom", utilisateur.getPrenom());
         namedparameters.addValue("email", utilisateur.getEmail());
@@ -77,7 +79,6 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
         namedparameters.addValue("rue", utilisateur.getRue());
         namedparameters.addValue("code_postal", utilisateur.getCodePostal());
         namedparameters.addValue("ville", utilisateur.getVille());
-        namedparameters.addValue("mot_de_passe", utilisateur.getMotDePasse());
         namedparameters.addValue("credit", utilisateur.getCredit());
         namedparameters.addValue("administrateur", utilisateur.isAdmin());
 
