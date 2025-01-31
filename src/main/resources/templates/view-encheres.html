@@ -1,62 +1,14 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="fr" >
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<html data-th-replace="~{layout::layout(title=~{::title}, main=~{::main})}">
   <title>Liste des Enchères</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-<header>
-  <div class="entete-gauche">
-  <a data-th-href="accueil-encheres">
-    <div><img th:src="@{/images/logo_ENI.png}" alt="image redirection accueil"></div>
-      </a>
-      <li>
-        <button onclick="window.location.reload();">Raffraichir la page</button>
-      </li>
-      <li>
-        <button onclick="history.back();">Retour</button>
-      </li>
-    </div>
-    <div class="entete-connexion">
-      <li>
-        <button>Enchères</button>
-      </li>
-      <li>
-        <button>Vendre un article</button>
-      </li>
-      <li>
-        <button>Mon profil</button>
-      </li>
-      <li>
-        <button>Déconnexion</button>
-      </li>
-    </div>
-</header>
+<main>
 <div class="container">
   <h1>Liste des Enchères</h1>
-
-  <table>
-    <tr data-th-each="c : ${articles}">
-      <td data-th-text="${c.nomArticle}"></td>
-      <td>
-            <span class="action">
-                <a th:href="@{/detail(id=${c.id})}">Détail</a>
-                <a th:href="@{/modifier(id=${c.id})}">Modifier</a>
-                <form method="post" th:action="@{/Liste}" style="display:inline;">
-                    <input type="hidden" name="id" th:value="${c.id}">
-                    <button type="submit" class="link-button">Supprimer</button>
-                </form>
-            </span>
-      </td>
-    </tr>
-  </table>
 
 
   <form method="get" action="/articles">
     <div class="filters">
-      <input type="text" name="keyword" placeholder="Le nom de l'article contient" th:value="${keyword}">
+      <input class="search-input" type="text" name="keyword" placeholder="Le nom de l'article contient" th:value="${keyword}">
       <select name="category">
         <option value="Toutes" th:selected="${category == null || category == 'Toutes'}">Toutes</option>
         <option value="Informatique" th:selected="${category == 'Informatique'}">Informatique</option>
@@ -78,18 +30,46 @@
           <input type="checkbox" name="filter" value="ventes_terminees" th:checked="${filter == 'ventes_terminees'}"> ventes terminées<br>
         </fieldset>
       </div>
-      <input type="submit" value="Rechercher">
+      <input type="submit" value="Rechercher" class="search-button">
+
     </div>
   </form>
-  <div class="article-list">
-    <div th:each="article : ${articles}" class="article-item">
-      <img th:src="@{${article.imageUrl}}" th:alt="${article.title}">
-      <h2 th:text="${article.title}"></h2>
-      <p>Prix : <span th:text="${article.price}"></span> points</p>
-      <p>Fin de l'enchère : <span th:text="${article.endDate}"></span></p>
-      <p>Vendeur : <span th:text="${article.seller}"></span></p>
-    </div>
   </div>
-</div>
-</body>
+
+  <!--creation de la table-->
+  <table>
+    <thead>
+    <tr>
+      <th>Nom de l'Article</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr data-th-each="c : ${articles}">
+      <td>
+        <div class="product-card">
+          <div class="product-image">
+            <!-- Image de l'article (à ajouter plus tard) -->
+            <span>Aucune image</span>
+          </div>
+          <div class="product-name" data-th-text="${c.nomArticle}"></div>
+        </div>
+      </td>
+      <td>
+        <span class="action">
+          <a th:href="@{/detail(id=${c.noArticle})}">Détail</a>
+          <a th:href="@{/modifier(id=${c.noArticle})}">Modifier</a>
+          <form method="post" th:action="@{/supprimer}" style="display:inline;">
+            <input type="hidden" name="id" th:value="${c.noArticle}">
+            <button type="submit" class="link-button">Supprimer</button>
+          </form>
+        </span>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+
+
+</main>
 </html>

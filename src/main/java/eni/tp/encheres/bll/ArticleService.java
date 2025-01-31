@@ -2,19 +2,16 @@ package eni.tp.encheres.bll;
 
 import eni.tp.encheres.bo.ArticleVendu;
 
+import java.util.List;
+
 public interface ArticleService {
-
-    public void addArticleVendu(ArticleVendu article);
-
-    public ArticleVendu getArticleVendubyID(int id);
-
-    Object getAllArticles();
+    void addArticleVendu(ArticleVendu article);
 
     void removeArticleVenduParId(int id);
 
+    ArticleVendu getArticleVendubyID(int id);
+
     void update(ArticleVendu article);
 
-
-
-
+    List<ArticleVendu> getAllArticles();
 }

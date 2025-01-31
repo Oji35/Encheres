@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html data-th-replace="~{layout::layout(title=~{::title}, main=~{::main})}">
 
 
@@ -5,7 +6,7 @@
 
 
 <main>
-    <h1>Liste des enchères</h1>
+    <h1>Accueil enchères</h1>
     <table>
         <tr data-th-each="c : ${article}">
             <td data-th-text="${c.getNomArticle}"></td>
@@ -25,28 +26,23 @@
 
     <div class="filtres">
         <form action="/submit" method="POST">
-        <input type="text" name="keyword" placeholder="Le nom de l'article contient" th:value="${keyword}">
+            <input type="text" name="keyword" placeholder="Le nom de l'article contient" th:value="${keyword}">
 
-            <label>
-                <input type="checkbox" name="category" value="Toutes" th:checked="${category == null || category == 'Toutes'}">Toutes
-            </label>
-            <label>
-                <input type="checkbox" name="category" value="Informatique" th:checked="${category == 'Informatique'}">Informatique
-            </label>
-            <label>
-                <input type="checkbox" name="category" value="Ameublement" th:checked="${category == 'Ameublement'}">Ameublement
-            </label>
-            <label>
-                <input type="checkbox" name="category" value="Vêtement" th:checked="${category == 'Vêtement'}">Vêtement
-            </label>
-            <label>
-                <input type="checkbox" name="category" value="Sport&Loisirs" th:checked="${category == 'Sport&Loisirs'}">Sport & Loisirs
-            </label>
+            <div class="category-select">
+                <label for="category">Catégories :</label>
+                <select name="category" id="category">
+                    <option value="Toutes" th:selected="${category == null || category == 'Toutes'}">Toutes</option>
+                    <option value="Informatique" th:selected="${category == 'Informatique'}">Informatique</option>
+                    <option value="Ameublement" th:selected="${category == 'Ameublement'}">Ameublement</option>
+                    <option value="Vêtement" th:selected="${category == 'Vêtement'}">Vêtement</option>
+                    <option value="Sport&Loisirs" th:selected="${category == 'Sport&Loisirs'}">Sport & Loisirs</option>
+                </select>
+            </div>
 
             <input type="submit" value="Rechercher">
         </form>
-
     </div>
+
 
     <!--            tentative de creation des article avec chaque parametres-->
 
