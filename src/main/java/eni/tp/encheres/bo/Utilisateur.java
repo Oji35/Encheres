@@ -1,5 +1,7 @@
 package eni.tp.encheres.bo;
 
+import java.util.Objects;
+
 public class Utilisateur {
 
     private int numeroUtilisateur;
@@ -31,6 +33,13 @@ public class Utilisateur {
         this.motDePasse = motDePasse;
         this.credit = credit;
         this.admin = admin;
+    }
+
+    //Constructeur pour récupérer le mdp
+    public Utilisateur(int numeroUtilisateur, String email, String motDePasse) {
+        super();
+        this.motDePasse = motDePasse;
+        this.email = email;
     }
 
     public int getNumeroUtilisateur() {
@@ -130,5 +139,29 @@ public class Utilisateur {
 
     public void setAdmin(boolean admin) {
         this.admin = admin;
+    }
+
+    /**
+     * Pour valider qu'un membre en session correspond à celui en base.
+     * Redéfinition de la méthode equals sur toutes les propriétés sauf motDePasse.
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result + Objects.hash(admin, pseudo);
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Utilisateur other = (Utilisateur) obj;
+        return admin == other.admin && Objects.equals(pseudo, other.pseudo);
     }
 }
