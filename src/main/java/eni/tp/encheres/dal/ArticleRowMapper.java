@@ -14,7 +14,6 @@ public class ArticleRowMapper implements RowMapper<ArticleVendu> {
     @Override
     public ArticleVendu mapRow(ResultSet rs, int rowNum) throws SQLException {
 
-
         Utilisateur user = new Utilisateur();
         user.setPseudo(rs.getString("utilisateur_pseudo"));
         user.setNom(rs.getString("utilisateur_nom"));
