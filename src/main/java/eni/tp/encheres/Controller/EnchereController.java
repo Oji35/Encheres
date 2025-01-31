@@ -35,6 +35,7 @@ public class EnchereController {
     @GetMapping("/view-encheres")
     public String afficherListeEnchere(Model model) {
         List<ArticleVendu> articles = articleService.getAllArticles(); // Vérifie que cette méthode fonctionne
+        System.out.println("Liste d'articles du viex-encheres : " + articles);
         model.addAttribute("articles", articles); // Doit être au pluriel comme dans Thymeleaf
         return "view-encheres"; // Assure-toi que view-encheres.html existe
     }
@@ -47,11 +48,11 @@ public class EnchereController {
 
     @GetMapping("/detail")
     public String afficherDetailArticle(@RequestParam(name = "id") int id, Model model) {
-        ArticleVendu article = articleService.getArticleVendubyID(id);
+       ArticleVendu article = articleService.getArticleVendubyID(id);
+        System.out.println("Article by id du Controller : " + article);
         if (article == null) {
             return "redirect:/erreur";
         }
-        System.out.println(article);
         model.addAttribute("article", article);
         return "details-vente";
     }

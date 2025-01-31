@@ -57,7 +57,7 @@
       </td>
       <td>
         <span class="action">
-          <a th:href="@{/detail(id=${c.noArticle})}">Détail</a>
+          <a th:href="@{/detail(id=${c.noArticle})}" >Detail</a>
           <a th:href="@{/modifier(id=${c.noArticle})}">Modifier</a>
           <form method="post" th:action="@{/supprimer}" style="display:inline;">
             <input type="hidden" name="id" th:value="${c.noArticle}">

@@ -34,7 +34,7 @@ public class ArticleDAOImpl implements ArticleDAO {
             "JOIN \n" +
             "    CATEGORIES c ON a.no_categorie = c.no_categorie";
 
-    static final String SELECT_BY_ID =  "SELECT " +
+    static final String SELECT_BY_ID = "SELECT " +
             "a.no_article, " +
             "a.nom_article, " +
             "a.description, " +
@@ -47,12 +47,11 @@ public class ArticleDAOImpl implements ArticleDAO {
             "u.prenom AS utilisateur_prenom, " +
             "c.libelle AS categorie_libelle " +
             "FROM ARTICLES_VENDUS a " +
-            "JOIN " +
-            "UTILISATEURS u ON a.no_utilisateur = u.no_utilisateur " +
-            "JOIN " +
-            "CATEGORIES c ON a.no_categorie = c.no_categorie " +
+            "JOIN UTILISATEURS u ON a.no_utilisateur = u.no_utilisateur " +
+            "JOIN CATEGORIES c ON a.no_categorie = c.no_categorie " +
             "WHERE a.no_article = ?";
-//            "SELECT * from ARTICLES_VENDUS where no_article=?";
+
+
     static final String INSERT = "INSERT INTO ARTICLES_VENDUS (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie) VALUES (?,?,?,?,?,?,?,?)";
     static final String DELETE = "DELETE FROM ARTICLES_VENDUS where no_article=?";
     static final String UPDATE = "UPDATE ARTICLES_VENDUS SET nom_article=?, description=?, date_debut_encheres=?, date_fin_encheres=?, prix_initial=?, prix_vente=?, no_utilisateur=?, no_categorie=? WHERE no_article=?";
@@ -61,6 +60,7 @@ public class ArticleDAOImpl implements ArticleDAO {
     NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     JdbcTemplate jdbcTemplate;
     private ArticleRowMapper articleRowMapper;
+
 
 
     public ArticleDAOImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate, JdbcTemplate jdbcTemplate, ArticleRowMapper articleRowMapper) {
@@ -75,15 +75,11 @@ public class ArticleDAOImpl implements ArticleDAO {
         return jdbcTemplate.query(SELECT_ALL, articleRowMapper);
     }
 
+
     // READ BY ID
     @Override
     public ArticleVendu readArticle(long id) {
-        try {
-            return jdbcTemplate.queryForObject(SELECT_BY_ID, articleRowMapper);
-        } catch (EmptyResultDataAccessException e) {
-            // Handle the case where no article was found (could return null or throw a custom exception)
-            return null;
-        }
+        return jdbcTemplate.queryForObject(SELECT_BY_ID, BeanPropertyRowMapper.newInstance(ArticleVendu.class), id);
     }
 
     // UPDATE
@@ -114,17 +110,15 @@ public class ArticleDAOImpl implements ArticleDAO {
         namedparameters.addValue("date_fin_encheres", article.getDateFinEncheres());
         namedparameters.addValue("prix_initial", article.getPrix_initial());
         namedparameters.addValue("prix_vente", article.getPrixVente());
-        namedparameters.addValue("no_utilisateur", article.getNoUtilisateur());
-        namedparameters.addValue("no_categorie", article.getNoCategorie());
-
+        namedparameters.addValue("no_categorie", article.getNoCategorie()); // Corrected key
 
         // For auto-generating the no_article value (IDENTITY column)
         var keyHolder = new GeneratedKeyHolder();
         namedParameterJdbcTemplate.update(
-                INSERT, // Assuming INSERT is updated for ARTICLES_VENDUS table
+                INSERT,
                 namedparameters,
                 keyHolder,
-                new String[]{"no_article"}
+                new String[]{"no_article"} // The auto-generated column for the article's ID
         );
 
         return keyHolder.getKey().intValue();  // Returns the generated ID of the new article
