@@ -32,8 +32,9 @@ public class UtilisateurController {
 
     @PostMapping("/login")
     public String LoggedOn(Model model) {
+        System.out.println(model);
 
-        return "Liste";
+        return "view-encheres";
     }
 
     @GetMapping("/inscription")

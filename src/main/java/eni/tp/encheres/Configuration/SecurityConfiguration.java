@@ -5,12 +5,17 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.ProviderManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
@@ -26,10 +31,12 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @Configuration
 public class SecurityConfiguration {
 
+    private UserDetailsService userDetailsManager;
+
     @Bean
     UserDetailsManager userDetailsManager(DataSource dataSource) {
         JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
-        jdbcUserDetailsManager.setUsersByUsernameQuery("select pseudo, motDePasse from UTILISATEURS where pseudo=?");
+        jdbcUserDetailsManager.setUsersByUsernameQuery("select pseudo, mot_de_passe from UTILISATEURS where pseudo=?");
 
         // Pour faire l'inscription
         jdbcUserDetailsManager.setCreateUserSql("INSERT INTO UTILISATEURS " +
@@ -71,6 +78,7 @@ public class SecurityConfiguration {
                 })
                 .formLogin(form -> form
                         .loginPage("/login")
+                        .loginProcessingUrl("/view-encheres")
                         .permitAll()
                 )
 
@@ -87,4 +95,12 @@ public class SecurityConfiguration {
 
         return null;
     }
+
+    @Bean
+    public AuthenticationManager authenticationManager(UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(userDetailsService);
+        authProvider.setPasswordEncoder(passwordEncoder);
+        return new ProviderManager(authProvider);}
+
 }
