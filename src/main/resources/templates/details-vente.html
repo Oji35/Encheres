@@ -1,37 +1,26 @@
 <html data-th-replace="~{layout::layout(title=~{::title}, main=~{::main})}">
 
-    <title>Détail de l'Enchère</title>
-    <!--    <script>-->
-    <!--        function validateBid() {-->
-    <!--            var meilleureOffre = parseInt(document.getElementById("meilleureOffre").innerText);-->
-    <!--            var montant = parseInt(document.getElementById("montant").value);-->
+<title>Détail de l'Enchère</title>
 
-    <!--            if (montant <= meilleureOffre) {-->
-    <!--                alert("Votre enchère doit être supérieure à la meilleure offre actuelle.");-->
-    <!--                return false;-->
-    <!--            }-->
-    <!--            return true;-->
-    <!--        }-->
-    <!--    </script>-->
+<main class="product-detail-container">
+    <h1>Détail de la vente</h1>
 
+    <!-- Section Image -->
+    <div class="product-image">
+        <!-- Espace réservé pour l'image si elle n'est pas disponible -->
+        <div class="image-placeholder">
+            <span>Aucune image disponible</span>
+        </div>
+    </div>
 
-<main>
-    <h1>Détail vente</h1>
-    <h2 th:text="${article.nom}"></h2>
-    <p><strong>Description :</strong> <span th:text="${article.description}"></span></p>
-    <p><strong>Catégorie :</strong> <span th:text="${article.categorie}"></span></p>
-    <p><strong>Meilleure offre :</strong> <span id="meilleureOffre"th:text="${article.meilleureOffre}+'pts par'+${utilisateur.meilleureOffre}"></span></p>
-    <p><strong>Mise à prix :</strong> <span th:text="${article.miseAPrix} + ' points'"></span></p>
-    <p><strong>Fin de l'enchère :</strong> <span th:text="${article.dateFin}"></span></p>
-    <p><strong>Retrait :</strong> <span th:text="${article.adresseRetrait}"></span></p>
-    <p><strong>Vendeur :</strong> <span th:text="${article.vendeur}"></span></p>
-
-    <form action="/encherir" method="post" onsubmit="return validateBid()">
-        <input type="hidden" name="articleId" th:value="${article.id}"/>
-        <label>Ma proposition :</label>
-        <input type="number" id="montant" name="montant" required/>
-        <button type="submit">Enchérir</button>
-    </form>
+    <!-- Informations sur l'article -->
+    <div class="product-info">
+        <p><strong>Nom de l'article :</strong> <span th:text="${article.nomArticle}"></span></p>
+        <p><strong>Description :</strong> <span th:text="${article.description}"></span></p>
+        <p><strong>Meilleure offre :</strong></p>
+        <p><strong>Mise à prix :</strong> <span th:text="${article.prix_initial} + ' points'"></span></p>
+        <p><strong>Fin de l'enchère :</strong> <span th:text="${article.dateFinEncheres}"></span></p>
+    </div>
 </main>
 
 </html>

@@ -2,9 +2,16 @@ package eni.tp.encheres.Controller;
 
 import eni.tp.encheres.bll.UtilisateurService;
 import eni.tp.encheres.bo.Utilisateur;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import javax.sql.DataSource;
 
 @Controller
 @RequestMapping
@@ -17,12 +24,68 @@ public class UtilisateurController {
         this.utilisateurService = utilisateurService;
     }
 
+    @GetMapping("/login")
+    public String Login(Model model) {
+
+        return "login";
+    }
+
+    @PostMapping("/login")
+    public String LoggedOn(Model model) {
+
+        return "Liste";
+    }
+
+    @GetMapping("/inscription")
+    public String Inscription(Model model) {
+
+        return "inscription";
+    }
+
+    @PostMapping("/inscription")
+    public String registerUser(@RequestParam("pseudo") String pseudo,
+                               @RequestParam("password") String password,
+                               @RequestParam("nom") String nom,
+                               @RequestParam("prenom") String prenom,
+                               @RequestParam("email") String email,
+                               @RequestParam("telephone") int telephone,
+                               @RequestParam("rue") String rue,
+                               @RequestParam("code_postal") int codePostal,
+                               @RequestParam("ville") String ville
+                               ) {
+
+        // Step 1: Handle password encoding
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encodedPassword = passwordEncoder.encode(password);
+
+        // Step 2: Create a new Utilisateur (User) object
+        Utilisateur newUser = new Utilisateur();
+        newUser.setPseudo(pseudo);
+        newUser.setMotDePasse(encodedPassword);  // Store the encoded password
+        newUser.setNom(nom);
+        newUser.setPrenom(prenom);
+        newUser.setEmail(email);
+        newUser.setNumeroTelephone(telephone);
+        newUser.setRue(rue);
+        newUser.setCodePostal(codePostal);
+        newUser.setVille(ville);
+        newUser.setCredit(0);
+        newUser.setAdmin(false);
+        System.out.println(newUser);
+
+        // Step 3: Save the new user to the database using the service or DAO layer
+        utilisateurService.addUtilisateur(newUser);
+
+        // Step 4: Redirect or return the appropriate view
+        return "redirect:/login";
+    }
+
     @GetMapping("/profil")
     public String afficherprofil(Model model) {
-        Utilisateur utilisateur = utilisateurService.getUtilisateur().isEmpty()
+        Utilisateur utilisateur = utilisateurService.getAllUtilisateur().isEmpty()
                 ? new Utilisateur(1, "User", "Nom", "Prénom", "email@example.com", 123456789,
                 "Rue Exemple", 75000, "Ville", "password", 100, false)
-                : utilisateurService.getUtilisateur().get(0);
+                : utilisateurService.getAllUtilisateur().get(0);
 
         model.addAttribute("nomProfil", utilisateur.getNom());
         model.addAttribute("emailProfil", utilisateur.getEmail());
@@ -63,18 +126,7 @@ public class UtilisateurController {
 
         return "redirect:/utilisateur/profil";
     }
-//A VOIR SI IL FAUT CREER UNE PAGE D INSCRIPTION OU PAS DONC JE REDIRECT SUR LE PROFIL
 
-    @GetMapping("/inscription")
-    public String inscriptionUtilisateur(Model model) {
-        model.addAttribute("utilisateur", utilisateurService.getUtilisateur());
-        return "redirect:/profil";
-    }
-    @PostMapping("/inscription")
-    public String creerUtilisateur(@ModelAttribute Utilisateur utilisateur,Model model){
-        utilisateurService.addUtilisateur(utilisateur);
-        return "redirect:/profil";
-    }
 
 
 }

@@ -1,14 +1,15 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="fr" data-th-fragment="layout(title,main)">>
+
+<html xmlns:th="http://www.thymeleaf.org" lang="fr" data-th-fragment="layout(title,main)">
 <head>
     <meta charset="UTF-8">
     <title data-th-replace="${title}"></title>
+    <link rel="stylesheet" data-th-href="@{/css/style.css}">
 </head>
 
 <body>
 <header>
     <div class="entete-gauche">
-        <a data-th-href="accueil-encheres">
+        <a data-th-href="view-encheres">
             <div><img th:src="@{/images/logo_ENI.png}" alt="image redirection accueil"></div>
         </a>
         <ul>
@@ -25,6 +26,13 @@
     </div>
     <div class="entete-connexion">
         <ul>
+            <li>
+                <a data-th-href="@{/login}" > Connexion </a>
+            </li>
+            <li>
+                <a data-th-href="@{/inscription}" > Inscription </a>
+            </li>
+
         <li>
             <a data-th-href="@{/accueil-encheres}" >Enchères</a>
         </li>
