@@ -32,7 +32,8 @@ public class SecurityConfiguration {
         jdbcUserDetailsManager.setUsersByUsernameQuery("select pseudo, motDePasse from UTILISATEURS where pseudo=?");
 
         // Pour faire l'inscription
-        jdbcUserDetailsManager.setCreateUserSql("INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) " +
+        jdbcUserDetailsManager.setCreateUserSql("INSERT INTO UTILISATEURS " +
+                "(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 0, 0)");
 
         return jdbcUserDetailsManager;

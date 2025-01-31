@@ -53,7 +53,15 @@ public class UtilisateurController {
                                @RequestParam("code_postal") int codePostal,
                                @RequestParam("ville") String ville
                                ) {
-
+        System.out.println(pseudo);
+        System.out.println(password);
+        System.out.println(nom);
+        System.out.println(prenom);
+        System.out.println(email);
+        System.out.println(telephone);
+        System.out.println(rue);
+        System.out.println(codePostal);
+        System.out.println(ville);
         // Step 1: Handle password encoding
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encodedPassword = passwordEncoder.encode(password);
@@ -71,7 +79,7 @@ public class UtilisateurController {
         newUser.setVille(ville);
         newUser.setCredit(0);
         newUser.setAdmin(false);
-        System.out.println(newUser);
+        System.out.println("UtilisateurController : " + newUser);
 
         // Step 3: Save the new user to the database using the service or DAO layer
         utilisateurService.addUtilisateur(newUser);
