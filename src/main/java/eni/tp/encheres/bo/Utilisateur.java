@@ -134,27 +134,29 @@ public class Utilisateur {
         this.admin = admin;
     }
 
+
     /**
      * Pour valider qu'un membre en session correspond à celui en base.
      * Redéfinition de la méthode equals sur toutes les propriétés sauf motDePasse.
+     * a voir car pas sur qu'on l'utilise
      */
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = super.hashCode();
-        result = prime * result + Objects.hash(admin, pseudo);
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (!super.equals(obj))
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Utilisateur other = (Utilisateur) obj;
-        return admin == other.admin && Objects.equals(pseudo, other.pseudo);
-    }
+//    @Override
+//    public int hashCode() {
+//        final int prime = 31;
+//        int result = super.hashCode();
+//        result = prime * result + Objects.hash(admin, pseudo);
+//        return result;
+//    }
+//
+//    @Override
+//    public boolean equals(Object obj) {
+//        if (this == obj)
+//            return true;
+//        if (!super.equals(obj))
+//            return false;
+//        if (getClass() != obj.getClass())
+//            return false;
+//        Utilisateur other = (Utilisateur) obj;
+//        return admin == other.admin && Objects.equals(pseudo, other.pseudo);
+//    }
 }

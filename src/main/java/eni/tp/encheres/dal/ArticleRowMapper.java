@@ -23,6 +23,7 @@ public class ArticleRowMapper implements RowMapper<ArticleVendu> {
         categorie.setLibelle(rs.getString("categorie_libelle"));
 
         ArticleVendu articleVendu = new ArticleVendu();
+        articleVendu.setNoArticle(rs.getInt("no_article"));
         articleVendu.setNomArticle(rs.getString("nom_article"));
         articleVendu.setDescription(rs.getString("description"));
         articleVendu.setDateDebutEncheres(rs.getTimestamp("date_debut_encheres").toLocalDateTime().toLocalDate());
