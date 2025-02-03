@@ -31,7 +31,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @Configuration
 public class SecurityConfiguration {
 
-    private UserDetailsService userDetailsManager;
+    private UserDetailsService userDetailsService;
 
     @Bean
     UserDetailsManager userDetailsManager(DataSource dataSource) {
@@ -65,7 +65,7 @@ public class SecurityConfiguration {
 
                     //Permettre à tous les utilisateurs d'afficher correctement les images et la css
                     auth.requestMatchers("/").permitAll();
-                    auth.requestMatchers("/accueil-encheres").permitAll();
+                    auth.requestMatchers("/accueil-encheres").authenticated();
                     auth.requestMatchers("/css/*").permitAll();
                     auth.requestMatchers("/images/*").permitAll();
                     auth.requestMatchers("/login").permitAll();
@@ -78,7 +78,8 @@ public class SecurityConfiguration {
                 })
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .loginProcessingUrl("/view-encheres")
+                        .loginProcessingUrl("/login")
+                        .failureUrl("/login?error=true")
                         .permitAll()
                 )
 
@@ -91,10 +92,6 @@ public class SecurityConfiguration {
         return http.build();
     }
 
-    private ServerHttpSecurity.FormLoginSpec formLogin() {
-
-        return null;
-    }
 
     @Bean
     public AuthenticationManager authenticationManager(UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {

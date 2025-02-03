@@ -30,12 +30,13 @@ public class UtilisateurController {
         return "login";
     }
 
-    @PostMapping("/login")
-    public String LoggedOn(Model model) {
-        System.out.println(model);
-
-        return "view-encheres";
-    }
+//    @PostMapping("/login")
+//    public String LoggedOn(Model model) {
+//        System.out.println(model);
+//        System.out.println(model.getAttribute("utilisateur"));
+//
+//        return "view-encheres";
+//    }
 
     @GetMapping("/inscription")
     public String Inscription(Model model) {
