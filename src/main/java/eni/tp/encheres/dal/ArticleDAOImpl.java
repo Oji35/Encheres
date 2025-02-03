@@ -79,7 +79,7 @@ public class ArticleDAOImpl implements ArticleDAO {
     @Override
     public ArticleVendu readArticle(long id) {
         try {
-            return jdbcTemplate.queryForObject(SELECT_BY_ID, articleRowMapper);
+            return jdbcTemplate.queryForObject(SELECT_BY_ID, BeanPropertyRowMapper.newInstance(ArticleVendu.class), id);
         } catch (EmptyResultDataAccessException e) {
             // Handle the case where no article was found (could return null or throw a custom exception)
             return null;

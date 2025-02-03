@@ -1,82 +1,76 @@
 <html data-th-replace="~{layout::layout(title=~{::title}, main=~{::main})}">
 
-
-  <title>Nouvelle Vente</title>
+<title>Nouvelle Vente</title>
 
 <main>
-<div class="container">
+  <div class="container">
+    <h1>Nouvelle vente</h1>
 
-  <h1>Nouvelle vente</h1>
-
-  <form method="post" th:action="@{/nouvelle-vente}" th:object="${article}">
-
-    <div>
-      <label for="title">Article</label>
-     <input type="text" id="title" th:field="*{title}">
-    </div>
-
-    <div>
-      <label for="description">Description</label>
-      <textarea id="description" th:field="*{description}"></textarea>
-    </div>
-
-    <div>
-      <label for="category">Catégorie</label>
-      <select id="category" th:field="*{category}">
-        <option value="Maison">Maison</option>
-        <option value="Informatique">Informatique</option>
-        <option value="Ameublement">Ameublement</option>
-        <option value="Vêtement">Vêtement</option>
-        <option value="Sport&Loisirs">Sport & Loisirs</option>
-      </select>
-    </div>
-
-    <div>
-      <label for="imageUrl">Photo de l'article</label>
-      <input type="file" id="imageUrl" th:field="*{imageUrl}">
-    </div>
-
-    <div>
-      <label for="price">Mise à prix</label>
-      <input type="number" id="price" th:field="*{prix}">
-    </div>
-
-    <div>
-      <label for="startDate">Début de l'enchère</label>
-      <input type="date" id="startDate" th:field="*{startDate}">
-    </div>
-
-    <div>
-      <label for="endDate">Fin de l'enchère</label>
-      <input type="date" id="endDate" th:field="*{endDate}">
-    </div>
-
-    <fieldset>
-      <legend>Retrait</legend>
-
+    <form method="post" th:action="@{/nouvelle-vente}" th:object="${article}">
       <div>
-        <label for="street">Rue</label>
-        <input type="text" id="street" th:field="*{rue}">
+        <label for="nomArticle">Nom de l'article</label>
+        <input type="text" id="nomArticle" th:field="*{nomArticle}" required>
       </div>
 
       <div>
-        <label for="postalCode">Code postal</label>
-        <input type="text" id="postalCode" th:field="*{codePostal}">
+        <label for="description">Description</label>
+        <textarea id="description" th:field="*{description}" required></textarea>
+      </div>
+
+<!--      <div>-->
+<!--        <label for="category">Catégorie</label>-->
+<!--        <select id="category" th:field="*{category}">-->
+<!--          <option value="Maison">Maison</option>-->
+<!--          <option value="Informatique">Informatique</option>-->
+<!--          <option value="Ameublement">Ameublement</option>-->
+<!--          <option value="Vêtement">Vêtement</option>-->
+<!--          <option value="Sport&Loisirs">Sport & Loisirs</option>-->
+<!--        </select>-->
+<!--      </div>-->
+
+<!--      <div>-->
+<!--        <label for="imageUrl">Photo de l'article</label>-->
+<!--        <input type="file" id="imageUrl" th:field="*{imageUrl}">-->
+<!--      </div>-->
+
+      <div>
+        <label for="prix_initial">Mise à prix</label>
+        <input type="number" id="prix_initial" th:field="*{prix_initial}" required>
       </div>
 
       <div>
-        <label for="city">Ville</label>
-        <input type="text" id="city" th:field="*{ville}">
+        <label for="dateDebutEncheres">Début de l'enchère</label>
+        <input type="date" id="dateDebutEncheres" th:field="*{dateDebutEncheres}" required>
       </div>
 
-    </fieldset>
+      <div>
+        <label for="dateFinEncheres">Fin de l'enchère</label>
+        <input type="date" id="dateFinEncheres" th:field="*{dateFinEncheres}" required>
+      </div>
 
-    <button type="submit">Enregistrer</button>
-    <button type="reset">Annuler</button>
+      <fieldset>
+        <legend>Retrait</legend>
 
-  </form>
-</div>
+<!--        <div>-->
+<!--          <label for="rue">Rue</label>-->
+<!--          <input type="text" id="rue" th:field="*{rue}" required>-->
+<!--        </div>-->
 
+<!--        <div>-->
+<!--          <label for="codePostal">Code postal</label>-->
+<!--          <input type="text" id="codePostal" th:field="*{codePostal}" required>-->
+<!--        </div>-->
+
+<!--        <div>-->
+<!--          <label for="ville">Ville</label>-->
+<!--          <input type="text" id="ville" th:field="*{ville}" required>-->
+<!--        </div>-->
+<!--      </fieldset>-->
+
+      <button type="submit">Enregistrer</button>
+      <button type="reset">Annuler</button>
+    </form>
+  </div>
 </main>
 
 </html>

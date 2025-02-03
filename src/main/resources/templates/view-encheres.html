@@ -9,6 +9,7 @@
   <form method="get" action="/articles">
     <div class="filters">
       <input class="search-input" type="text" name="keyword" placeholder="Le nom de l'article contient" th:value="${keyword}">
+
       <select name="category">
         <option value="Toutes" th:selected="${category == null || category == 'Toutes'}">Toutes</option>
         <option value="Informatique" th:selected="${category == 'Informatique'}">Informatique</option>
@@ -16,6 +17,7 @@
         <option value="Vêtement" th:selected="${category == 'Vêtement'}">Vêtement</option>
         <option value="Sport&Loisirs" th:selected="${category == 'Sport&Loisirs'}">Sport & Loisirs</option>
       </select>
+
       <div th:if="${isAuthenticated}">
         <fieldset>
           <legend>Achats</legend>
@@ -53,6 +55,7 @@
             <span>Aucune image</span>
           </div>
           <div class="product-name" data-th-text="${c.nomArticle}"></div>
+          <div class="product-name" data-th-text="${c.getUtilisateur().prenom}"></div>
         </div>
       </td>
       <td>

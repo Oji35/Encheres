@@ -993,4 +993,12 @@ footer {
     box-sizing: border-box;  /* Assure que le padding est pris en compte dans la largeur */
 }
 
+select[name="category"] {
+    width: 300px; /* Largeur plus grande */
+    height: 50px; /* Hauteur plus grande */
+    font-size: 18px; /* Texte plus grand */
+    padding: 10px; /* Espacement interne */
+    border-radius: 8px; /* Arrondi des bords */
+}
+
 
