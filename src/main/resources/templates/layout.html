@@ -26,8 +26,7 @@
     <div class="entete-connexion">
         <ul>
             <li>
-                <!-- th:if="${#authentication==null}">-->
-                <a data-th-href="@{/login}"> Connexion </a>
+
             </li>
             <li>
                 <a data-th-href="@{/inscription}"> Inscription </a>
@@ -42,15 +41,23 @@
             <li>
                 <a data-th-href="@{/profil}">Mon profil</a>
             </li>
-            <li>
-                <!-- th:if="${#authentification != null}">-->
+            <li th:if="${#authentication != null and #authentication.isAuthenticated()}">
                 <form th:action="@{/logout}" method="POST">
-                <button type="submit">Déconnexion</button>
+                    <button type="submit">Déconnexion</button>
                 </form>
             </li>
-
+            <li th:if="${#authentication == null or not #authentication.isAuthenticated()}">
+                <a data-th-href="@{/login}"> Connexion </a>
+            </li>
         </ul>
     </div>
+    <div th:if="${#authentication != null}">
+        <p>L'utilisateur est connecté : <span th:text="${#authentication.name}"></span></p>
+    </div>
+    <div th:if="${#authentication == null}">
+        <p>L'utilisateur n'est pas connecté</p>
+    </div>
+
 
 </header>
 

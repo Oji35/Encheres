@@ -55,7 +55,7 @@ public class SecurityConfiguration {
         http
                 .authorizeHttpRequests(auth -> {
 
-                    auth.requestMatchers(HttpMethod.GET,"/modifier-profil").permitAll() ;
+                    auth.requestMatchers(HttpMethod.GET,"/modifier-profil").permitAll();
                     auth.requestMatchers(HttpMethod.GET,"/nouvelle-vente").permitAll();
 
                     //Permettre à tous les utilisateurs d'afficher correctement les images et la css
@@ -86,7 +86,7 @@ public class SecurityConfiguration {
                         .invalidateHttpSession(true)
                         .clearAuthentication(true)
                         .permitAll()
-                ); // Custom login page URL
+                );
 
         return http.build();
     }
@@ -104,4 +104,5 @@ public class SecurityConfiguration {
         return authenticationManagerBuilder.build();
 
     }
+
 }

@@ -136,11 +136,10 @@ public class UtilisateurController {
     }
 
     //Gestion de la déconnection
-    @RequestMapping ("/logout-sucess")
+    @RequestMapping("/logout-sucess")
     public String logoutSucess(Model model) {
-        return"redirect:/inscription";
+        return "redirect:/view-encheres";
     }
-
 
 
 }
