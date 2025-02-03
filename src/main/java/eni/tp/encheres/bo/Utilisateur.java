@@ -9,7 +9,7 @@ public class Utilisateur {
     private String nom;
     private String prenom;
     private String email;
-    private int numeroTelephone;
+    private int telephone;
     private String rue;
     private int codePostal;
     private String ville;
@@ -18,7 +18,7 @@ public class Utilisateur {
     private boolean admin= false;
 
     public Utilisateur(int numeroUtilisateur, String pseudo, String nom, String prenom,
-                       String email, int numeroTelephone, String rue, int codePostal,
+                       String email, int telephone, String rue, int codePostal,
                        String ville, String motDePasse, int credit, boolean admin) {
 
         this.numeroUtilisateur = numeroUtilisateur;
@@ -26,7 +26,7 @@ public class Utilisateur {
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
-        this.numeroTelephone = numeroTelephone;
+        this.telephone = telephone;
         this.rue = rue;
         this.codePostal = codePostal;
         this.ville = ville;
@@ -78,12 +78,12 @@ public class Utilisateur {
         this.email = email;
     }
 
-    public int getNumeroTelephone() {
-        return numeroTelephone;
+    public int getTelephone() {
+        return telephone;
     }
 
-    public void setNumeroTelephone(int numeroTelephone) {
-        this.numeroTelephone = numeroTelephone;
+    public void setTelephone(int telephone) {
+        this.telephone = telephone;
     }
 
     public String getRue() {

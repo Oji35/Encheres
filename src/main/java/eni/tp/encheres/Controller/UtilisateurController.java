@@ -1,10 +1,15 @@
 package eni.tp.encheres.Controller;
 
 import eni.tp.encheres.bll.UtilisateurService;
+import eni.tp.encheres.bo.ArticleVendu;
 import eni.tp.encheres.bo.Utilisateur;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcOperations;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -19,6 +24,8 @@ public class UtilisateurController {
 
     private final UtilisateurService utilisateurService;
 
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     public UtilisateurController(UtilisateurService utilisateurService) {
         this.utilisateurService = utilisateurService;
@@ -75,7 +82,7 @@ public class UtilisateurController {
         newUser.setNom(nom);
         newUser.setPrenom(prenom);
         newUser.setEmail(email);
-        newUser.setNumeroTelephone(telephone);
+        newUser.setTelephone(telephone);
         newUser.setRue(rue);
         newUser.setCodePostal(codePostal);
         newUser.setVille(ville);
@@ -91,16 +98,21 @@ public class UtilisateurController {
     }
 
     @GetMapping("/profil")
-    public String afficherprofil(Model model) {
-        Utilisateur utilisateur = utilisateurService.getAllUtilisateur().isEmpty()
-                ? new Utilisateur(1, "User", "Nom", "Prénom", "email@example.com", 123456789,
-                "Rue Exemple", 75000, "Ville", "password", 100, false)
-                : utilisateurService.getAllUtilisateur().get(0);
+    public String afficherprofil(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+        String username = userDetails.getUsername();
 
-        model.addAttribute("nomProfil", utilisateur.getNom());
-        model.addAttribute("emailProfil", utilisateur.getEmail());
+        // QUERY SQL to get the no_utilisateur
+        String sql = "SELECT no_utilisateur FROM UTILISATEURS WHERE pseudo = ?";
+        Integer noUtilisateur = jdbcTemplate.queryForObject(sql, Integer.class, username);
 
-        return "profil";
+        if (noUtilisateur != null) {
+            Utilisateur utilisateur = utilisateurService.getUtilisateurbyID(noUtilisateur);
+            model.addAttribute("utilisateur", utilisateur);
+
+            return "profil";
+        }
+        // If no user found, redirect to login page or show an error
+        return "redirect:/login";
     }
 
     @GetMapping("/modifier-profil")

@@ -18,7 +18,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
     // Variables STRING pour les requêtes SQL
     static final String SELECT_ALL = "SELECT * from UTILISATEURS";
     static final String SELECT_BY_ID = "SELECT * from UTILISATEURS where no_utilisateur=?";
-    static final String INSERT = "INSERT INTO UTILISATEURS (pseudo, mot_de_passe, nom, prenom, email, telephone, rue, code_postal, ville, credit, administrateur) " +
+    static final String INSERT = "INSERT INTO UTILISATEURS (pseudo, mot_de_passe,nom, prenom, email, telephone, rue, code_postal, ville, credit, administrateur) " +
             "VALUES (:pseudo, :mot_de_passe, :nom, :prenom, :email, :telephone, :rue, :code_postal, :ville, :credit, :administrateur)";
     static final String DELETE = "DELETE FROM UTILISATEURS where no_utilisateur=?";
     static final String UPDATE = "UPDATE UTILISATEURS SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?, credit=?, administrateur=? WHERE no_utilisateur=?";
@@ -49,7 +49,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
     // UPDATE
     @Override
     public void updateUtilisateur(Utilisateur utilisateur) {
-        jdbcTemplate.update(UPDATE, utilisateur.getPseudo(), utilisateur.getNom(), utilisateur.getPrenom(), utilisateur.getEmail(), utilisateur.getNumeroTelephone(), utilisateur.getCodePostal(), utilisateur.getVille(), utilisateur.getMotDePasse(), utilisateur.getCredit(), utilisateur.isAdmin());
+        jdbcTemplate.update(UPDATE, utilisateur.getPseudo(), utilisateur.getNom(), utilisateur.getPrenom(), utilisateur.getEmail(), utilisateur.getTelephone(), utilisateur.getCodePostal(), utilisateur.getVille(), utilisateur.getMotDePasse(), utilisateur.getCredit(), utilisateur.isAdmin());
     }
 
     // REQUETE SQL POUR DELETE
@@ -75,7 +75,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
         namedparameters.addValue("nom", utilisateur.getNom());
         namedparameters.addValue("prenom", utilisateur.getPrenom());
         namedparameters.addValue("email", utilisateur.getEmail());
-        namedparameters.addValue("telephone", utilisateur.getNumeroTelephone());
+        namedparameters.addValue("telephone", utilisateur.getTelephone());
         namedparameters.addValue("rue", utilisateur.getRue());
         namedparameters.addValue("code_postal", utilisateur.getCodePostal());
         namedparameters.addValue("ville", utilisateur.getVille());
