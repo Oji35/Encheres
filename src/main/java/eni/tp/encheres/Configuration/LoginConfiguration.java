@@ -16,29 +16,30 @@ public class LoginConfiguration {
     @Controller
     public static class LoginController {
 
-    //    Utilisateur utilisateur;
-    //    protected final Log logger = LogFactory.getLog(getClass());
-
-     //   @GetMapping("/login")
-    //    String login(Model model) {
-     //       model.addAttribute("utilisateur", utilisateur);
-     //       logger.info("Affichage du formulaire de login");
-     //       return "login";
-     //   }
-
-        //recupérer les infos de connection
-     //   @PostMapping("/login")
-     //   String loginPost(@RequestParam String pseudo, @RequestParam String motdepasse, Model model) {
-     //       logger.info("Tentative de connection user");
-     //       if("pseudo".equals(utilisateur.getPseudo()) && "password".equals(motdepasse)) {
-     //           return "redirect:/accueil-encheres";
-     //       }else{
-     //           logger.warn("Erreur de l'identifiant ou du mot de passe");
-     //           return "login";
-     //       }
-
-        }
+        Utilisateur utilisateur;
+        protected final Log logger = LogFactory.getLog(getClass());
+//
+//        @GetMapping("/login")
+//        String login(Model model) {
+//            model.addAttribute("utilisateur", utilisateur);
+//            logger.info("Affichage du formulaire de login");
+//            return "login";
+//        }
+//
+//        //recupérer les infos de connection
+//        @PostMapping("/login")
+//        String loginPost(@RequestParam String pseudo, @RequestParam String motdepasse, Model model) {
+//            logger.info("Tentative de connection user");
+//            if("pseudo".equals(utilisateur.getPseudo()) && "password".equals(motdepasse)) {
+//                return "redirect:/accueil-encheres";
+//            }else{
+//                logger.warn("Erreur de l'identifiant ou du mot de passe");
+//                return "login";
+//            }
+//
+//        }
 
     }
+}
 
 
