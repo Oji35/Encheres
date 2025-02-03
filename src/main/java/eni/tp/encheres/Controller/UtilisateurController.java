@@ -102,11 +102,13 @@ public class UtilisateurController {
         String username = userDetails.getUsername();
 
         // QUERY SQL to get the no_utilisateur
-        String sql = "SELECT no_utilisateur FROM UTILISATEURS WHERE pseudo = ?";
-        Integer noUtilisateur = jdbcTemplate.queryForObject(sql, Integer.class, username);
+//        String sql = "SELECT no_utilisateur FROM UTILISATEURS WHERE pseudo = ?";
+//        Integer noUtilisateur = jdbcTemplate.queryForObject(sql, Integer.class, username);
 
-        if (noUtilisateur != null) {
-            Utilisateur utilisateur = utilisateurService.getUtilisateurbyID(noUtilisateur);
+        // Use the getUtilisateurByUsername method to get the Utilisateur object
+        Utilisateur utilisateur = utilisateurService.getUtilisateurByUsername(username);
+
+        if (utilisateur != null) {
             model.addAttribute("utilisateur", utilisateur);
 
             return "profil";
@@ -115,36 +117,62 @@ public class UtilisateurController {
         return "redirect:/login";
     }
 
+
+
+
     @GetMapping("/modifier-profil")
-    public String modifierProfilForm(@RequestParam("id") int id, Model model) {
-        Utilisateur utilisateur = utilisateurService.getUtilisateurbyID(id);
-                model.addAttribute("utilisateur", utilisateur);
-        return "modifier-profil";
+    public String modifierProfilForm(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+        String username = userDetails.getUsername();
+
+        Utilisateur utilisateur = utilisateurService.getUtilisateurByUsername(username);
+
+        if (utilisateur != null) {
+            model.addAttribute("utilisateur", utilisateur);
+
+            return "modifier-profil";
+
+        }
+
+        // If no user found, redirect to login page or show an error
+        return "redirect:/login";
+
     }
 
 
     @PostMapping("/modifier-profil")
-    public String postModifierProfil(@ModelAttribute Utilisateur utilisateur,
-                                     @RequestParam String password,
-                                     @RequestParam String newpassword,
-                                     @RequestParam String confirmPassword,
+    public String postModifierProfil(@RequestParam("nom") String nom,
+                                     @RequestParam("prenom") String prenom,
+                                     @RequestParam("email") String email,
+                                     @RequestParam("telephone") int telephone,
+                                     @RequestParam("rue") String rue,
+                                     @RequestParam("code_postal") int codePostal,
+                                     @RequestParam("ville") String ville,
+                                     @RequestParam("password") String password,
+                                     @AuthenticationPrincipal UserDetails userDetails,
                                      Model model) {
-        Utilisateur utilisateurExistant = utilisateurService.getUtilisateurbyID(utilisateur.getNumeroUtilisateur());
+        String username = userDetails.getUsername();
+
+        Utilisateur utilisateur = utilisateurService.getUtilisateurByUsername(username);
+
+
+
+
+
 
        // if (!passwordEncoder.matches(password, utilisateurExistant.getMotDePasse())) {
         //    model.addAttribute("error", "L'ancien mot de passe est incorrect.");
          //   return "modifier-profil";
             //}
-        if (newpassword.equals(password)) {
-            model.addAttribute("error", "Le nouveau mot de passe doit être différent de l'ancien.");
-            return "modifier-profil";
-        }
-        if (!newpassword.equals(confirmPassword)) {
-            model.addAttribute("error", "La confirmation du mot de passe est incorrecte.");
-            return "modifier-profil";
-        }
-        //utilisateurExistant.setMotDePasse(passwordEncoder.encode(newpassword));
-        //utilisateurService.update(utilisateurExistant);
+//        if (newpassword.equals(password)) {
+//            model.addAttribute("error", "Le nouveau mot de passe doit être différent de l'ancien.");
+//            return "modifier-profil";
+//        }
+//        if (!newpassword.equals(confirmPassword)) {
+//            model.addAttribute("error", "La confirmation du mot de passe est incorrecte.");
+//            return "modifier-profil";
+//        }
+//        //utilisateurExistant.setMotDePasse(passwordEncoder.encode(newpassword));
+//        //utilisateurService.update(utilisateurExistant);
 
         return "redirect:/utilisateur/profil";
     }

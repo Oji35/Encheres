@@ -3,6 +3,8 @@ package eni.tp.encheres.bll;
 import eni.tp.encheres.bo.Utilisateur;
 import eni.tp.encheres.dal.UtilisateurDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -18,6 +20,15 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
     public UtilisateurServiceImpl(UtilisateurDAO utilisateurDAO) {
         this.utilisateurDAO = utilisateurDAO;
+    }
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
+    public Utilisateur getUtilisateurByUsername(String username) {
+        String query = "SELECT * FROM UTILISATEURS WHERE pseudo = ?";
+        return jdbcTemplate.queryForObject(query, new Object[]{username},
+                BeanPropertyRowMapper.newInstance(Utilisateur.class));
     }
 
     @Override

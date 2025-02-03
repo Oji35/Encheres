@@ -13,8 +13,8 @@
     <p><strong>Code Postal:</strong> <span data-th-text="${utilisateur.codePostal}"></span></p>
     <p><strong>Ville:</strong> <span data-th-text="${utilisateur.ville}"></span></p>
 
-    <form action="/edit-profile" method="get">
-        <button type="submit">Modifier</button>
+    <form>
+         <button type="submit"> <a data-th-href="@{/modifier-profil}"> Modifier </a> </button>
     </form>
 
 </main>
