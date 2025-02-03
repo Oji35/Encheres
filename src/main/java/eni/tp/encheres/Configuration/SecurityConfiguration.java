@@ -55,7 +55,7 @@ public class SecurityConfiguration {
         http
                 .authorizeHttpRequests(auth -> {
 
-                    auth.requestMatchers(HttpMethod.GET,"/modifier-profil").permitAll();
+                    auth.requestMatchers(HttpMethod.GET,"/modifier-profil").permitAll() ;
                     auth.requestMatchers(HttpMethod.GET,"/nouvelle-vente").permitAll();
 
                     //Permettre à tous les utilisateurs d'afficher correctement les images et la css
@@ -63,7 +63,7 @@ public class SecurityConfiguration {
                     auth.requestMatchers("/accueil-encheres").authenticated();
                     auth.requestMatchers("/css/*").permitAll();
                     auth.requestMatchers("/images/*").permitAll();
-                    auth.requestMatchers("/login").permitAll();
+                    auth.requestMatchers("/login","/logout").permitAll();
                     auth.requestMatchers("/view-encheres").permitAll();
                     auth.requestMatchers("/enchere-remporte").permitAll();
                     auth.requestMatchers("/enchere-termine").permitAll();
@@ -82,7 +82,9 @@ public class SecurityConfiguration {
 
                 .logout((logout) -> logout
                         .logoutUrl("/logout")
-                        .logoutSuccessUrl("/Liste")
+                        .logoutSuccessUrl("/logout-sucess")
+                        .invalidateHttpSession(true)
+                        .clearAuthentication(true)
                         .permitAll()
                 ); // Custom login page URL
 

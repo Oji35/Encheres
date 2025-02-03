@@ -135,6 +135,12 @@ public class UtilisateurController {
         return "redirect:/utilisateur/profil";
     }
 
+    //Gestion de la déconnection
+    @RequestMapping ("/logout-sucess")
+    public String logoutSucess(Model model) {
+        return"redirect:/inscription";
+    }
+
 
 
 }
