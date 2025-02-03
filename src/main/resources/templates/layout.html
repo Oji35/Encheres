@@ -41,20 +41,23 @@
             <li>
                 <a data-th-href="@{/profil}">Mon profil</a>
             </li>
-            <li th:if="${#authentication != null and #authentication.isAuthenticated()}">
+
+<!--            comparer a anonymousUser marche mieux que is authenticated-->
+            <li th:if="${#authentication != null && #authentication.name != 'anonymousUser'}">
                 <form th:action="@{/logout}" method="POST">
                     <button type="submit">Déconnexion</button>
                 </form>
             </li>
-            <li th:if="${#authentication == null or not #authentication.isAuthenticated()}">
+
+            <li th:if="${#authentication == null || #authentication.name == 'anonymousUser'}">
                 <a data-th-href="@{/login}"> Connexion </a>
             </li>
         </ul>
     </div>
-    <div th:if="${#authentication != null}">
+    <div th:if="${#authentication != null && #authentication.name != 'anonymousUser'}">
         <p>L'utilisateur est connecté : <span th:text="${#authentication.name}"></span></p>
     </div>
-    <div th:if="${#authentication == null}">
+    <div th:if="${#authentication == null || #authentication.name == 'anonymousUser'}">
         <p>L'utilisateur n'est pas connecté</p>
     </div>
 
