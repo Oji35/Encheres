@@ -34,21 +34,30 @@ public class SecurityConfiguration {
     private UserDetailsService userDetailsService;
 
     @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+
+    @Bean
     UserDetailsManager userDetailsManager(DataSource dataSource) {
         JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
-        jdbcUserDetailsManager.setUsersByUsernameQuery("select pseudo, mot_de_passe from UTILISATEURS where pseudo=?");
+        // Query spécifique pour adapter UserdetailsManager avec la BDD
+        jdbcUserDetailsManager.setUsersByUsernameQuery(
+                "SELECT pseudo, mot_de_passe, 1 AS enabled FROM UTILISATEURS WHERE pseudo=?");
 
-        // Pour faire l'inscription
+        // QUERY pour vérifier si l'utilisateur qui se connecte est admin ou non
+        jdbcUserDetailsManager.setAuthoritiesByUsernameQuery(
+                "SELECT pseudo, CASE WHEN administrateur = 1 THEN 'ROLE_ADMIN' ELSE 'ROLE_USER' END AS authority " +
+                        "FROM UTILISATEURS WHERE pseudo=?");
+
+
+        // Pour faire l'inscription (possiblement inutile)
         jdbcUserDetailsManager.setCreateUserSql("INSERT INTO UTILISATEURS " +
                 "(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 0, 0)");
 
         return jdbcUserDetailsManager;
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
     }
 
     /**
@@ -60,8 +69,8 @@ public class SecurityConfiguration {
         http
                 .authorizeHttpRequests(auth -> {
 
-                    auth.requestMatchers(HttpMethod.GET,"/modifier-profil").permitAll();
-                    auth.requestMatchers(HttpMethod.GET,"/nouvelle-vente").permitAll();
+                    auth.requestMatchers(HttpMethod.GET, "/modifier-profil").permitAll();
+                    auth.requestMatchers(HttpMethod.GET, "/nouvelle-vente").permitAll();
 
                     //Permettre à tous les utilisateurs d'afficher correctement les images et la css
                     auth.requestMatchers("/").permitAll();
@@ -79,6 +88,8 @@ public class SecurityConfiguration {
                 .formLogin(form -> form
                         .loginPage("/login")
                         .loginProcessingUrl("/login")
+                        .usernameParameter("pseudo")
+                        .passwordParameter("mot_de_passe")
                         .failureUrl("/login?error=true")
                         .permitAll()
                 )
@@ -94,10 +105,17 @@ public class SecurityConfiguration {
 
 
     @Bean
-    public AuthenticationManager authenticationManager(UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(userDetailsService);
-        authProvider.setPasswordEncoder(passwordEncoder);
-        return new ProviderManager(authProvider);}
+    public AuthenticationManager authenticationManager(HttpSecurity http, UserDetailsManager userDetailsManager) throws Exception {
+        System.out.println("userDetailsManager : " + userDetailsManager);
+        AuthenticationManagerBuilder authenticationManagerBuilder =
+                http.getSharedObject(AuthenticationManagerBuilder.class);
+
+        authenticationManagerBuilder.userDetailsService(userDetailsManager)
+                .passwordEncoder(passwordEncoder());
+        System.out.println("authenticationManager : " + authenticationManagerBuilder);
+
+        return authenticationManagerBuilder.build();
+
+    }
 
 }
