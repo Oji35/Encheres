@@ -4,15 +4,20 @@ import eni.tp.encheres.bll.UtilisateurService;
 import eni.tp.encheres.bll.UtilisateurServiceImpl;
 import eni.tp.encheres.bo.ArticleVendu;
 import eni.tp.encheres.bo.Utilisateur;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -188,6 +193,29 @@ public class UtilisateurController {
         return "redirect:/profil";
     }
 
+    @PostMapping("/profil")
+    public String SupprimerProfil (@AuthenticationPrincipal UserDetails userDetails,
+        Model model, HttpServletRequest request, HttpServletResponse response)    {
+        String username = userDetails.getUsername();
+        Utilisateur utilisateur = utilisateurService.getUtilisateurByUsername(username);
+
+        if (utilisateur != null) {
+            //Supprime l'utilisateur
+            utilisateurService.removeUtilisateur(utilisateur);
+
+            //Logout
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            if (auth != null) {
+                new SecurityContextLogoutHandler().logout(request, response, auth);
+            }
+
+
+
+            return "redirect:/view-encheres";
+        }
+        return "redirect:/login"
+        ;
+    }
 
 
 }

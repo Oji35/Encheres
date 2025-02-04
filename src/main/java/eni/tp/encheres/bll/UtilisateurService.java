@@ -10,7 +10,7 @@ public interface UtilisateurService {
 
     void addUtilisateur(Utilisateur utilisateur);
 
-    void removeUtilisateur(int id);
+    void removeUtilisateur(Utilisateur utilisateur);
 
     List<Utilisateur> getAllUtilisateur();
 
