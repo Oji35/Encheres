@@ -64,6 +64,7 @@ public class SecurityConfiguration {
                     auth.requestMatchers("/css/*").permitAll();
                     auth.requestMatchers("/images/*").permitAll();
                     auth.requestMatchers("/login").permitAll();
+                    auth.requestMatchers("/logout").authenticated();
                     auth.requestMatchers("/view-encheres").permitAll();
                     auth.requestMatchers("/enchere-remporte").permitAll();
                     auth.requestMatchers("/enchere-termine").permitAll();
@@ -83,8 +84,11 @@ public class SecurityConfiguration {
                 .logout((logout) -> logout
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/Liste")
+                        .logoutSuccessUrl("/logout-sucess")
+                        .invalidateHttpSession(true)
+                        .clearAuthentication(true)
                         .permitAll()
-                ); // Custom login page URL
+                );
 
         return http.build();
     }

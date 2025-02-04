@@ -1,4 +1,3 @@
-
 <html xmlns:th="http://www.thymeleaf.org" lang="fr" data-th-fragment="layout(title,main)">
 <head>
     <meta charset="UTF-8">
@@ -13,12 +12,12 @@
             <div><img th:src="@{/images/logo_ENI.png}" alt="image redirection accueil"></div>
         </a>
         <ul>
-        <li>
-            <button onclick="window.location.reload();">Rafraichir la page</button>
-        </li>
-        <li>
-            <button onclick="history.back();">Retour</button>
-        </li>
+            <li>
+                <button onclick="window.location.reload();">Rafraichir la page</button>
+            </li>
+            <li>
+                <button onclick="history.back();">Retour</button>
+            </li>
             <li>
                 <button onclick="window.location='/view-encheres'">Accueil</button>
             </li>
@@ -26,30 +25,40 @@
     </div>
     <div class="entete-connexion">
         <ul>
+
             <li>
-                <a data-th-href="@{/login}" > Connexion </a>
+                <a data-th-href="@{/}">Enchères</a>
             </li>
             <li>
-                <a data-th-href="@{/inscription}" > Inscription </a>
+                <a data-th-href="@{/nouvelle-vente}">Vendre un article</a>
+            </li>
+            <li>
+                <a data-th-href="@{/profil}">Mon profil</a>
+            </li>
+            <li>
+                <a data-th-href="@{/inscription}"> Inscription </a>
+            </li>
+            <!--            comparer a anonymousUser marche mieux que is authenticated-->
+            <li th:if="${#authentication != null && #authentication.name != 'anonymousUser'}">
+                <form th:action="@{/logout}" method="POST">
+                    <button type="submit">Déconnexion</button>
+                </form>
             </li>
 
-        <li>
-            <a data-th-href="@{/accueil-encheres}" >Enchères</a>
-        </li>
-        <li>
-            <a data-th-href="@{/nouvelle-vente}" >Vendre un article</a>
-        </li>
-        <li>
-            <a data-th-href="@{/profil}" >Mon profil</a>
-        </li>
-        <li>
-            <button>Déconnexion</button>
-        </li>
+            <li th:if="${#authentication == null || #authentication.name == 'anonymousUser'}">
+                <a data-th-href="@{/login}"> Connexion </a>
+            </li>
         </ul>
+    </div>
+    <div th:if="${#authentication != null && #authentication.name != 'anonymousUser'}">
+        <p>Bienvenue : <span th:text="${#authentication.name}"></span></p>
+    </div>
+    <div th:if="${#authentication == null || #authentication.name == 'anonymousUser'}">
+        <p>Vous n'êtes pas connecté</p>
     </div>
 </header>
 
-<main data-th-replace="${main}"> </main>
+<main data-th-replace="${main}"></main>
 
 </body>
 </html>

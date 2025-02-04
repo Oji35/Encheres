@@ -62,6 +62,11 @@ public class UtilisateurController {
         System.out.println(rue);
         System.out.println(codePostal);
         System.out.println(ville);
+
+        //evite de s'inscrire sous le pseudo anonymousUser
+        if (pseudo.equals("anonymousUser")) {
+            return "redirect:/error";
+        }
         // Step 1: Handle password encoding
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encodedPassword = passwordEncoder.encode(password);
@@ -135,6 +140,10 @@ public class UtilisateurController {
         return "redirect:/utilisateur/profil";
     }
 
-
+    //Gestion de la déconnection
+    @RequestMapping ("/logout-sucess")
+    public String logoutSucess(Model model) {
+        return"redirect:/inscription";
+    }
 
 }
