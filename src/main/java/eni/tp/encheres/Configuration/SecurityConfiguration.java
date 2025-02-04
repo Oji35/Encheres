@@ -33,7 +33,7 @@ public class SecurityConfiguration {
         JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
         // Query spécifique pour adapter UserdetailsManager avec la BDD
         jdbcUserDetailsManager.setUsersByUsernameQuery(
-                "SELECT pseudo, mot_de_passe, 1 AS enabled FROM UTILISATEURS WHERE pseudo=?");
+                "SELECT pseudo, mot_de_passe, enabled FROM UTILISATEURS WHERE pseudo=?");
         // QUERY pour vérifier si l'utilisateur qui se connecte est admin ou non
         jdbcUserDetailsManager.setAuthoritiesByUsernameQuery(
                 "SELECT pseudo, CASE WHEN administrateur = 1 THEN 'ROLE_ADMIN' ELSE 'ROLE_USER' END AS authority " +

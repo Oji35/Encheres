@@ -20,6 +20,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
     static final String SELECT_BY_ID = "SELECT * from UTILISATEURS where no_utilisateur=?";
     static final String INSERT = "INSERT INTO UTILISATEURS (pseudo, mot_de_passe, nom, prenom, email, telephone, rue, code_postal, ville, credit, administrateur) " +
             "VALUES (:pseudo, :mot_de_passe, :nom, :prenom, :email, :telephone, :rue, :code_postal, :ville, :credit, :administrateur)";
+    static final String DISABLE_USER = "UPDATE UTILISATEURS SET enabled = 0 WHERE pseudo = ?";
     static final String DELETE = "DELETE FROM UTILISATEURS where pseudo=?";
     static final String UPDATE = "UPDATE UTILISATEURS SET nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=? WHERE pseudo=?";
 
@@ -63,19 +64,19 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 
     }
 
+    //REQUETE SQL POUR DESACTIVER L'UTILISATEUR
+    @Transactional
+    @Override
+    public void disableUtilisateur(Utilisateur utilisateur) {
+        jdbcTemplate.update(DISABLE_USER, utilisateur.getPseudo());
+    }
+
     // REQUETE SQL POUR DELETE
     @Transactional
     @Override
     public void deleteUtilisateur(Utilisateur utilisateur) {
         jdbcTemplate.update(DELETE, utilisateur.getPseudo());
     }
-
-    // FONCTION DELETE AVEC APPEL A L'ID
-//    @Transactional
-//    @Override
-//    public void CallIDAndDelete(Utilisateur utilisateur) {
-//        deleteUtilisateur(utilisateur.getNumeroUtilisateur());
-//    }
 
     // CREATE
     @Override

@@ -109,11 +109,6 @@ public class UtilisateurController {
     @GetMapping("/profil")
     public String afficherprofil(@AuthenticationPrincipal UserDetails userDetails, Model model) {
         String username = userDetails.getUsername();
-
-        // QUERY SQL to get the no_utilisateur
-//        String sql = "SELECT no_utilisateur FROM UTILISATEURS WHERE pseudo = ?";
-//        Integer noUtilisateur = jdbcTemplate.queryForObject(sql, Integer.class, username);
-
         // Use the getUtilisateurByUsername method to get the Utilisateur object
         Utilisateur utilisateur = utilisateurService.getUtilisateurByUsername(username);
 
