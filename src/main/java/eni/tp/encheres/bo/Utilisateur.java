@@ -134,8 +134,25 @@ public class Utilisateur {
         this.admin = admin;
     }
 
+    @Override
+    public String toString() {
+        return "Utilisateur{" +
+                "numeroUtilisateur=" + numeroUtilisateur +
+                ", pseudo='" + pseudo + '\'' +
+                ", nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                ", email='" + email + '\'' +
+                ", telephone=" + telephone +
+                ", rue='" + rue + '\'' +
+                ", codePostal=" + codePostal +
+                ", ville='" + ville + '\'' +
+                ", motDePasse='" + motDePasse + '\'' +
+                ", credit=" + credit +
+                ", admin=" + admin +
+                '}';
+    }
 
-    /**
+/**
      * Pour valider qu'un membre en session correspond à celui en base.
      * Redéfinition de la méthode equals sur toutes les propriétés sauf motDePasse.
      * a voir car pas sur qu'on l'utilise
