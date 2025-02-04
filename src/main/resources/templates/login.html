@@ -3,23 +3,24 @@
     <title>Page de connexion</title>
 
 <main>
+    <div class="inscription-container">
     <form th:action="@{/login}" method="post">
         <h1>Connectez-vous</h1>
         <ul class="flex-outer">
             <li>
                 <label for="inputUsername">Pseudo</label>
-                <input id="inputUsername" type="text" name="pseudo" />
+                <input class="inscription-input" id="inputUsername" type="text" name="pseudo" />
             </li>
             <li>
                 <label for="inputPwd">Votre mot de passe</label>
-                <input id="inputPwd" type="password" name="mot_de_passe" />
+                <input class="inscription-input" id="inputPwd" type="password" name="mot_de_passe" />
             </li>
             <li>
                 <button type="submit">Se connecter</button>
             </li>
         </ul>
     </form>
-
+    </div>
 </main>
 
 </html>
