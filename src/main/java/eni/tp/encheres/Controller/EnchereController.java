@@ -2,8 +2,10 @@ package eni.tp.encheres.Controller;
 
 import eni.tp.encheres.bll.ArticleService;
 import eni.tp.encheres.bll.ArticleServiceImpl;
+import eni.tp.encheres.bll.CategoriesService;
 import eni.tp.encheres.bo.ArticleVendu;
 import eni.tp.encheres.dal.CategorieDAOImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -71,11 +73,13 @@ public class EnchereController {
 
 
 
+    @Autowired
+    private CategoriesService categoriesService; // Injection du service
+
     @GetMapping("/nouvelle-vente")
     public String afficherFormulaire(Model model) {
-        model.addAttribute("article", new ArticleVendu()); // Nouvel article vide
-        model.addAttribute("categories", articleService.getAllArticles());
-        model.addAttribute("categories", List.of("Informatique", "Ameublement", "Vêtement", "Sport&Loisirs"));
+        model.addAttribute("article", new ArticleVendu());
+        model.addAttribute("categories", categoriesService.getAllCategorie());
         return "nouvelle-vente";
     }
 

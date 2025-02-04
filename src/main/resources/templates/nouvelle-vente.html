@@ -18,9 +18,9 @@
       </div>
 
       <label for="category">Catégorie</label>
-      <select id="category" th:field="*{noCategorie}">
-        <option th:each="cat : ${categories}" th:value="${cat.noCategorie}" th:text="${cat.libelle}"></option>
-      </select>
+      <select id="category" th:field="*{categorie.noCategorie}">
+        <option th:each="c : ${categories}" th:value="${c.noCategorie}" th:text="${c.libelle}"></option>
+     </select>
 
 
       <div>
@@ -63,6 +63,10 @@
             <span>Aucune image disponible</span>
           </div>
         </div>
+
+      <label for="avatar">Ajouter une image :</label>
+
+      <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" />
 
 
         <button type="submit" >Enregistrer</button>
