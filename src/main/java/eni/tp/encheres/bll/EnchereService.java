@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 public interface EnchereService {
 
-    void addEnchere(Enchere enchere);
+    void addEnchere(Enchere enchere) throws Exception;
 
     void removeEnchere(int id);
 

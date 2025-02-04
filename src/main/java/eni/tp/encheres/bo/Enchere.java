@@ -1,24 +1,31 @@
 package eni.tp.encheres.bo;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Enchere {
-
-    private Date dateEnchere;
+    private int numeroUtilisateur;
+    private int noArticle;
+    private LocalDateTime dateEnchere;
     private int montantEnchere;
-    private int id;
     private String nomObjet;
+
+    public Enchere( int numeroUtilisateur,int noArticle, int montantEnchere) {
+        this.numeroUtilisateur = numeroUtilisateur;
+        this.noArticle = noArticle;
+        this.dateEnchere = LocalDateTime.now();
+        this.montantEnchere = montantEnchere;
+    }
 
     public String getNomObjet() {return nomObjet;}
 
     public void setNomObjet(String nomObjet) {this.nomObjet = nomObjet;}
 
     public int getId() {
-        return id;
+        return noArticle;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.noArticle = id;
     }
 
     public int getMontantEnchere() {
@@ -29,14 +36,17 @@ public class Enchere {
         this.montantEnchere = montantEnchere;
     }
 
-    public Date getDateEnchere() {
+    public LocalDateTime getDateEnchere() {
         return dateEnchere;
     }
 
-    public void setDateEnchere(Date dateEnchere) {
+    public void setDateEnchere(LocalDateTime dateEnchere) {
         this.dateEnchere = dateEnchere;
     }
 
 
-
+    public int getNumeroUtilisateur() {
+        return numeroUtilisateur;
+    }
 }
+
