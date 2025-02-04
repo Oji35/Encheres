@@ -1,7 +1,9 @@
 package eni.tp.encheres.Controller;
 
 import eni.tp.encheres.bll.ArticleService;
+import eni.tp.encheres.bll.ArticleServiceImpl;
 import eni.tp.encheres.bo.ArticleVendu;
+import eni.tp.encheres.dal.CategorieDAOImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,10 +15,12 @@ import java.util.List;
 @RequestMapping
 public class EnchereController {
 
+    private final ArticleServiceImpl articleServiceImpl;
     private ArticleService articleService;
 
-    public EnchereController(ArticleService articleService) {
+    public EnchereController(ArticleService articleService, ArticleServiceImpl articleServiceImpl) {
         this.articleService = articleService;
+        this.articleServiceImpl = articleServiceImpl;
     }
 
     @GetMapping("/")
@@ -70,23 +74,18 @@ public class EnchereController {
     @GetMapping("/nouvelle-vente")
     public String afficherFormulaire(Model model) {
         model.addAttribute("article", new ArticleVendu()); // Nouvel article vide
+        model.addAttribute("categories", articleService.getAllArticles());
         model.addAttribute("categories", List.of("Informatique", "Ameublement", "Vêtement", "Sport&Loisirs"));
         return "nouvelle-vente";
     }
 
 
+    //celui de petit chat
     @PostMapping("/nouvelle-vente")
-    public String enregistrerVente(@ModelAttribute ArticleVendu article, BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            model.addAttribute("categories", List.of("Maison", "Informatique", "Ameublement", "Vêtement", "Sport&Loisirs"));
-            return "nouvelle-vente";
-        }
-        // Sauvegarde dans la base de données (ajoute ton service ici)
+    public String newChat(@ModelAttribute ArticleVendu article, Model model) {
         articleService.addArticleVendu(article);
-
-        return "redirect:/ventes";
+        return "redirect:/view-encheres";
     }
-
 
 
 

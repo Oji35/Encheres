@@ -17,15 +17,11 @@
         <textarea id="description" th:field="*{description}" required></textarea>
       </div>
 
-      <div>
-        <label for="category">Catégorie</label>
-        <select id="category" th:field="*{categorie}">
-          <option value="Informatique">Informatique</option>
-          <option value="Ameublement">Ameublement</option>
-          <option value="Vêtement">Vêtement</option>
-          <option value="Sport&Loisirs">Sport & Loisirs</option>
-        </select>
-      </div>
+      <label for="category">Catégorie</label>
+      <select id="category" th:field="*{noCategorie}">
+        <option th:each="cat : ${categories}" th:value="${cat.noCategorie}" th:text="${cat.libelle}"></option>
+      </select>
+
 
       <div>
         <label for="prix_initial">Mise à prix</label>
@@ -69,8 +65,10 @@
         </div>
 
 
-        <button type="submit">Enregistrer</button>
-      <button type="reset">Annuler</button>
+        <button type="submit" >Enregistrer</button>
+      <a href="/">
+        <button type="button">Annuler</button>
+      </a>
     </form>
   </div>
 </main>
