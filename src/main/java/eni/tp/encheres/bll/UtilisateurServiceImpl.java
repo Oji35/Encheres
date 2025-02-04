@@ -3,6 +3,8 @@ package eni.tp.encheres.bll;
 import eni.tp.encheres.bo.Utilisateur;
 import eni.tp.encheres.dal.UtilisateurDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,11 +22,20 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         this.utilisateurDAO = utilisateurDAO;
     }
 
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
+    public Utilisateur getUtilisateurByUsername(String username) {
+        String query = "SELECT * FROM UTILISATEURS WHERE pseudo = ?";
+        return jdbcTemplate.queryForObject(query, new Object[]{username},
+                BeanPropertyRowMapper.newInstance(Utilisateur.class));
+    }
+
     @Override
     public void addUtilisateur(Utilisateur utilisateur) {
         utilisateurDAO.createUtilisateur(utilisateur);
 
-        System.out.println("UtilisateurService : " + utilisateur);
+        System.out.println("UtilisateurService CREATE : " + utilisateur.toString());
     }
 
     @Override
@@ -45,12 +56,8 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
     @Override
     public void update(Utilisateur utilisateur) {
-        for (int i = 0; i < utilisateurs.size(); i++) {
-            if (utilisateurs.get(i).getNumeroUtilisateur() == utilisateur.getNumeroUtilisateur()) {
-                utilisateurs.set(i, utilisateur);
-                return;
-            }
-        }
+        utilisateurDAO.updateUtilisateur(utilisateur);
+        System.out.println("UtilisateurService UPDATE : " + utilisateur.toString());
     }
 }
 

@@ -18,6 +18,5 @@ public interface UtilisateurService {
 
     void update(Utilisateur utilisateur);
 
-
-
+    Utilisateur getUtilisateurByUsername(String username);
 }

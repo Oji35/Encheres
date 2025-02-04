@@ -8,39 +8,36 @@
   <main>
 
     <h1>Modifier le Profil</h1>
-        <form action="/update-profile" method="post">
+        <form th:action="@{/modifier-profil}" method="post">
           <label>Pseudo:</label>
           <input type="text" name="pseudo" th:value="${utilisateur.pseudo}" readonly/><br/>
 
           <label>Nom:</label>
-          <input type="text" name="nom" th:value="${utilisateur.nom}" required/><br/>
+          <input type="text" name="nom" th:value="${utilisateur.nom}" /><br/>
 
           <label>Prénom:</label>
-          <input type="text" name="prenom" th:value="${utilisateur.prenom}" required/><br/>
+          <input type="text" name="prenom" th:value="${utilisateur.prenom}" /><br/>
 
           <label>Email:</label>
-          <input type="email" name="email" th:value="${utilisateur.email}" required/><br/>
+          <input type="email" name="email" th:value="${utilisateur.email}"/><br/>
 
           <label>Téléphone:</label>
-          <input type="text" name="telephone" th:value="${utilisateur.telephone}" required/><br/>
+          <input type="text" name="telephone" th:value="${utilisateur.telephone}" /><br/>
 
           <label>Rue:</label>
-          <input type="text" name="rue" th:value="${utilisateur.rue}" required/><br/>
+          <input type="text" name="rue" th:value="${utilisateur.rue}" /><br/>
 
           <label>Code Postal:</label>
-          <input type="text" name="codePostal" th:value="${utilisateur.codePostal}" required/><br/>
+          <input type="text" name="code_postal" th:value="${utilisateur.codePostal}" /><br/>
 
           <label>Ville:</label>
-          <input type="text" name="ville" th:value="${utilisateur.ville}" required/><br/>
+          <input type="text" name="ville" th:value="${utilisateur.ville}" /><br/>
 
           <label>Mot de passe:</label>
-          <input type="password" name="password" required/><br/>
+          <input type="password" name="password" /><br/>
 
           <label>Confirmer le mot de passe:</label>
-          <input type="password" name="confirmPassword" required/><br/>
-
-          <label>Crédits restants:</label>
-          <input type="number" name="credits" th:value="${utilisateur.credits}" readonly/><br/>
+          <input type="password" name="confirmPassword" /><br/>
 
           <button type="submit">Enregistrer</button>
         </form>
