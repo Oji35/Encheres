@@ -32,22 +32,26 @@
             <li>
                 <a data-th-href="@{/nouvelle-vente}">Vendre un article</a>
             </li>
-            <li>
-                <a data-th-href="@{/profil}">Mon profil</a>
-            </li>
-            <li>
-                <a data-th-href="@{/inscription}"> Inscription </a>
-            </li>
-            <!--            comparer a anonymousUser marche mieux que is authenticated-->
-            <li th:if="${#authentication != null && #authentication.name != 'anonymousUser'}">
-                <form th:action="@{/logout}" method="POST">
-                    <button type="submit">Déconnexion</button>
-                </form>
-            </li>
 
-            <li th:if="${#authentication == null || #authentication.name == 'anonymousUser'}">
-                <a data-th-href="@{/login}"> Connexion </a>
-            </li>
+            <!--            comparer a anonymousUser marche mieux que is authenticated-->
+            <div th:if="${#authentication != null && #authentication.name != 'anonymousUser'}">
+                <li>
+                    <a data-th-href="@{/profil}">Mon profil</a>
+                </li>
+                <li>
+                    <form th:action="@{/logout}" method="POST">
+                        <button type="submit">Déconnexion</button>
+                    </form>
+                </li>
+            </div>
+
+            <div th:if="${#authentication == null || #authentication.name == 'anonymousUser'}">
+                <li><a data-th-href="@{/login}"> Connexion </a>
+                </li>
+                <li>
+                    <a data-th-href="@{/inscription}"> Inscription </a>
+                </li>
+            </div>
         </ul>
     </div>
     <div th:if="${#authentication != null && #authentication.name != 'anonymousUser'}">
