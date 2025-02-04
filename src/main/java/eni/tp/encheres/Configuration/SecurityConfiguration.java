@@ -63,7 +63,9 @@ public class SecurityConfiguration {
                     auth.requestMatchers("/accueil-encheres").authenticated();
                     auth.requestMatchers("/css/*").permitAll();
                     auth.requestMatchers("/images/*").permitAll();
-                    auth.requestMatchers("/login","/logout").permitAll();
+                    auth.requestMatchers("/login").permitAll();
+                    //Verifier
+                    auth.requestMatchers("/logout").authenticated();
                     auth.requestMatchers("/view-encheres").permitAll();
                     auth.requestMatchers("/enchere-remporte").permitAll();
                     auth.requestMatchers("/enchere-termine").permitAll();

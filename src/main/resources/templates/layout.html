@@ -55,10 +55,10 @@
         </ul>
     </div>
     <div th:if="${#authentication != null && #authentication.name != 'anonymousUser'}">
-        <p>L'utilisateur est connecté : <span th:text="${#authentication.name}"></span></p>
+        <p>Bienvenue : <span th:text="${#authentication.name}"></span></p>
     </div>
     <div th:if="${#authentication == null || #authentication.name == 'anonymousUser'}">
-        <p>L'utilisateur n'est pas connecté</p>
+        <p>Vous n'êtes pas connecté</p>
     </div>
 
 

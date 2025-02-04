@@ -62,6 +62,10 @@ public class UtilisateurController {
         System.out.println(rue);
         System.out.println(codePostal);
         System.out.println(ville);
+
+        if (pseudo.equals("anonymousUser")) {
+            return "redirect:/error";
+        }
         // Step 1: Handle password encoding
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encodedPassword = passwordEncoder.encode(password);
