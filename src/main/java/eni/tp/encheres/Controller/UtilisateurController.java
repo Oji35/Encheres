@@ -75,9 +75,15 @@ public class UtilisateurController {
         System.out.println(codePostal);
         System.out.println(ville);
 
+        // Check if the pseudo already exists
+        Utilisateur existingUser = utilisateurService.getUtilisateurByUsername(pseudo);
+        if (existingUser != null) {
+            return "redirect:/inscription";
+        }
+
         //evite de s'inscrire sous le pseudo anonymousUser
         if (pseudo.equals("anonymousUser")) {
-            return "redirect:/error";
+            return "redirect:/inscription";
         }
 
         // Step 1: Handle password encoding

@@ -28,8 +28,13 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     @Override
     public Utilisateur getUtilisateurByUsername(String username) {
         String query = "SELECT * FROM UTILISATEURS WHERE pseudo = ?";
-        return jdbcTemplate.queryForObject(query, new Object[]{username},
+        List<Utilisateur> utilisateurs = jdbcTemplate.query(query, new Object[]{username},
                 BeanPropertyRowMapper.newInstance(Utilisateur.class));
+
+        if (utilisateurs.isEmpty()) {
+            return null; // No user found
+        }
+        return utilisateurs.get(0);
     }
 
     @Override
