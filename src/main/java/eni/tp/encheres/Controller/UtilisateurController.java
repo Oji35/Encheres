@@ -1,6 +1,7 @@
 package eni.tp.encheres.Controller;
 
 import eni.tp.encheres.bll.UtilisateurService;
+import eni.tp.encheres.bll.UtilisateurServiceImpl;
 import eni.tp.encheres.bo.ArticleVendu;
 import eni.tp.encheres.bo.Utilisateur;
 import org.apache.commons.logging.Log;
@@ -26,6 +27,8 @@ public class UtilisateurController {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+    @Autowired
+    private UtilisateurServiceImpl utilisateurServiceImpl;
 
     public UtilisateurController(UtilisateurService utilisateurService) {
         this.utilisateurService = utilisateurService;
@@ -138,6 +141,8 @@ public class UtilisateurController {
 
     }
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @PostMapping("/modifier-profil")
     public String postModifierProfil(@RequestParam("nom") String nom,
@@ -148,33 +153,39 @@ public class UtilisateurController {
                                      @RequestParam("code_postal") int codePostal,
                                      @RequestParam("ville") String ville,
                                      @RequestParam("password") String password,
+                                     @RequestParam("confirmPassword") String confirmPassword,
                                      @AuthenticationPrincipal UserDetails userDetails,
                                      Model model) {
+
+        if (!password.equals(confirmPassword)) {
+            model.addAttribute("error", "Les mots de passe ne correspondent pas.");
+            return "modifier-profil"; // Show error and stay on the profile update page
+        }
+
         String username = userDetails.getUsername();
 
-        Utilisateur utilisateur = utilisateurService.getUtilisateurByUsername(username);
+        Utilisateur utilisateurModif = utilisateurService.getUtilisateurByUsername(username);
+        if (utilisateurModif == null) {
+            model.addAttribute("error", "Utilisateur non trouvé.");
+            return "modifier-profil"; // Show error and stay on the profile update page
+        }
+
+        utilisateurModif.setNom(nom);
+        utilisateurModif.setPrenom(prenom);
+        utilisateurModif.setEmail(email);
+        utilisateurModif.setTelephone(telephone);
+        utilisateurModif.setRue(rue);
+        utilisateurModif.setCodePostal(codePostal);
+        utilisateurModif.setVille(ville);
+        if (!password.isEmpty()) {
+            utilisateurModif.setMotDePasse(passwordEncoder.encode(password));
+        }
+
+        utilisateurService.update(utilisateurModif);
+        System.out.println("UtilisateurController : " + utilisateurModif.toString());
 
 
-
-
-
-
-       // if (!passwordEncoder.matches(password, utilisateurExistant.getMotDePasse())) {
-        //    model.addAttribute("error", "L'ancien mot de passe est incorrect.");
-         //   return "modifier-profil";
-            //}
-//        if (newpassword.equals(password)) {
-//            model.addAttribute("error", "Le nouveau mot de passe doit être différent de l'ancien.");
-//            return "modifier-profil";
-//        }
-//        if (!newpassword.equals(confirmPassword)) {
-//            model.addAttribute("error", "La confirmation du mot de passe est incorrecte.");
-//            return "modifier-profil";
-//        }
-//        //utilisateurExistant.setMotDePasse(passwordEncoder.encode(newpassword));
-//        //utilisateurService.update(utilisateurExistant);
-
-        return "redirect:/utilisateur/profil";
+        return "redirect:/profil";
     }
 
 

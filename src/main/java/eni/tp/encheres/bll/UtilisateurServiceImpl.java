@@ -35,7 +35,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     public void addUtilisateur(Utilisateur utilisateur) {
         utilisateurDAO.createUtilisateur(utilisateur);
 
-        System.out.println("UtilisateurService : " + utilisateur);
+        System.out.println("UtilisateurService CREATE : " + utilisateur.toString());
     }
 
     @Override
@@ -56,12 +56,8 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
     @Override
     public void update(Utilisateur utilisateur) {
-        for (int i = 0; i < utilisateurs.size(); i++) {
-            if (utilisateurs.get(i).getNumeroUtilisateur() == utilisateur.getNumeroUtilisateur()) {
-                utilisateurs.set(i, utilisateur);
-                return;
-            }
-        }
+        utilisateurDAO.updateUtilisateur(utilisateur);
+        System.out.println("UtilisateurService UPDATE : " + utilisateur.toString());
     }
 }
 
