@@ -1,6 +1,7 @@
 package eni.tp.encheres.dal;
 
 import eni.tp.encheres.bo.Utilisateur;
+import jakarta.transaction.Transactional;
 
 import java.util.List;
 
@@ -12,11 +13,14 @@ public interface UtilisateurDAO {
 
     List<Utilisateur> readAllUtilisateurs();
 
-    void CallIDAndDelete(Utilisateur utilisateur);
-
     void updateUtilisateur(Utilisateur utilisateur);
 
-    void deleteUtilisateur(long id);
+    //REQUETE SQL POUR DESACTIVER L'UTILISATEUR
+    @Transactional
+    void disableUtilisateur(Utilisateur utilisateur);
+
+    // REQUETE SQL POUR DELETE
+    void deleteUtilisateur(Utilisateur utilisateur);
 
 
 }

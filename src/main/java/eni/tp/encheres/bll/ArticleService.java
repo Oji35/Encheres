@@ -14,4 +14,5 @@ public interface ArticleService {
     void update(ArticleVendu article);
 
     List<ArticleVendu> getAllArticles();
+
 }

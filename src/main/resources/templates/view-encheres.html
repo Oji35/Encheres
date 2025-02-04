@@ -1,64 +1,70 @@
-
 <html data-th-replace="~{layout::layout(title=~{::title}, main=~{::main})}">
-  <title>Liste des Enchères</title>
+<title>Liste des Enchères</title>
 <main>
-<div class="container">
-  <h1>Liste des Enchères</h1>
+    <div class="container">
+        <h1>Liste des Enchères</h1>
 
 
-  <form method="get" action="/articles">
-    <div class="filters">
-      <input class="search-input" type="text" name="keyword" placeholder="Le nom de l'article contient" th:value="${keyword}">
+        <form method="get" action="/articles">
+            <div class="filters">
+                <input class="search-input" type="text" name="keyword" placeholder="Le nom de l'article contient"
+                       th:value="${keyword}">
 
-      <select name="category">
-        <option value="Toutes" th:selected="${category == null || category == 'Toutes'}">Toutes</option>
-        <option value="Informatique" th:selected="${category == 'Informatique'}">Informatique</option>
-        <option value="Ameublement" th:selected="${category == 'Ameublement'}">Ameublement</option>
-        <option value="Vêtement" th:selected="${category == 'Vêtement'}">Vêtement</option>
-        <option value="Sport&Loisirs" th:selected="${category == 'Sport&Loisirs'}">Sport & Loisirs</option>
-      </select>
+                <select name="category">
+                    <option value="Toutes" th:selected="${category == null || category == 'Toutes'}">Toutes</option>
+                    <option value="Informatique" th:selected="${category == 'Informatique'}">Informatique</option>
+                    <option value="Ameublement" th:selected="${category == 'Ameublement'}">Ameublement</option>
+                    <option value="Vêtement" th:selected="${category == 'Vêtement'}">Vêtement</option>
+                    <option value="Sport&Loisirs" th:selected="${category == 'Sport&Loisirs'}">Sport & Loisirs</option>
+                </select>
 
-      <div th:if="${isAuthenticated}">
-        <fieldset>
-          <legend>Achats</legend>
-          <input type="checkbox" name="filter" value="encheres_ouvertes" th:checked="${filter == 'encheres_ouvertes'}"> enchères ouvertes<br>
-          <input type="checkbox" name="filter" value="mes_encheres_en_cours" th:checked="${filter == 'mes_encheres_en_cours'}"> mes enchères en cours<br>
-          <input type="checkbox" name="filter" value="mes_encheres_remportees" th:checked="${filter == 'mes_encheres_remportees'}"> mes enchères remportées<br>
-        </fieldset>
-        <fieldset>
-          <legend>Mes ventes</legend>
-          <input type="checkbox" name="filter" value="mes_ventes_en_cours" th:checked="${filter == 'mes_ventes_en_cours'}"> mes ventes en cours<br>
-          <input type="checkbox" name="filter" value="ventes_non_debutees" th:checked="${filter == 'ventes_non_debutees'}"> ventes non débutées<br>
-          <input type="checkbox" name="filter" value="ventes_terminees" th:checked="${filter == 'ventes_terminees'}"> ventes terminées<br>
-        </fieldset>
-      </div>
-      <input type="submit" value="Rechercher" class="search-button">
+                <div th:if="${isAuthenticated}">
+                    <fieldset>
+                        <legend>Achats</legend>
+                        <input type="checkbox" name="filter" value="encheres_ouvertes"
+                               th:checked="${filter == 'encheres_ouvertes'}"> enchères ouvertes<br>
+                        <input type="checkbox" name="filter" value="mes_encheres_en_cours"
+                               th:checked="${filter == 'mes_encheres_en_cours'}"> mes enchères en cours<br>
+                        <input type="checkbox" name="filter" value="mes_encheres_remportees"
+                               th:checked="${filter == 'mes_encheres_remportees'}"> mes enchères remportées<br>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Mes ventes</legend>
+                        <input type="checkbox" name="filter" value="mes_ventes_en_cours"
+                               th:checked="${filter == 'mes_ventes_en_cours'}"> mes ventes en cours<br>
+                        <input type="checkbox" name="filter" value="ventes_non_debutees"
+                               th:checked="${filter == 'ventes_non_debutees'}"> ventes non débutées<br>
+                        <input type="checkbox" name="filter" value="ventes_terminees"
+                               th:checked="${filter == 'ventes_terminees'}"> ventes terminées<br>
+                    </fieldset>
+                </div>
+                <input type="submit" value="Rechercher" class="search-button">
 
+            </div>
+        </form>
     </div>
-  </form>
-  </div>
 
-  <!--creation de la table-->
-  <table>
-    <thead>
-    <tr>
-      <th>Nom de l'Article</th>
-      <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr data-th-each="c : ${articles}">
-      <td>
-        <div class="product-card">
-          <div class="product-image">
-            <!-- Image de l'article (à ajouter plus tard) -->
-            <span>Aucune image</span>
-          </div>
-          <div class="product-name" data-th-text="${c.nomArticle}"></div>
-          <div class="product-name" data-th-text="${c.getUtilisateur().prenom}"></div>
-        </div>
-      </td>
-      <td>
+    <!--creation de la table-->
+    <table>
+        <thead>
+        <tr>
+            <th>Nom de l'Article</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-th-each="c : ${articles}">
+            <td>
+                <div class="product-card">
+                    <div class="product-image">
+                        <!-- Image de l'article (à ajouter plus tard) -->
+                        <span>Aucune image</span>
+                    </div>
+                    <div class="product-name" data-th-text="${c.nomArticle}"></div>
+                    <div class="product-name" data-th-text="${c.getUtilisateur().prenom}"></div>
+                </div>
+            </td>
+            <td>
         <span class="action">
           <a th:href="@{/detail(id=${c.noArticle})}">Détail</a>
           <a th:href="@{/modifier(id=${c.noArticle})}">Modifier</a>
@@ -67,11 +73,10 @@
             <button type="submit" class="link-button">Supprimer</button>
           </form>
         </span>
-      </td>
-    </tr>
-    </tbody>
-  </table>
-
+            </td>
+        </tr>
+        </tbody>
+    </table>
 
 
 </main>

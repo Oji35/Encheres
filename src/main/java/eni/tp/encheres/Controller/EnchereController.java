@@ -5,11 +5,12 @@ import eni.tp.encheres.bll.ArticleServiceImpl;
 import eni.tp.encheres.bll.CategoriesService;
 import eni.tp.encheres.bo.ArticleVendu;
 import eni.tp.encheres.dal.CategorieDAOImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 
 import java.util.List;
 
@@ -18,9 +19,10 @@ import java.util.List;
 public class EnchereController {
 
     private final ArticleServiceImpl articleServiceImpl;
+
     private ArticleService articleService;
 
-    public EnchereController(ArticleService articleService, ArticleServiceImpl articleServiceImpl) {
+    public EnchereController(ArticleServiceImpl articleServiceImpl, ArticleService articleService) {
         this.articleService = articleService;
         this.articleServiceImpl = articleServiceImpl;
     }
@@ -30,14 +32,12 @@ public class EnchereController {
         return "redirect:/view-encheres";
     }
 
-
     @GetMapping("/accueil-encheres")
     public String accueil(Model model) {
         model.addAttribute("keyword", "");
         model.addAttribute("category", "Toutes");
         return "accueil-encheres";
     }
-
 
     @GetMapping("/view-encheres")
     public String afficherListeEnchere(Model model) {
@@ -58,21 +58,15 @@ public class EnchereController {
         if (article == null) {
             return "redirect:/erreur";
         }
-        System.out.println(article);
         model.addAttribute("article", article);
         return "details-vente";
     }
-
-
 
     @PostMapping("/details-vente")
     public String posteEnchere(@RequestParam(name = "id") int id) {
         articleService.removeArticleVenduParId(id);
         return "view-encheres";
     }
-
-
-
     @Autowired
     private CategoriesService categoriesService; // Injection du service
 
@@ -82,15 +76,22 @@ public class EnchereController {
         model.addAttribute("categories", categoriesService.getAllCategorie());
         return "nouvelle-vente";
     }
-
-
-    //celui de petit chat
+    //2 post Mapping a tester
     @PostMapping("/nouvelle-vente")
     public String newChat(@ModelAttribute ArticleVendu article, Model model) {
         articleService.addArticleVendu(article);
         return "redirect:/view-encheres";
     }
 
-
+//    @PostMapping("/nouvelle-vente")
+//    public String enregistrerVente(@ModelAttribute ArticleVendu article, BindingResult result, Model model) {
+//        if (result.hasErrors()) {
+//            model.addAttribute("categories", List.of("Maison", "Informatique", "Ameublement", "Vêtement", "Sport&Loisirs"));
+//            return "nouvelle-vente";
+//        }
+//        // Sauvegarde dans la base de données (ajoute ton service ici)
+//        articleService.addArticleVendu(article);
+//        return "redirect:/ventes";
+//    }
 
 }

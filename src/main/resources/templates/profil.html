@@ -13,8 +13,11 @@
     <p><strong>Code Postal:</strong> <span data-th-text="${utilisateur.codePostal}"></span></p>
     <p><strong>Ville:</strong> <span data-th-text="${utilisateur.ville}"></span></p>
 
-    <form action="/edit-profile" method="get">
+    <form action="/modifier-profil" method="get">
         <button type="submit">Modifier</button>
+    </form>
+    <form th:action="@{/profil}" method="post">
+        <button type="submit">  Supprimer le compte </button>
     </form>
 
 </main>
