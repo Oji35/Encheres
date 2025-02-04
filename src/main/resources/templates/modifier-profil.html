@@ -3,17 +3,15 @@
 
 <title>Modifier Profil</title>
 
-
-
   <main>
 
     <h1>Modifier le Profil</h1>
-        <form action="/update-profile" method="post">
+        <form th:action="@{/modifier-profil}" method="post">
           <label>Pseudo:</label>
           <input type="text" name="pseudo" th:value="${utilisateur.pseudo}" readonly/><br/>
 
           <label>Nom:</label>
-          <input type="text" name="nom" th:value="${utilisateur.nom}" required/><br/>
+          <input type="text" name="nom" th:value="${utilisateur.nom}"required/><br/>
 
           <label>Prénom:</label>
           <input type="text" name="prenom" th:value="${utilisateur.prenom}" required/><br/>
@@ -28,19 +26,18 @@
           <input type="text" name="rue" th:value="${utilisateur.rue}" required/><br/>
 
           <label>Code Postal:</label>
-          <input type="text" name="codePostal" th:value="${utilisateur.codePostal}" required/><br/>
+          <input type="text" name="code_postal" th:value="${utilisateur.codePostal}" required/><br/>
 
           <label>Ville:</label>
           <input type="text" name="ville" th:value="${utilisateur.ville}" required/><br/>
 
           <label>Mot de passe:</label>
           <input type="password" name="password" required/><br/>
-
           <label>Confirmer le mot de passe:</label>
           <input type="password" name="confirmPassword" required/><br/>
 
-          <label>Crédits restants:</label>
-          <input type="number" name="credits" th:value="${utilisateur.credits}" readonly/><br/>
+<!--          <label>Crédits restants:</label>-->
+<!--          <input type="number" name="credits" th:value="${utilisateur.credits}" readonly/><br/>-->
 
           <button type="submit">Enregistrer</button>
         </form>

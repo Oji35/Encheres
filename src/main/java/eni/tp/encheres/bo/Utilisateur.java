@@ -9,7 +9,7 @@ public class Utilisateur {
     private String nom;
     private String prenom;
     private String email;
-    private int numeroTelephone;
+    private int telephone;
     private String rue;
     private int codePostal;
     private String ville;
@@ -18,7 +18,7 @@ public class Utilisateur {
     private boolean admin= false;
 
     public Utilisateur(int numeroUtilisateur, String pseudo, String nom, String prenom,
-                       String email, int numeroTelephone, String rue, int codePostal,
+                       String email, int telephone, String rue, int codePostal,
                        String ville, String motDePasse, int credit, boolean admin) {
 
         this.numeroUtilisateur = numeroUtilisateur;
@@ -26,7 +26,7 @@ public class Utilisateur {
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
-        this.numeroTelephone = numeroTelephone;
+        this.telephone = telephone;
         this.rue = rue;
         this.codePostal = codePostal;
         this.ville = ville;
@@ -78,12 +78,12 @@ public class Utilisateur {
         this.email = email;
     }
 
-    public int getNumeroTelephone() {
-        return numeroTelephone;
+    public int getTelephone() {
+        return telephone;
     }
 
-    public void setNumeroTelephone(int numeroTelephone) {
-        this.numeroTelephone = numeroTelephone;
+    public void setTelephone(int telephone) {
+        this.telephone = telephone;
     }
 
     public String getRue() {
@@ -134,29 +134,23 @@ public class Utilisateur {
         this.admin = admin;
     }
 
+    @Override
+    public String toString() {
+        return "Utilisateur{" +
+                "numeroUtilisateur=" + numeroUtilisateur +
+                ", pseudo='" + pseudo + '\'' +
+                ", nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                ", email='" + email + '\'' +
+                ", telephone=" + telephone +
+                ", rue='" + rue + '\'' +
+                ", codePostal=" + codePostal +
+                ", ville='" + ville + '\'' +
+                ", motDePasse='" + motDePasse + '\'' +
+                ", credit=" + credit +
+                ", admin=" + admin +
+                '}';
+    }
 
-    /**
-     * Pour valider qu'un membre en session correspond à celui en base.
-     * Redéfinition de la méthode equals sur toutes les propriétés sauf motDePasse.
-     * a voir car pas sur qu'on l'utilise
-     */
-//    @Override
-//    public int hashCode() {
-//        final int prime = 31;
-//        int result = super.hashCode();
-//        result = prime * result + Objects.hash(admin, pseudo);
-//        return result;
-//    }
-//
-//    @Override
-//    public boolean equals(Object obj) {
-//        if (this == obj)
-//            return true;
-//        if (!super.equals(obj))
-//            return false;
-//        if (getClass() != obj.getClass())
-//            return false;
-//        Utilisateur other = (Utilisateur) obj;
-//        return admin == other.admin && Objects.equals(pseudo, other.pseudo);
-//    }
+
 }

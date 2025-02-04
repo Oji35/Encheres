@@ -61,6 +61,8 @@ public class SecurityConfiguration {
                     //Permettre à tous les utilisateurs d'afficher correctement les images et la css
                     auth.requestMatchers("/").permitAll();
                     auth.requestMatchers("/accueil-encheres").authenticated();
+                    auth.requestMatchers("/profil/*").authenticated();
+                    auth.requestMatchers("/modifier-profil/*").authenticated();
                     auth.requestMatchers("/css/*").permitAll();
                     auth.requestMatchers("/images/*").permitAll();
                     auth.requestMatchers("/login").permitAll();
