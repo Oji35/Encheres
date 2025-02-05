@@ -3,52 +3,53 @@
 <title>Page de connexion</title>
 
 <main>
-    <form th:action="@{/inscription}" method="post">
-        <h1>Inscrivez-vous</h1>
-        <ul class="flex-outer">
-            <li>
-                <label for="inputUsername">Votre pseudo</label>
-                <input id="inputUsername" type="text" name="pseudo" required />
-            </li>
-            <li>
-                <label for="inputPwd">Votre mot de passe</label>
-                <input id="inputPwd" type="password" name="password" required />
+    <div class="inscription-container">
+        <form th:action="@{/inscription}" method="post">
+            <h1>Inscrivez-vous</h1>
+            <ul class="flex-outer">
+                <li>
+                    <label for="inputUsername">Votre pseudo</label>
+                    <input class="inscription-input" id="inputUsername" type="text" name="pseudo" required />
+                </li>
+                <li>
+                    <label for="inputPwd">Votre mot de passe</label>
+                    <input class="inscription-input" id="inputPwd" type="password" name="password" required />
 
-            </li>
-            <li>
-                <label for="inputLastName">Votre nom</label>
-                <input id="inputLastName" type="text" name="nom" required />
-            </li>
-            <li>
-                <label for="inputFirstName">Votre prénom</label>
-                <input id="inputFirstName" type="text" name="prenom" required />
-            </li>
-            <li>
-                <label for="inputEmail">Votre adresse mail</label>
-                <input id="inputEmail" type="email" name="email" required />
-            </li>
-            <li>
-                <label for="inputPhone">Votre téléphone</label>
-                <input id="inputPhone" type="tel" name="telephone" required />
-            </li>
-            <li>
-                <label for="inputStreet">Votre rue</label>
-                <input id="inputStreet" type="text" name="rue" required />
-            </li>
-            <li>
-                <label for="inputPostalCode">Votre code postal</label>
-                <input id="inputPostalCode" type="text" name="code_postal" required />
-            </li>
-            <li>
-                <label for="inputCity">Votre ville</label>
-                <input id="inputCity" type="text" name="ville" required />
-            </li>
-            <li>
-                <button type="submit">S'inscrire</button>
-            </li>
-        </ul>
-    </form>
-
+                </li>
+                <li>
+                    <label for="inputLastName">Votre nom</label>
+                    <input class="inscription-input" id="inputLastName" type="text" name="nom" required />
+                </li>
+                <li>
+                    <label for="inputFirstName">Votre prénom</label>
+                    <input class="inscription-input" id="inputFirstName" type="text" name="prenom" required />
+                </li>
+                <li>
+                    <label for="inputEmail">Votre adresse mail</label>
+                    <input class="inscription-input" id="inputEmail" type="email" name="email" required />
+                </li>
+                <li>
+                    <label for="inputPhone">Votre téléphone</label>
+                    <input class="inscription-input" id="inputPhone" type="tel" name="telephone" required />
+                </li>
+                <li>
+                    <label for="inputStreet">Votre rue</label>
+                    <input class="inscription-input" id="inputStreet" type="text" name="rue" required />
+                </li>
+                <li>
+                    <label for="inputPostalCode">Votre code postal</label>
+                    <input class="inscription-input" id="inputPostalCode" type="text" name="code_postal" required />
+                </li>
+                <li>
+                    <label for="inputCity">Votre ville</label>
+                    <input class="inscription-input" id="inputCity" type="text" name="ville" required />
+                </li>
+                <li>
+                    <button type="submit">S'inscrire</button>
+                </li>
+            </ul>
+        </form>
+    </div>
 </main>
 
 </html>
