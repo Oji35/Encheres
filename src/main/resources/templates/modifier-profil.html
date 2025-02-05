@@ -3,45 +3,59 @@
 
 <title>Modifier Profil</title>
 
-  <main>
-
+<main class="product-detail-container">
     <h1>Modifier le Profil</h1>
+    <div class="inscription-container">
+
         <form th:action="@{/modifier-profil}" method="post">
+          <div class="form-group">
           <label>Pseudo:</label>
-          <input type="text" name="pseudo" th:value="${utilisateur.pseudo}" readonly/><br/>
-
+          <input class="inscription-input" type="text" name="pseudo" th:value="${utilisateur.pseudo}" readonly/><br/>
+          </div>
+          <div class="form-group">
           <label>Nom:</label>
-          <input type="text" name="nom" th:value="${utilisateur.nom}"required/><br/>
-
+          <input class="inscription-input" type="text" name="nom" th:value="${utilisateur.nom}"required/><br/>
+          </div>
+          <div class="form-group">
           <label>Prénom:</label>
-          <input type="text" name="prenom" th:value="${utilisateur.prenom}" required/><br/>
-
+          <input class="inscription-input" type="text" name="prenom" th:value="${utilisateur.prenom}" required/><br/>
+          </div>
+          <div class="form-group">
           <label>Email:</label>
-          <input type="email" name="email" th:value="${utilisateur.email}" required/><br/>
-
+          <input class="inscription-input" type="email" name="email" th:value="${utilisateur.email}" required/><br/>
+          </div>
+          <div class="form-group">
           <label>Téléphone:</label>
-          <input type="text" name="telephone" th:value="${utilisateur.telephone}" required/><br/>
-
+          <input class="inscription-input" type="text" name="telephone" th:value="${utilisateur.telephone}" required/><br/>
+          </div>
+          <div class="form-group">
           <label>Rue:</label>
-          <input type="text" name="rue" th:value="${utilisateur.rue}" required/><br/>
-
+          <input class="inscription-input" type="text" name="rue" th:value="${utilisateur.rue}" required/><br/>
+          </div>
+          <div class="form-group">
           <label>Code Postal:</label>
-          <input type="text" name="code_postal" th:value="${utilisateur.codePostal}" required/><br/>
-
+          <input class="inscription-input" type="text" name="code_postal" th:value="${utilisateur.codePostal}" required/><br/>
+          </div>
+          <div class="form-group">
           <label>Ville:</label>
-          <input type="text" name="ville" th:value="${utilisateur.ville}" required/><br/>
-
+          <input class="inscription-input" type="text" name="ville" th:value="${utilisateur.ville}" required/><br/>
+          </div>
+          <div class="form-group">
           <label>Mot de passe:</label>
-          <input type="password" name="password" required/><br/>
-          <label>Confirmer le mot de passe:</label>
-          <input type="password" name="confirmPassword" required/><br/>
+          <input class="inscription-input" type="password" name="password" required/><br/>
+          </div>
+          <div class="form-group">
+          <label>Mot de passe:</label>
+          <input class="inscription-input" type="password" name="confirmPassword" required/><br/>
+          </div>
 
 <!--          <label>Crédits restants:</label>-->
 <!--          <input type="number" name="credits" th:value="${utilisateur.credits}" readonly/><br/>-->
-
+          <div class="modifier-profil">
           <button type="submit">Enregistrer</button>
+          </div>
         </form>
-
+    </div>
   </main>
 
 </html>

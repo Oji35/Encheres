@@ -1,26 +1,57 @@
+<!DOCTYPE html>
 <html data-th-replace="~{layout::layout(title=~{::title}, main=~{::main})}">
-
-<title>Profil </title>
-
-<main>
+<head>
+    <title>Profil</title>
+    <link rel="stylesheet" data-th-href="@{/css/style.css}">
+</head>
+<body>
+<main class="product-detail-container">
     <h1>Profil de l'utilisateur</h1>
-    <p><strong>Pseudo:</strong> <span data-th-text="${utilisateur.pseudo}"></span></p>
-    <p><strong>Nom:</strong> <span data-th-text="${utilisateur.nom}"></span></p>
-    <p><strong>Prénom:</strong> <span data-th-text="${utilisateur.prenom}"></span></p>
-    <p><strong>Email:</strong> <span data-th-text="${utilisateur.email}"></span></p>
-    <p><strong>Téléphone:</strong> <span data-th-text="${utilisateur.telephone}"></span></p>
-    <p><strong>Rue:</strong> <span data-th-text="${utilisateur.rue}"></span></p>
-    <p><strong>Code Postal:</strong> <span data-th-text="${utilisateur.codePostal}"></span></p>
-    <p><strong>Ville:</strong> <span data-th-text="${utilisateur.ville}"></span></p>
+    <div class="inscription-container">
+        <form method="get">
+            <div class="form-group">
+                <label>Pseudo:</label>
+                <input class="inscription-input" type="text" name="pseudo" th:value="${utilisateur.pseudo}" readonly/>
+            </div>
+            <div class="form-group">
+                <label>Nom:</label>
+                <input class="inscription-input" type="text" name="nom" th:value="${utilisateur.nom}" readonly/>
+            </div>
+            <div class="form-group">
+                <label>Prénom:</label>
+                <input class="inscription-input" type="text" name="prenom" th:value="${utilisateur.prenom}" readonly/>
+            </div>
+            <div class="form-group">
+                <label>Email:</label>
+                <input class="inscription-input" type="email" name="email" th:value="${utilisateur.email}" readonly/>
+            </div>
+            <div class="form-group">
+                <label>Téléphone:</label>
+                <input class="inscription-input" type="text" name="telephone" th:value="${utilisateur.telephone}" readonly/>
+            </div>
+            <div class="form-group">
+                <label>Rue:</label>
+                <input class="inscription-input" type="text" name="rue" th:value="${utilisateur.rue}" readonly/>
+            </div>
+            <div class="form-group">
+                <label>Code Postal:</label>
+                <input class="inscription-input" type="text" name="code_postal" th:value="${utilisateur.codePostal}" readonly/>
+            </div>
+            <div class="form-group">
+                <label>Ville:</label>
+                <input class="inscription-input" type="text" name="ville" th:value="${utilisateur.ville}" readonly/>
+            </div>
+        </form>
 
-    <form action="/modifier-profil" method="get">
-        <button type="submit">Modifier</button>
-    </form>
-    <form th:action="@{/profil}" method="post">
-        <button type="submit">  Supprimer le compte </button>
-    </form>
-
+        <div class="modifier-profil">
+            <form class="valider-profil" action="/modifier-profil" method="get">
+                <button type="submit">Modifier</button>
+            </form>
+            <form th:action="@{/profil}" method="get">
+                <button type="submit">Supprimer le compte</button>
+            </form>
+        </div>
+    </div>
 </main>
-
-
+</body>
 </html>

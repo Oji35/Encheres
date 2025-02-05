@@ -1,48 +1,79 @@
-<html data-th-replace="~{layout::layout(title=~{::title}, main=~{::main})}"><title>Nouvelle Vente</title>
+<!DOCTYPE html>
+<html data-th-replace="~{layout::layout(title=~{::title}, main=~{::main})}">
+
 <title>Nouvelle Vente</title>
+
 <main>
-    <div class="container"><h1>Nouvelle vente</h1>
+    <h1>Nouvelle vente</h1>
+    <div class="container">
+
         <form method="post" th:action="@{/nouvelle-vente}" th:object="${article}">
-            <div><label for="nomArticle">Nom de l'article</label>
-                <input type="text" id="nomArticle" th:field="*{nomArticle}" required></div>
-            <div><label for="description">Description</label>
-                <textarea id="description" th:field="*{description}" required></textarea></div>
-            <label for="category">Catégorie</label>
-            <select id="category" th:field="*{categorie.noCategorie}">
-                <option th:each="c : ${categories}" th:value="${c.noCategorie}" th:text="${c.libelle}"></option>
-            </select>
+            <div class="nouvelle-vente-container">
+                <!-- Section pour l'image -->
+                <div class="image-section">
+                    <div class="product-image">
+                        <!-- Espace réservé pour l'image si elle n'est pas disponible -->
+                        <div class="image-placeholder">
+                            <span>Aucune image disponible</span>
+                        </div>
+                    </div>
+                    <label for="avatar">Ajouter une image :</label>
+                    <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg"/>
+                </div>
 
-            <div><label for="prix_initial">Mise à prix</label>
-                <input type="number" id="prix_initial" th:field="*{prix_initial}" required>
+                <!-- Section pour la description -->
+                <div class="description-section">
+                    <div>
+                        <label for="nomArticle">Nom de l'article</label>
+                        <input type="text" id="nomArticle" th:field="*{nomArticle}" required>
+                    </div>
+                    <div>
+                        <label for="description">Description</label>
+                        <textarea id="description" th:field="*{description}" required></textarea>
+                    </div>
+                    <div>
+                        <label for="category">Catégorie</label>
+                        <select id="category" th:field="*{categorie.noCategorie}">
+                            <option th:each="c : ${categories}" th:value="${c.noCategorie}" th:text="${c.libelle}"></option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="prix_initial">Mise à prix</label>
+                        <input type="number" id="prix_initial" th:field="*{prix_initial}" required>
+                    </div>
+                    <div>
+                        <label for="dateDebutEncheres">Début de l'enchère</label>
+                        <input type="date" id="dateDebutEncheres" th:field="*{dateDebutEncheres}" required>
+                    </div>
+                    <div>
+                        <label for="dateFinEncheres">Fin de l'enchère</label>
+                        <input type="date" id="dateFinEncheres" th:field="*{dateFinEncheres}" required>
+                    </div>
+<!--                    <fieldset>-->
+<!--                        <legend>Retrait</legend>-->
+<!--                        <div>-->
+<!--                            <label for="rue">Rue</label>-->
+<!--                            <input type="text" id="rue" th:field="*{utilisateur.getRue()}" required>-->
+<!--                        </div>-->
+<!--                        <div>-->
+<!--                            <label for="codePostal">Code postal</label>-->
+<!--                            <input type="text" id="codePostal" th:field="*{utilisateur.getCodePostal()}" required>-->
+<!--                        </div>-->
+<!--                        <div>-->
+<!--                            <label for="ville">Ville</label>-->
+<!--                            <input type="text" id="ville" th:field="*{utilisateur.getVille()}" required>-->
+<!--                        </div>-->
+<!--                    </fieldset>-->
+                    <div class="button-container">
+                        <button type="submit">Enregistrer</button>
+                        <a href="/">
+                            <button type="button">Annuler</button>
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div>
-                <label for="dateDebutEncheres">Début de l'enchère</label>
-                <input type="date" id="dateDebutEncheres" th:field="*{dateDebutEncheres}" required>
-            </div>
-            <div>
-                <label for="dateFinEncheres">Fin de l'enchère</label>
-                <input type="date" id="dateFinEncheres" th:field="*{dateFinEncheres}" required>
-
-            </div><!--marche pas car pas co--><!--
-            <fieldset>-->
-            <!--        <legend>Retrait</legend>-->
-            <!--        <div>--><!--          <label for="rue">Rue</label>-->
-            <!--          <input type="text" id="rue" th:field="*{utilisateur.getRue()}" required>-->
-            <!--        </div>--><!--        <div>--><!--          <label for="codePostal">Code postal</label>-->
-            <!--          <input type="text" id="codePostal" th:field="*{utilisateur.getCodePostal()}" required>-->
-            <!--        </div>--><!--        <div>--><!--          <label for="ville">Ville</label>-->
-            <!--          <input type="text" id="ville" th:field="*{utilisateur.getVille()}" required>-->
-            <!--        </div>--><!--      </fieldset>-->
-            <div class="product-image">          <!-- Espace réservé pour l'image si elle n'est pas disponible -->
-                <div class="image-placeholder"><span>Aucune image disponible</span></div>
-            </div>
-            <label for="avatar">Ajouter une image :</label> <input type="file" id="avatar" name="avatar"
-                                                                   accept="image/png, image/jpeg"/>
-            <button type="submit">Enregistrer</button>
-            <a href="/">
-                <button type="button">Annuler</button>
-            </a>
         </form>
     </div>
 </main>
+
 </html>
