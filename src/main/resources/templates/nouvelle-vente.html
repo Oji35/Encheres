@@ -2,37 +2,39 @@
 <title>Nouvelle Vente</title>
 <main>
     <div class="container"><h1>Nouvelle vente</h1>
-        <form method="post" th:action="@{/nouvelle-vente}" th:object="${article}">
+        <form method="post" th:action="@{/nouvelle-vente}">
             <div><label for="nomArticle">Nom de l'article</label>
-                <input type="text" id="nomArticle" th:field="*{nomArticle}" required></div>
+                <input type="text" id="nomArticle" name="nomArticle" required></div>
             <div><label for="description">Description</label>
-                <textarea id="description" th:field="*{description}" required></textarea></div>
+                <textarea id="description" name="description" required></textarea></div>
             <label for="category">Catégorie</label>
-            <select id="category" th:field="*{categorie.noCategorie}">
+            <select id="category" name="category">
                 <option th:each="c : ${categories}" th:value="${c.noCategorie}" th:text="${c.libelle}"></option>
             </select>
 
             <div><label for="prix_initial">Mise à prix</label>
-                <input type="number" id="prix_initial" th:field="*{prix_initial}" required>
+                <input type="number" id="prix_initial" name="miseAPrix" required>
             </div>
             <div>
                 <label for="dateDebutEncheres">Début de l'enchère</label>
-                <input type="date" id="dateDebutEncheres" th:field="*{dateDebutEncheres}" required>
+                <input type="date" id="dateDebutEncheres" name="DebutEnchere" required>
             </div>
             <div>
                 <label for="dateFinEncheres">Fin de l'enchère</label>
-                <input type="date" id="dateFinEncheres" th:field="*{dateFinEncheres}" required>
+                <input type="date" id="dateFinEncheres" name="FinEnchere" required>
 
-            </div><!--marche pas car pas co--><!--
-            <fieldset>-->
-            <!--        <legend>Retrait</legend>-->
-            <!--        <div>--><!--          <label for="rue">Rue</label>-->
-            <!--          <input type="text" id="rue" th:field="*{utilisateur.getRue()}" required>-->
-            <!--        </div>--><!--        <div>--><!--          <label for="codePostal">Code postal</label>-->
-            <!--          <input type="text" id="codePostal" th:field="*{utilisateur.getCodePostal()}" required>-->
-            <!--        </div>--><!--        <div>--><!--          <label for="ville">Ville</label>-->
-            <!--          <input type="text" id="ville" th:field="*{utilisateur.getVille()}" required>-->
-            <!--        </div>--><!--      </fieldset>-->
+            </div><!--marche pas car pas co-->
+            <fieldset>
+                    <legend>Retrait</legend>
+                    <div>          <label for="rue">Rue</label>
+                      <input type="text" id="rue" th:value="${utilisateur.rue}" th:field="*{utilisateur.rue}" required>
+                    </div>        <div>          <label for="codePostal">Code postal</label>
+                      <input type="text" id="codePostal" th:field="*{utilisateur.codePostal}" required>
+                    </div>        <div>          <label for="ville">Ville</label>
+                      <input type="text" id="ville" th:field="*{utilisateur.ville}" required>
+                    </div>
+            </fieldset>
+
             <div class="product-image">          <!-- Espace réservé pour l'image si elle n'est pas disponible -->
                 <div class="image-placeholder"><span>Aucune image disponible</span></div>
             </div>

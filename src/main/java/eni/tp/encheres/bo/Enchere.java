@@ -4,29 +4,26 @@ import java.util.Date;
 
 public class Enchere {
 
+    private int noUtilisateur;
+    private int noArticle;
     private Date dateEnchere;
     private int montantEnchere;
-    private int id;
-    private String nomObjet;
 
-    public String getNomObjet() {return nomObjet;}
-
-    public void setNomObjet(String nomObjet) {this.nomObjet = nomObjet;}
-
-    public int getId() {
-        return id;
+    // Getters and Setters
+    public int getNoUtilisateur() {
+        return noUtilisateur;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setNoUtilisateur(int noUtilisateur) {
+        this.noUtilisateur = noUtilisateur;
     }
 
-    public int getMontantEnchere() {
-        return montantEnchere;
+    public int getNoArticle() {
+        return noArticle;
     }
 
-    public void setMontantEnchere(int montantEnchere) {
-        this.montantEnchere = montantEnchere;
+    public void setNoArticle(int noArticle) {
+        this.noArticle = noArticle;
     }
 
     public Date getDateEnchere() {
@@ -37,6 +34,11 @@ public class Enchere {
         this.dateEnchere = dateEnchere;
     }
 
+    public int getMontantEnchere() {
+        return montantEnchere;
+    }
 
-
+    public void setMontantEnchere(int montantEnchere) {
+        this.montantEnchere = montantEnchere;
+    }
 }

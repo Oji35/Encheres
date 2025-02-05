@@ -53,7 +53,7 @@ public class ArticleDAOImpl implements ArticleDAO {
             "CATEGORIES c ON a.no_categorie = c.no_categorie " +
             "WHERE a.no_article = ?";
 //            "SELECT * from ARTICLES_VENDUS where no_article=?";
-    static final String INSERT = "INSERT INTO ARTICLES_VENDUS (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie) VALUES (?,?,?,?,?,?,?,?)";
+    static final String INSERT = "INSERT INTO ARTICLES_VENDUS (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie) VALUES (:nom_article, :description, :date_debut_encheres, :date_fin_encheres, :prix_initial, :prix_vente, :no_utilisateur, :no_categorie)";
     static final String DELETE = "DELETE FROM ARTICLES_VENDUS where no_article=?";
     static final String UPDATE = "UPDATE ARTICLES_VENDUS SET nom_article=?, description=?, date_debut_encheres=?, date_fin_encheres=?, prix_initial=?, prix_vente=?, no_utilisateur=?, no_categorie=? WHERE no_article=?";
 
@@ -114,7 +114,7 @@ public class ArticleDAOImpl implements ArticleDAO {
         namedparameters.addValue("date_fin_encheres", article.getDateFinEncheres());
         namedparameters.addValue("prix_initial", article.getPrix_initial());
         namedparameters.addValue("prix_vente", article.getPrixVente());
-        namedparameters.addValue("no_utilisateur", article.getNoUtilisateur());
+        namedparameters.addValue("no_utilisateur", article.getUtilisateur().getNo_Utilisateur());
         namedparameters.addValue("no_categorie", article.getNoCategorie());
 
 

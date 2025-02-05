@@ -117,6 +117,7 @@ public class UtilisateurController {
         String username = userDetails.getUsername();
         // Use the getUtilisateurByUsername method to get the Utilisateur object
         Utilisateur utilisateur = utilisateurService.getUtilisateurByUsername(username);
+        System.out.println("Numero utilisateur connecté : " + utilisateur.getNo_Utilisateur());
 
         if (utilisateur != null) {
             model.addAttribute("utilisateur", utilisateur);
