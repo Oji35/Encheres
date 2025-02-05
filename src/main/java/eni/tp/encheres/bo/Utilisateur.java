@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Utilisateur {
 
-    private int numeroUtilisateur;
+    private int no_Utilisateur;
     private String pseudo;
     private String nom;
     private String prenom;
@@ -17,11 +17,11 @@ public class Utilisateur {
     private int credit;
     private boolean admin= false;
 
-    public Utilisateur(int numeroUtilisateur, String pseudo, String nom, String prenom,
+    public Utilisateur(int no_Utilisateur, String pseudo, String nom, String prenom,
                        String email, int telephone, String rue, int codePostal,
                        String ville, String motDePasse, int credit, boolean admin) {
 
-        this.numeroUtilisateur = numeroUtilisateur;
+        this.no_Utilisateur = no_Utilisateur;
         this.pseudo = pseudo;
         this.nom = nom;
         this.prenom = prenom;
@@ -35,15 +35,15 @@ public class Utilisateur {
         this.admin = admin;
     }
 
-    public int getNumeroUtilisateur() {
-        return numeroUtilisateur;
+    public int getNo_Utilisateur() {
+        return no_Utilisateur;
     }
 
     public Utilisateur() {
     }
 
-    public void setNumeroUtilisateur(int numeroUtilisateur) {
-        this.numeroUtilisateur = numeroUtilisateur;
+    public void setNo_Utilisateur(int no_Utilisateur) {
+        this.no_Utilisateur = no_Utilisateur;
     }
 
     public String getPseudo() {
@@ -137,7 +137,7 @@ public class Utilisateur {
     @Override
     public String toString() {
         return "Utilisateur{" +
-                "numeroUtilisateur=" + numeroUtilisateur +
+                "numeroUtilisateur=" + no_Utilisateur +
                 ", pseudo='" + pseudo + '\'' +
                 ", nom='" + nom + '\'' +
                 ", prenom='" + prenom + '\'' +
