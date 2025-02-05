@@ -42,7 +42,7 @@ public class ArticleVendu {
     }
 
     public int getNoUtilisateur() {
-        return utilisateur.getNumeroUtilisateur();
+        return utilisateur.getNo_Utilisateur();
     }
 
     public int getNoCategorie() {

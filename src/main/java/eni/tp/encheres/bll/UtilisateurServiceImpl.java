@@ -65,7 +65,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         utilisateurDAO.updateUtilisateur(utilisateur);
         System.out.println("UtilisateurService UPDATE : " + utilisateur.toString());
         for (int i = 0; i < utilisateurs.size(); i++) {
-            if (utilisateurs.get(i).getNumeroUtilisateur() == utilisateur.getNumeroUtilisateur()) {
+            if (utilisateurs.get(i).getNo_Utilisateur() == utilisateur.getNo_Utilisateur()) {
                 utilisateurs.set(i, utilisateur);
                 return;
             }
