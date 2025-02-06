@@ -3,9 +3,10 @@
 <title>Page de connexion</title>
 
 <main>
+    <h1>Inscrivez-vous</h1>
     <div class="inscription-container">
         <form th:action="@{/inscription}" method="post">
-            <h1>Inscrivez-vous</h1>
+
             <ul class="flex-outer">
                 <li>
                     <label for="inputUsername">Votre pseudo</label>
@@ -45,7 +46,7 @@
                     <input class="inscription-input" id="inputCity" type="text" name="ville" required />
                 </li>
                 <li>
-                    <button type="submit">S'inscrire</button>
+                    <button type="submit" style="align-items: center">S'inscrire</button>
                 </li>
             </ul>
         </form>

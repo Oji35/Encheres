@@ -11,7 +11,10 @@ body {
     color: #333;
     line-height: 1.6;
 }
+h1{
 
+    margin-left: 15%;
+}
 /* Structure principale de la page */
 .container {
     width: 90%;
@@ -66,8 +69,20 @@ header ul li a {
     border: none;
     cursor: pointer;
     transition: background-color 0.3s ease, font-size 0.3s ease;
+    justify-content: center;
 }
-
+button{
+    padding: 8px 12px;
+    border-radius: 5px;
+    background-color:#3498db ;
+    color:#fff ;
+    font-weight: bold;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, font-size 0.3s ease;
+    justify-content: center;
+}
 header ul li button:hover,
 header ul li a:hover {
     background-color: #ddd;
@@ -122,6 +137,9 @@ header ul li a:hover {
     grid-template-columns: repeat(2, 1fr);
     gap: 80px;
     padding: 80px;
+    margin-left: 80px;
+    margin-bottom: 80px;
+    margin-right: 80px;
 }
 
 /* Carte d'article */
@@ -133,8 +151,16 @@ header ul li a:hover {
     text-align: center;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
+footer{
 
+    color: #3498db;
+    padding: 15px 20px;
+}
 .product-card:hover {
     transform: translateY(-15px);
 }
@@ -151,6 +177,7 @@ header ul li a:hover {
     color: #aaa;
     font-weight: bold;
     margin-bottom: 15px;
+    text-align: center;
 }
 
 .product-image span {
@@ -212,7 +239,7 @@ header ul li a:hover {
     gap: 35px;
 }
 
-.product-image {
+.image-section {
     flex: 1;
     max-width: 300px;
     display: flex;
@@ -232,32 +259,32 @@ header ul li a:hover {
     color: #aaa;
 }
 
-.nouvelle-vente-form {
+.description-section {
     flex: 2;
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-.nouvelle-vente-form div {
+.description-section div {
     display: flex;
     flex-direction: column;
 }
 
-.nouvelle-vente-form label {
+.description-section label {
     font-weight: bold;
 }
 
-.nouvelle-vente-form input,
-.nouvelle-vente-form textarea,
-.nouvelle-vente-form select {
+.description-section input,
+.description-section textarea,
+.description-section select {
     width: 100%;
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ddd;
 }
 
-.nouvelle-vente-form button {
+.description-section button {
     background-color: #3498db;
     color: white;
     padding: 10px;
@@ -266,7 +293,7 @@ header ul li a:hover {
     cursor: pointer;
 }
 
-.nouvelle-vente-form button:hover {
+.description-section button:hover {
     background-color: #2980b9;
 }
 
@@ -288,16 +315,17 @@ footer {
     margin-top: 40px;
     padding: 20px;
     font-size: 0.9em;
-    color: #888;
-    background: #fff;
+    color:black;
+    background: #3498db;
     border-top: 1px solid #ddd;
 }
+
 /* Styles spécifiques pour la page de connexion */
 .login-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 80vh;
+    height: 60vh;
     background-color: #f4f4f4;
 }
 
@@ -361,12 +389,15 @@ footer {
 .login-button:hover {
     background-color: #2980b9;
 }
+
 /* Styles spécifiques pour la page d'inscription */
 .inscription-container {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    height: 100vh;
+    justify-content: center;
+    height: 78vh;
+    margin-bottom: 200px;
     background-color: #f4f4f4;
 }
 
@@ -436,19 +467,224 @@ footer {
 
 
 
+.flex-outer li {
+    display: flex;
+    justify-content: center;
+    align-items: center;    /* Centre verticalement */
+}
+
+.flex-outer li button {
+    padding: 8px 12px;
+    border-radius: 5px;
+    background-color: #3498db;
+    color: #fff;
+    font-weight: bold;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, font-size 0.3s ease;
+}
+
+.flex-outer li button:hover {
+    background-color: #2980b9;
+}
+
+
 /* Responsive Design */
 @media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    header ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
     .nouvelle-vente-container {
         flex-direction: column;
         align-items: center;
     }
 
-    .product-image {
+    .image-section {
         max-width: 100%;
     }
 
-    .nouvelle-vente-form {
+    .description-section {
+        width: 100%;
+    }
+
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .product-card {
+        padding: 15px;
+    }
+
+    .product-image {
+        height: 150px;
+    }
+
+    .filtres {
+        width: 90%;
+        max-width: 400px;
+    }
+
+    .login-container,
+    .inscription-container {
+        height: auto;
+        padding: 20px;
+    }
+
+    .login-container form,
+    .inscription-container form {
+        padding: 30px;
+    }
+
+    .login-container h1,
+    .inscription-container h1 {
+        font-size: 1.5em;
+    }
+
+    .login-input,
+    .inscription-input {
+        font-size: 1em;
+    }
+
+    .login-button,
+    .inscription-button {
+        font-size: 1em;
+        padding: 12px;
+    }
+
+    .button-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .button-container button {
         width: 100%;
     }
 }
 
+/* Styles pour le conteneur des fieldsets */
+.fieldset {
+    display: flex; /* Utiliser Flexbox pour disposer les éléments côte à côte */
+    gap: 20px; /* Espace entre les fieldsets */
+}
+
+/* Styles pour les fieldsets */
+.fieldset fieldset {
+    border: none; /* Supprimer le rectangle autour des fieldsets */
+    margin: 0; /* Supprimer les marges par défaut */
+    padding: 0; /* Supprimer les paddings par défaut */
+}
+
+/* Styles pour les légendes des fieldsets */
+.fieldset legend {
+    font-weight: bold; /* Rendre les légendes en gras */
+    margin-bottom: 10px; /* Ajouter un espace en dessous des légendes */
+}
+
+/* Styles pour les inputs à l'intérieur des fieldsets */
+.fieldset input[type="checkbox"] {
+    margin: 5px 0; /* Ajouter un espace autour des checkboxes */
+}
+
+/* Styles pour le conteneur des boutons */
+.button-container {
+    display: flex;
+    justify-content: center; /* Centrer horizontalement */
+    gap: 10px; /* Espace entre les boutons */
+    margin-top: 20px; /* Espace au-dessus des boutons */
+}
+
+/* Styles pour les boutons */
+.button-container button {
+    padding: 10px 20px;
+    font-size: 1.2em;
+    border-radius: 5px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button-container button:hover {
+    background-color: #2980b9;
+}
+
+/* Styles pour le conteneur principal de la page de détail */
+.product-detail-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    margin-bottom: 80px;
+    margin-top: 80px;
+}
+
+/* Style pour le titre */
+.product-detail-container h1 {
+    text-align: left;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+/* Style pour la section image */
+.product-image {
+
+    text-align: center;
+    margin-bottom: 20px;
+    width: 300px;
+    height: 200px;
+}
+
+/* Style pour le placeholder de l'image */
+.image-placeholder {
+    border: 1px solid #ccc;
+    padding: 40px;
+    background-color: #f9f9f9;
+    width: 300px;
+    height: 200px;
+    margin: 60px;
+}
+
+/* Style pour les informations de l'article */
+.product-info {
+    width: 60%;
+    text-align: left;
+    margin-top: 60px;
+}
+
+/* Style pour les paragraphes des informations de l'article */
+.product-info p {
+    margin: 10px 0;
+}
+
+/* Styles pour les formulaires */
+.form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.form-group label {
+    width: 150px;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.form-group input {
+    flex: 1;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}

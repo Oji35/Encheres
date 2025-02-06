@@ -27,19 +27,19 @@ import java.util.List;
 @RequestMapping
 public class EnchereController {
 
-    private final ArticleServiceImpl articleServiceImpl;
-
     @Autowired
     private ArticleService articleService;
     @Autowired
+    private CategoriesService categoriesService;
     private UtilisateurService utilisateurService;
 
     @Autowired
     private EnchereService enchereService;
 
-    public EnchereController(ArticleServiceImpl articleServiceImpl, ArticleService articleService, EnchereService enchereService) {
+    public EnchereController(CategoriesService categoriesService, UtilisateurService utilisateurService, ArticleService articleService, EnchereService enchereService) {
+        this.categoriesService = categoriesService;
+        this.utilisateurService = utilisateurService;
         this.articleService = articleService;
-        this.articleServiceImpl = articleServiceImpl;
         this.enchereService = enchereService;
     }
 
@@ -70,6 +70,7 @@ public class EnchereController {
 
     @GetMapping("/detail")
     public String afficherDetailArticle(@RequestParam(name = "id") int id, Model model) {
+//        model.addAttribute("categories", categoriesService.getCategoriebyID(id));
         ArticleVendu article = articleService.getArticleVendubyID(id);
         System.out.println(article);
 
@@ -105,8 +106,7 @@ public class EnchereController {
     }
 
 
-    @Autowired
-    private CategoriesService categoriesService; // Injection du service
+    // Injection du service
 
     @GetMapping("/nouvelle-vente")
     public String afficherFormulaire(@AuthenticationPrincipal UserDetails userDetails,Model model) {
@@ -149,6 +149,7 @@ public class EnchereController {
         articleService.addArticleVendu(newArticle);
         return "redirect:/view-encheres";
     }
+
 
 //    @PostMapping("/nouvelle-vente")
 //    public String enregistrerVente(@ModelAttribute ArticleVendu article, BindingResult result, Model model) {

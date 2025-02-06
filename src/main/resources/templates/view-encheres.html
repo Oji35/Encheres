@@ -1,8 +1,23 @@
+<!DOCTYPE html>
 <html data-th-replace="~{layout::layout(title=~{::title}, main=~{::main})}">
-<title>Liste des Enchères</title>
+<head>
+    <title>Liste des Enchères</title>
+    <link rel="stylesheet" data-th-href="@{/css/style.css}">
+</head>
+<body>
+<header>
+    <div class="entete-gauche">
+        <img src="logo.png" alt="Logo">
+        <ul>
+            <li><a href="/">Accueil</a></li>
+            <li><a href="/articles">Articles</a></li>
+            <li><a href="/contact">Contact</a></li>
+        </ul>
+    </div>
+</header>
 <main>
+    <h1>Liste des Enchères</h1>
     <div class="container">
-        <h1>Liste des Enchères</h1>
 
 
         <form method="get" action="/articles">
@@ -10,15 +25,11 @@
                 <input class="search-input" type="text" name="keyword" placeholder="Le nom de l'article contient"
                        th:value="${keyword}">
 
-                <select name="category">
-                    <option value="Toutes" th:selected="${category == null || category == 'Toutes'}">Toutes</option>
-                    <option value="Informatique" th:selected="${category == 'Informatique'}">Informatique</option>
-                    <option value="Ameublement" th:selected="${category == 'Ameublement'}">Ameublement</option>
-                    <option value="Vêtement" th:selected="${category == 'Vêtement'}">Vêtement</option>
-                    <option value="Sport&Loisirs" th:selected="${category == 'Sport&Loisirs'}">Sport & Loisirs</option>
+                <select id="category" name="category">
+                    <option th:each="c : ${categories}" th:value="${c.noCategorie}" th:text="${c.libelle}"></option>
                 </select>
 
-                <div th:if="${isAuthenticated}">
+                <div class="fieldset" th:if="${#authentication != null && #authentication.name != 'anonymousUser'}">
                     <fieldset>
                         <legend>Achats</legend>
                         <input type="checkbox" name="filter" value="encheres_ouvertes"
@@ -38,46 +49,37 @@
                                th:checked="${filter == 'ventes_terminees'}"> ventes terminées<br>
                     </fieldset>
                 </div>
-                <input type="submit" value="Rechercher" class="search-button">
-
+                <div class="modifier-profil">
+                    <input type="submit" value="Rechercher" class="search-button">
+                </div>
             </div>
         </form>
     </div>
 
-    <!--creation de la table-->
-    <table>
-        <thead>
-        <tr>
-            <th>Nom de l'Article</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr data-th-each="c : ${articles}">
-            <td>
-                <div class="product-card">
-                    <div class="product-image">
-                        <!-- Image de l'article (à ajouter plus tard) -->
-                        <span>Aucune image</span>
-                    </div>
-                    <div class="product-name" data-th-text="${c.nomArticle}"></div>
-                    <div class="product-name" data-th-text="${c.getUtilisateur().prenom}"></div>
+    <!-- Création de la grille des produits -->
+    <div class="product-grid">
+        <div th:each="c : ${articles}">
+            <div class="product-card">
+                <div class="product-image">
+                    <!-- Image de l'article (à ajouter plus tard) -->
+                    <span><a th:href="@{/detail(id=${c.noArticle})}">Aucune image</a></span>
                 </div>
-            </td>
-            <td>
-        <span class="action">
-          <a th:href="@{/detail(id=${c.noArticle})}">Détail</a>
-          <a th:href="@{/modifier(id=${c.noArticle})}">Modifier</a>
-          <form method="post" th:action="@{/supprimer}" style="display:inline;">
-            <input type="hidden" name="id" th:value="${c.noArticle}">
-            <button type="submit" class="link-button">Supprimer</button>
-          </form>
-        </span>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+                <div class="product-name" data-th-text="${c.nomArticle}"></div>
+                <div class="product-name">Vendu par : <span data-th-text="${c.getUtilisateur().pseudo}"></span></div>
 
+                <div class="product-actions">
+                    <a th:href="@{/detail(id=${c.noArticle})}">Détail</a>
 
+                    <a th:href="@{/modifier(id=${c.noArticle})}"  th:if="${c.getUtilisateur().pseudo==#authentication.name}">Modifier</a>
+                    <form method="post" th:action="@{/supprimer}" style="display:inline;" th:if="${c.getUtilisateur().pseudo==#authentication.name}">
+                        <input type="hidden" name="id" th:value="${c.noArticle}">
+                        <button type="submit" class="link-button">Supprimer</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </main>
+
+</body>
 </html>

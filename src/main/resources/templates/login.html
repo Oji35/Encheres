@@ -3,9 +3,10 @@
     <title>Page de connexion</title>
 
 <main>
+    <h1>Connectez-vous</h1>
     <div class="inscription-container">
     <form th:action="@{/login}" method="post">
-        <h1>Connectez-vous</h1>
+
         <ul class="flex-outer">
             <li>
                 <label for="inputUsername">Pseudo</label>
@@ -16,7 +17,7 @@
                 <input class="inscription-input" id="inputPwd" type="password" name="mot_de_passe" />
             </li>
             <li>
-                <button type="submit">Se connecter</button>
+                <button type="submit" style="align-items: center">Se connecter</button>
             </li>
         </ul>
     </form>

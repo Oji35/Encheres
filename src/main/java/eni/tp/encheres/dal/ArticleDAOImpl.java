@@ -26,6 +26,7 @@ public class ArticleDAOImpl implements ArticleDAO {
             "    u.pseudo AS utilisateur_pseudo,\n" +
             "    u.nom AS utilisateur_nom,\n" +
             "    u.prenom AS utilisateur_prenom,\n" +
+            " c.no_categorie AS categorie_no, " +
             "    c.libelle AS categorie_libelle\n" +
             "FROM \n" +
             "    ARTICLES_VENDUS a\n" +
@@ -45,6 +46,7 @@ public class ArticleDAOImpl implements ArticleDAO {
             "u.pseudo AS utilisateur_pseudo, " +
             "u.nom AS utilisateur_nom, " +
             "u.prenom AS utilisateur_prenom, " +
+            " c.no_categorie AS categorie_no, " +
             "c.libelle AS categorie_libelle " +
             "FROM ARTICLES_VENDUS a " +
             "JOIN " +

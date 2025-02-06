@@ -18,9 +18,6 @@
             <li>
                 <button onclick="history.back();">Retour</button>
             </li>
-            <li>
-                <button onclick="window.location='/view-encheres'">Accueil</button>
-            </li>
         </ul>
     </div>
     <div class="entete-connexion">
@@ -30,7 +27,7 @@
                 <a data-th-href="@{/}">Enchères</a>
             </li>
             <li>
-                <a data-th-href="@{/nouvelle-vente}">Vendre un article</a>
+                <a data-th-href="@{/nouvelle-vente}"  th:if="${#authentication != null && #authentication.name != 'anonymousUser'}">Vendre un article</a>
             </li>
             <!--            comparer a anonymousUser marche mieux que is authenticated-->
             <div th:if="${#authentication != null && #authentication.name != 'anonymousUser'}">
@@ -62,6 +59,9 @@
 </header>
 
 <main data-th-replace="${main}"></main>
-
+<footer>
+    <p>Propriété d'Ethan,Audrey,Alexandre et Jonathan.Tous droits réservés, sauf si vous êtes un ninja du clavier. Dans ce cas, bonne chance !</p>
+</footer>
 </body>
+
 </html>

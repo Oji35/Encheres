@@ -20,6 +20,7 @@ public class ArticleRowMapper implements RowMapper<ArticleVendu> {
         user.setPrenom(rs.getString("utilisateur_prenom"));
 
         Categorie categorie = new Categorie();
+        categorie.setNoCategorie(rs.getInt("categorie_no"));
         categorie.setLibelle(rs.getString("categorie_libelle"));
 
         ArticleVendu articleVendu = new ArticleVendu();
