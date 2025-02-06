@@ -71,5 +71,10 @@ public class UtilisateurServiceImpl implements UtilisateurService {
             }
         }
     }
+
+    @Override
+    public Utilisateur findByPseudo(String name) {
+        return null;
+    }
 }
 

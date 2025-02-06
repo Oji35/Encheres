@@ -2,6 +2,7 @@ package eni.tp.encheres.bo;
 
 import java.util.Date;
 
+
 public class Enchere {
 
     private int noUtilisateur;
@@ -40,5 +41,15 @@ public class Enchere {
 
     public void setMontantEnchere(int montantEnchere) {
         this.montantEnchere = montantEnchere;
+    }
+
+    @Override
+    public String toString() {
+        return "Enchere{" +
+                "noUtilisateur=" + noUtilisateur +
+                ", noArticle=" + noArticle +
+                ", dateEnchere=" + dateEnchere +
+                ", montantEnchere=" + montantEnchere +
+                '}';
     }
 }

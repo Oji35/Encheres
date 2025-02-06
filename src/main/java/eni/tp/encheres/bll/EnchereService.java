@@ -1,19 +1,26 @@
 package eni.tp.encheres.bll;
 
 import eni.tp.encheres.bo.Enchere;
-
+import org.springframework.stereotype.Service;
+import java.util.*;
+import eni.tp.encheres.bo.Enchere;
+import org.springframework.stereotype.Service;
+import java.util.ArrayList;
 import java.util.List;
 
+
+@Service
 public interface EnchereService {
-    // Récupérer toutes les enchères pour un article donné
-    List<Enchere> listerEncheresParArticle(int noArticle);
 
-    // Ajouter une nouvelle enchère
-    void proposerEnchere(Enchere enchere);
+    void addEnchere(Enchere enchere) throws Exception;
 
-    // Récupérer la meilleure enchère pour un article
-    Enchere getMeilleureEnchereParArticle(int noArticle);
+    void removeEnchere(int id);
 
-    // Cette méthode ne doit pas avoir de corps dans l'interface
-    Enchere getMeilleureEnchere(int articleId);
+    List<Enchere> getEnchere();
+
+    Enchere getEncherebyID(int id);
+
+    void update(Enchere enchere);
+
+    List<Enchere> getAllArticles();
 }

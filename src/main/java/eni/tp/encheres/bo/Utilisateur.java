@@ -2,7 +2,7 @@ package eni.tp.encheres.bo;
 
 import java.util.Objects;
 
-public class Utilisateur {
+public class Utilisateur  {
 
     private int no_Utilisateur;
     private String pseudo;

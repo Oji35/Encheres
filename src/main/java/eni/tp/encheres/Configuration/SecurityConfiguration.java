@@ -63,6 +63,11 @@ public class SecurityConfiguration {
                     auth.requestMatchers("/accueil-encheres").authenticated();
                     auth.requestMatchers("/profil/*").authenticated();
                     auth.requestMatchers("/modifier-profil/*").authenticated();
+                    auth.requestMatchers("/details-vente/**").authenticated();
+                    auth.requestMatchers("/details-vente/{id}").authenticated();
+                    auth.requestMatchers("/details-vente/encherir").authenticated();
+
+                    auth.requestMatchers("/encherir").permitAll();
                     auth.requestMatchers("/css/*").permitAll();
                     auth.requestMatchers("/images/*").permitAll();
                     auth.requestMatchers("/login").permitAll();
@@ -97,13 +102,12 @@ public class SecurityConfiguration {
 
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http, UserDetailsManager userDetailsManager) throws Exception {
-        System.out.println("userDetailsManager : " + userDetailsManager);
         AuthenticationManagerBuilder authenticationManagerBuilder =
                 http.getSharedObject(AuthenticationManagerBuilder.class);
 
         authenticationManagerBuilder.userDetailsService(userDetailsManager)
                 .passwordEncoder(passwordEncoder());
-        System.out.println("authenticationManager : " + authenticationManagerBuilder);
+
 
         return authenticationManagerBuilder.build();
 

@@ -119,4 +119,7 @@ public class ArticleVendu {
                 ", categorie=" + categorie +
                 '}';
     }
+
+    public void setImageName(String fileName) {
+    }
 }

@@ -50,8 +50,9 @@
             </div>
         </ul>
     </div>
-    <div th:if="${#authentication != null && #authentication.name != 'anonymousUser'}">
+    <div method="GET" th:action="@{/profil}"  th:if="${#authentication != null && #authentication.name != 'anonymousUser'}">
         <p>Bienvenue : <span th:text="${#authentication.name}"></span></p>
+<!--        <p>Crédit restant : <span th:text="${utilisateur.credit} + ' points'"  ></span></p>-->
     </div>
     <div th:if="${#authentication == null || #authentication.name == 'anonymousUser'}">
         <p>Vous n'êtes pas connecté</p>

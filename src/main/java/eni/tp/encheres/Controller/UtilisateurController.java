@@ -3,6 +3,7 @@ package eni.tp.encheres.Controller;
 import eni.tp.encheres.bll.UtilisateurService;
 import eni.tp.encheres.bll.UtilisateurServiceImpl;
 import eni.tp.encheres.bo.Utilisateur;
+import eni.tp.encheres.dal.UtilisateurDAO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,20 +19,24 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @Controller
 @RequestMapping
 public class UtilisateurController {
 
     private final UtilisateurService utilisateurService;
+    private final UtilisateurDAO utilisateurDAO;
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
     @Autowired
     private UtilisateurServiceImpl utilisateurServiceImpl;
 
-    public UtilisateurController(UtilisateurService utilisateurService) {
+    public UtilisateurController(UtilisateurService utilisateurService, UtilisateurDAO utilisateurDAO) {
         this.utilisateurService = utilisateurService;
+        this.utilisateurDAO = utilisateurDAO;
     }
 
     @GetMapping("/login")
@@ -151,7 +156,8 @@ public class UtilisateurController {
     private PasswordEncoder passwordEncoder;
 
     @PostMapping("/modifier-profil")
-    public String postModifierProfil(@RequestParam("nom") String nom,
+    public String postModifierProfil(@RequestParam("pseudo") String pseudo,
+                                    @RequestParam("nom") String nom,
                                      @RequestParam("prenom") String prenom,
                                      @RequestParam("email") String email,
                                      @RequestParam("telephone") int telephone,
@@ -165,17 +171,27 @@ public class UtilisateurController {
 
         if (!password.equals(confirmPassword)) {
             model.addAttribute("error", "Les mots de passe ne correspondent pas.");
-            return "modifier-profil"; // Show error and stay on the profile update page
+            return "modifier-profil";
         }
 
         String username = userDetails.getUsername();
 
         Utilisateur utilisateurModif = utilisateurService.getUtilisateurByUsername(username);
-        if (utilisateurModif == null) {
-            model.addAttribute("error", "Utilisateur non trouvé.");
-            return "modifier-profil"; // Show error and stay on the profile update page
-        }
+//        if (utilisateurModif == null) {
+//            model.addAttribute("error", "Utilisateur non trouvé.");
+//            return "modifier-profil";
+//        }
+//
+//        // Check if the pseudo is already taken by another user
+//        List<Utilisateur> allUsers = utilisateurDAO.readAllUtilisateurs();
+//        for (Utilisateur user : allUsers) {
+//            if (user.getPseudo().equals(pseudo)) {
+//                model.addAttribute("error", "Pseudo déjà utilisé");
+//                return "modifier-profil";
+//            }
+//        }
 
+        utilisateurModif.setPseudo(pseudo);
         utilisateurModif.setNom(nom);
         utilisateurModif.setPrenom(prenom);
         utilisateurModif.setEmail(email);
@@ -193,6 +209,7 @@ public class UtilisateurController {
 
         return "redirect:/profil";
     }
+
     @PostMapping("/profil")
     public String SupprimerProfil (@AuthenticationPrincipal UserDetails userDetails,
                                    Model model, HttpServletRequest request, HttpServletResponse response)    {

@@ -10,11 +10,11 @@
         <form th:action="@{/modifier-profil}" method="post">
           <div class="form-group">
           <label>Pseudo:</label>
-          <input class="inscription-input" type="text" name="pseudo" th:value="${utilisateur.pseudo}" readonly/><br/>
+          <input class="inscription-input" type="text" name="pseudo" th:value="${utilisateur.pseudo}" required/><br/>
           </div>
           <div class="form-group">
           <label>Nom:</label>
-          <input class="inscription-input" type="text" name="nom" th:value="${utilisateur.nom}"required/><br/>
+          <input class="inscription-input" type="text" name="nom" th:value="${utilisateur.nom}" required/><br/>
           </div>
           <div class="form-group">
           <label>Prénom:</label>
@@ -45,7 +45,7 @@
           <input class="inscription-input" type="password" name="password" required/><br/>
           </div>
           <div class="form-group">
-          <label>Mot de passe:</label>
+          <label> Confirmer le Mot de passe:</label>
           <input class="inscription-input" type="password" name="confirmPassword" required/><br/>
           </div>
 

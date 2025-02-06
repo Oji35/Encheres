@@ -1,12 +1,10 @@
-<!DOCTYPE html>
 <html data-th-replace="~{layout::layout(title=~{::title}, main=~{::main})}">
-<head>
-    <title>Profil</title>
-    <link rel="stylesheet" data-th-href="@{/css/style.css}">
-</head>
-<body>
+
+<title>Mon profil</title>
+
 <main class="product-detail-container">
     <h1>Profil de l'utilisateur</h1>
+
     <div class="inscription-container">
         <form method="get">
             <div class="form-group">
@@ -41,6 +39,10 @@
                 <label>Ville:</label>
                 <input class="inscription-input" type="text" name="ville" th:value="${utilisateur.ville}" readonly/>
             </div>
+            <div class="form-group">
+                <label>Crédit:</label>
+                <input class="inscription-input" type="text" name="credit" th:value="${utilisateur.credit}" readonly/>
+            </div>
         </form>
 
         <div class="modifier-profil">
@@ -53,5 +55,5 @@
         </div>
     </div>
 </main>
-</body>
+
 </html>

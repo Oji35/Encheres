@@ -21,4 +21,5 @@ public interface UtilisateurService {
     void update(Utilisateur utilisateur);
 
 
+    Utilisateur findByPseudo(String name);
 }
