@@ -27,7 +27,7 @@
                 <a data-th-href="@{/}">Enchères</a>
             </li>
             <li>
-                <a data-th-href="@{/nouvelle-vente}">Vendre un article</a>
+                <a data-th-href="@{/nouvelle-vente}"  th:if="${#authentication != null && #authentication.name != 'anonymousUser'}">Vendre un article</a>
             </li>
             <!--            comparer a anonymousUser marche mieux que is authenticated-->
             <div th:if="${#authentication != null && #authentication.name != 'anonymousUser'}">

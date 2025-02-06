@@ -63,12 +63,13 @@
                     <span><a th:href="@{/detail(id=${c.noArticle})}">Aucune image</a></span>
                 </div>
                 <div class="product-name" data-th-text="${c.nomArticle}"></div>
-                <div class="product-name">Vendu par : <span data-th-text="${c.getUtilisateur().prenom}"></span></div>
+                <div class="product-name">Vendu par : <span data-th-text="${c.getUtilisateur().pseudo}"></span></div>
 
                 <div class="product-actions">
                     <a th:href="@{/detail(id=${c.noArticle})}">Détail</a>
-                    <a th:href="@{/modifier(id=${c.noArticle})}">Modifier</a>
-                    <form method="post" th:action="@{/supprimer}" style="display:inline;">
+
+                    <a th:href="@{/modifier(id=${c.noArticle})}"  th:if="${c.getUtilisateur().pseudo==#authentication.name}">Modifier</a>
+                    <form method="post" th:action="@{/supprimer}" style="display:inline;" th:if="${c.getUtilisateur().pseudo==#authentication.name}">
                         <input type="hidden" name="id" th:value="${c.noArticle}">
                         <button type="submit" class="link-button">Supprimer</button>
                     </form>
