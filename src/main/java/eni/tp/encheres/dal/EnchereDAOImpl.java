@@ -27,10 +27,10 @@ public class EnchereDAOImpl implements EnchereDAO {
         List<Enchere> encheres = jdbcTemplate.query(SELECT_BY_ARTICLE, new BeanPropertyRowMapper<>(Enchere.class), id);
 
         // Return the first result if it exists, or null if no results
-        if (encheres != null) {
-            return encheres.get(0);
+        if (encheres != null && !encheres.isEmpty()) {
+            return encheres.get(0);  // Return the first bid if found
         } else {
-            return null;
+            return null;  // Return null if no bids were found
         }
     }
 
