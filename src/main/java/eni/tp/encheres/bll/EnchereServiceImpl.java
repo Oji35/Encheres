@@ -43,6 +43,11 @@ public class EnchereServiceImpl implements EnchereService{
                     throw new EnchereException("Crédit insuffisant");
                 }
 
+                // Step 5: Subtract the bid amount from the user's current credit balance
+            int newCreditBalance = credits - enchere.getMontantEnchere();
+            String updateUserCreditsQuery = "UPDATE UTILISATEURS SET credit = ? WHERE no_utilisateur = ?";
+            int rowsUpdated = jdbcTemplate.update(updateUserCreditsQuery, newCreditBalance, enchere.getNoUtilisateur());
+
                 System.out.println("ENCHERE : " + enchere);
                 enchereDAO.updateEnchere(enchere);
 
@@ -50,7 +55,13 @@ public class EnchereServiceImpl implements EnchereService{
         } catch (EmptyResultDataAccessException e) {
             // If no previous bid is found, proceed to create the new bid
             System.out.println("No previous bid for this article, creating a new one.");
+            String userQuery = "SELECT credit FROM UTILISATEURS WHERE no_utilisateur = ?";
+            Integer credits = jdbcTemplate.queryForObject(userQuery, new Object[]{enchere.getNoUtilisateur()}, Integer.class);
+            int newCreditBalance = credits - enchere.getMontantEnchere();
+            String updateUserCreditsQuery = "UPDATE UTILISATEURS SET credit = ? WHERE no_utilisateur = ?";
+            int rowsUpdated = jdbcTemplate.update(updateUserCreditsQuery, newCreditBalance, enchere.getNoUtilisateur());
             enchereDAO.createEnchere(enchere);
+
         }
 
 

@@ -84,6 +84,19 @@ public class EnchereController {
         return "details-vente";
     }
 
+//    //Recupérer l'id Article
+    @GetMapping("/details-article/{id}")
+    public String detailsVente(@PathVariable int id, Model model) {
+        ArticleVendu article = articleService.getArticleVendubyID(id);
+        System.out.println(article);
+
+        Enchere enchere = enchereService.getEncherebyID(id);
+        System.out.println("enchere de getEnchereController :" + enchere);
+        model.addAttribute("article", article);
+        model.addAttribute("enchere", enchere);
+        return "details-vente";
+    }
+
 
     @PostMapping("/details-vente")
     public String posteEnchere(@RequestParam(name = "id") int id) {
