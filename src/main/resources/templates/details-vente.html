@@ -17,8 +17,8 @@
     <div class="product-info">
         <p><strong>Nom de l'article :</strong> <span th:text="${article.nomArticle}"></span></p>
         <p><strong>Description :</strong> <span th:text="${article.description}"></span></p>
-        <p><strong>Categorie :</strong> <span th:text="${article.categorie}"></span></p>
-        <p><strong>Meilleure offre :</strong></p>
+<!--        <p><strong>Categorie :</strong> <span th:text="${article.categorie.getLibelle()}"></span></p>-->
+        <p><strong>Meilleure offre :</strong><span th:text="${article.prixVente}"></span></p>
         <p><strong>Mise à prix :</strong> <span th:text="${article.prix_initial} + ' points'"></span></p>
         <p><strong>Fin de l'enchère :</strong> <span th:text="${article.dateFinEncheres}"></span></p>
     </div>

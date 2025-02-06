@@ -22,15 +22,15 @@ import java.util.List;
 @RequestMapping
 public class EnchereController {
 
-    private final ArticleServiceImpl articleServiceImpl;
 
-    private ArticleService articleService;
-    @Autowired
+    private CategoriesService categoriesService;
     private UtilisateurService utilisateurService;
+    private ArticleService articleService;
 
-    public EnchereController(ArticleServiceImpl articleServiceImpl, ArticleService articleService) {
+    public EnchereController(CategoriesService categoriesService, UtilisateurService utilisateurService, ArticleService articleService) {
+        this.categoriesService = categoriesService;
+        this.utilisateurService = utilisateurService;
         this.articleService = articleService;
-        this.articleServiceImpl = articleServiceImpl;
     }
 
     @GetMapping("/")
@@ -42,6 +42,7 @@ public class EnchereController {
     public String accueil(Model model) {
         model.addAttribute("keyword", "");
         model.addAttribute("category", "Toutes");
+        model.addAttribute("categories", categoriesService.getAllCategorie());
         return "accueil-encheres";
     }
 
@@ -60,10 +61,13 @@ public class EnchereController {
 
     @GetMapping("/detail")
     public String afficherDetailArticle(@RequestParam(name = "id") int id, Model model) {
+//        model.addAttribute("categories", categoriesService.getCategoriebyID(id));
         ArticleVendu article = articleService.getArticleVendubyID(id);
+        System.out.println(article);
         if (article == null) {
             return "redirect:/erreur";
         }
+        System.out.println(article);
         model.addAttribute("article", article);
         return "details-vente";
     }
@@ -73,8 +77,6 @@ public class EnchereController {
         articleService.removeArticleVenduParId(id);
         return "view-encheres";
     }
-    @Autowired
-    private CategoriesService categoriesService; // Injection du service
 
     @GetMapping("/nouvelle-vente")
     public String afficherFormulaire(@AuthenticationPrincipal UserDetails userDetails,Model model) {
