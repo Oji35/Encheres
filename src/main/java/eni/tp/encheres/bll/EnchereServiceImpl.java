@@ -1,46 +1,87 @@
 package eni.tp.encheres.bll;
 
+import eni.tp.encheres.bll.EnchereService;
 import eni.tp.encheres.bo.Enchere;
+import eni.tp.encheres.bo.EnchereException;
+import eni.tp.encheres.bo.Utilisateur;
 import eni.tp.encheres.dal.EnchereDAO;
+import eni.tp.encheres.dal.EnchereDAOImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
 import java.util.List;
 
 @Service
-public class EnchereServiceImpl implements EnchereService {
-
-    private final EnchereDAO enchereDAO;
-
+public class EnchereServiceImpl implements EnchereService{
     @Autowired
-    public EnchereServiceImpl(EnchereDAO enchereDAO) {
-        this.enchereDAO = enchereDAO;
+    private JdbcTemplate jdbcTemplate;
+    @Autowired
+    private EnchereDAO enchereDAO;
+
+    @Override
+    public void addEnchere(Enchere enchere) throws EnchereException {
+        try {
+            String selectQuery = "SELECT montant_enchere FROM ENCHERES WHERE no_article = ?";
+            Integer previous = jdbcTemplate.queryForObject(selectQuery, new Object[]{enchere.getNoArticle()}, Integer.class);
+            System.out.println("Enchère précédente : " + previous);
+
+                if (enchere.getMontantEnchere() < previous) {
+                    throw new EnchereException("Le montant proposé doit être supérieur à " + previous.toString());
+                }
+
+                String userQuery = "SELECT credit FROM UTILISATEURS WHERE no_utilisateur = ?";
+                Integer credits = jdbcTemplate.queryForObject(userQuery, new Object[]{enchere.getNoUtilisateur()}, Integer.class);
+                System.out.println("Crédits : " + credits);
+
+                if (credits == null) {
+                    throw new EnchereException("Erreur interne");
+                }
+                if (enchere.getMontantEnchere() > credits) {
+                    throw new EnchereException("Crédit insuffisant");
+                }
+
+                System.out.println("ENCHERE : " + enchere);
+                enchereDAO.updateEnchere(enchere);
+
+
+        } catch (EmptyResultDataAccessException e) {
+            // If no previous bid is found, proceed to create the new bid
+            System.out.println("No previous bid for this article, creating a new one.");
+            enchereDAO.createEnchere(enchere);
+        }
+
+
     }
 
     @Override
-    public List<Enchere> listerEncheresParArticle(int noArticle) {
-        return enchereDAO.readEncheresParArticle(noArticle);
+    public void removeEnchere(int id) {
+//        jdbcTemplate.update();
     }
 
     @Override
-    public void proposerEnchere(Enchere enchere) {
-        enchereDAO.createEnchere(enchere);
+    public List<Enchere> getEnchere() {
+        return List.of();
     }
 
     @Override
-    public Enchere getMeilleureEnchereParArticle(int noArticle) {
-        List<Enchere> encheres = enchereDAO.readEncheresParArticle(noArticle);
-        return encheres.stream()
-                .max((e1, e2) -> Integer.compare(e1.getMontantEnchere(), e2.getMontantEnchere()))
-                .orElse(null);
+    public Enchere getEncherebyID(int id) {
+        System.out.println("ID de getEncherebyID :" + id);
+        Enchere enchere = enchereDAO.readEncheresParArticle(id);
+        System.out.println(enchere);
+
+            return enchere;
     }
 
     @Override
-    public Enchere getMeilleureEnchere(int articleId) {
-        List<Enchere> encheres = enchereDAO.readEncheresParArticle(articleId);
-        return encheres.stream()
-                .max(Comparator.comparingInt(Enchere::getMontantEnchere))
-                .orElse(null);
+    public void update(Enchere enchere) {
+
+    }
+
+    @Override
+    public List<Enchere> getAllArticles() {
+        return List.of();
     }
 }

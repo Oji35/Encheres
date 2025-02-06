@@ -16,12 +16,28 @@
     <!-- Informations sur l'article -->
     <div class="product-info">
         <p><strong>Nom de l'article :</strong> <span th:text="${article.nomArticle}"></span></p>
+        <p><strong>ID de l'article :</strong> <span th:text="${article.noArticle}"></span></p>
         <p><strong>Description :</strong> <span th:text="${article.description}"></span></p>
         <p><strong>Categorie :</strong> <span th:text="${article.categorie}"></span></p>
         <p><strong>Meilleure offre :</strong></p>
         <p><strong>Mise à prix :</strong> <span th:text="${article.prix_initial} + ' points'"></span></p>
+        <p><strong>Dernière enchère :</strong>
+            <span th:if="${enchere != null}" th:text="${enchere.montantEnchere + ' points'}"></span>
+            <span th:if="${enchere == null}">Aucune enchère</span></p>
         <p><strong>Fin de l'enchère :</strong> <span th:text="${article.dateFinEncheres}"></span></p>
     </div>
+    <form method="POST" th:action="@{/encherir}">
+        <input type="hidden" name="id" th:value="${article.noArticle}" />
+        <div>
+
+            <label for="montantEnchere">Entrez votre montant d'enchère :</label>
+            <input type="number" id="montantEnchere" name="montantEnchere" min="0" step="5" required />
+
+
+        </div>
+        <button type="submit">Soumettre l'enchère</button>
+    </form>
+
 </main>
 
 </html>

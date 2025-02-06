@@ -1,12 +1,13 @@
 package eni.tp.encheres.Controller;
 
-import eni.tp.encheres.bll.ArticleService;
-import eni.tp.encheres.bll.ArticleServiceImpl;
-import eni.tp.encheres.bll.CategoriesService;
-import eni.tp.encheres.bll.UtilisateurService;
+import eni.tp.encheres.bll.*;
 import eni.tp.encheres.bo.ArticleVendu;
+import eni.tp.encheres.bo.Enchere;
+import eni.tp.encheres.bo.EnchereException;
+import eni.tp.encheres.bo.Utilisateur;
 import eni.tp.encheres.dal.CategorieDAOImpl;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,8 +15,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.sql.SQLOutput;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -24,13 +29,18 @@ public class EnchereController {
 
     private final ArticleServiceImpl articleServiceImpl;
 
+    @Autowired
     private ArticleService articleService;
     @Autowired
     private UtilisateurService utilisateurService;
 
-    public EnchereController(ArticleServiceImpl articleServiceImpl, ArticleService articleService) {
+    @Autowired
+    private EnchereService enchereService;
+
+    public EnchereController(ArticleServiceImpl articleServiceImpl, ArticleService articleService, EnchereService enchereService) {
         this.articleService = articleService;
         this.articleServiceImpl = articleServiceImpl;
+        this.enchereService = enchereService;
     }
 
     @GetMapping("/")
@@ -61,18 +71,27 @@ public class EnchereController {
     @GetMapping("/detail")
     public String afficherDetailArticle(@RequestParam(name = "id") int id, Model model) {
         ArticleVendu article = articleService.getArticleVendubyID(id);
+        System.out.println(article);
+
+        Enchere enchere = enchereService.getEncherebyID(id);
+        System.out.println("enchere de getEnchereController :" + enchere);
+
         if (article == null) {
             return "redirect:/erreur";
         }
         model.addAttribute("article", article);
+        model.addAttribute("enchere", enchere);
         return "details-vente";
     }
+
 
     @PostMapping("/details-vente")
     public String posteEnchere(@RequestParam(name = "id") int id) {
         articleService.removeArticleVenduParId(id);
         return "view-encheres";
     }
+
+
     @Autowired
     private CategoriesService categoriesService; // Injection du service
 
@@ -118,7 +137,6 @@ public class EnchereController {
         return "redirect:/view-encheres";
     }
 
-
 //    @PostMapping("/nouvelle-vente")
 //    public String enregistrerVente(@ModelAttribute ArticleVendu article, BindingResult result, Model model) {
 //        if (result.hasErrors()) {
@@ -130,4 +148,52 @@ public class EnchereController {
 //        return "redirect:/ventes";
 //    }
 
+
+
+
+    //Recuperer les données de l'enchere
+    @PostMapping("/encherir")
+    public String submitById(@RequestParam(name = "id") int id,
+                             @RequestParam(name = "montantEnchere") int montantEnchere,
+                             @AuthenticationPrincipal UserDetails userDetails, // Get the authenticated user
+                             RedirectAttributes redirectAttributes,
+                             Model model) throws Exception {
+
+
+        // Get the current logged-in user ID (assuming your user object has the user ID)
+        System.out.println("Numéro article envoyé par le Postmapping : " + id);
+        String username = userDetails.getUsername();
+
+        Utilisateur utilisateur = utilisateurService.getUtilisateurByUsername(username);
+
+        // Set the current date as the bid date
+        Date dateEnchere = new Date(); // You can use LocalDateTime.now() if you need a more specific timestamp
+
+        System.out.println("Date envoyée " + dateEnchere);
+
+        // Create a new Encheres instance
+        Enchere enchere = new Enchere();
+        enchere.setNoUtilisateur(utilisateur.getNo_Utilisateur());
+        enchere.setNoArticle(id);
+        enchere.setMontantEnchere(montantEnchere);
+        enchere.setDateEnchere(dateEnchere);
+
+        System.out.println(enchere.toString());
+
+        enchereService.addEnchere(enchere);
+        model.addAttribute("message","Enchère enregistrée avec succès!");
+        return "redirect:/details-article/" + id;
+    }
+
 }
+
+
+//@GetMapping("/detail")
+//public String afficherDetailArticle(@RequestParam(name = "id") int id, Model model) {
+//    ArticleVendu article = articleService.getArticleVendubyID(id);
+//    if (article == null) {
+//        return "redirect:/erreur";
+//    }
+//    model.addAttribute("article", article);
+//    return "details-vente";
+//}
