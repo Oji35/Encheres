@@ -72,7 +72,6 @@ public class EnchereController {
     public String afficherDetailArticle(@RequestParam(name = "id") int id, Model model) {
 //        model.addAttribute("categories", categoriesService.getCategoriebyID(id));
         ArticleVendu article = articleService.getArticleVendubyID(id);
-        System.out.println(article);
 
         Enchere enchere = enchereService.getEncherebyID(id);
         System.out.println("enchere de getEnchereController :" + enchere);
@@ -89,7 +88,6 @@ public class EnchereController {
     @GetMapping("/details-article/{id}")
     public String detailsVente(@PathVariable int id, Model model) {
         ArticleVendu article = articleService.getArticleVendubyID(id);
-        System.out.println(article);
 
         Enchere enchere = enchereService.getEncherebyID(id);
         System.out.println("enchere de getEnchereController :" + enchere);
