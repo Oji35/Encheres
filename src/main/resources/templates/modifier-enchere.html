@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html data-th-replace="~{layout::layout(title=~{::title}, main=~{::main})}">
+
+<title>Modifier Vente</title>
+
+<main>
+  <h1>Modifier vente</h1>
+  <div class="container">
+    <form method="post" th:action="@{/modifier-enchere}" th:object="${article}" enctype="multipart/form-data">
+      <input type="hidden" th:field="*{noArticle}">
+      <div class="nouvelle-vente-container">
+        <div class="image-section">
+          <label for="avatar">Ajouter une image :</label>
+
+          <script>
+            function previewImage(event) {
+              var reader = new FileReader();
+              reader.onload = function() {
+                var output = document.getElementById('imagePreview');
+                output.src = reader.result;
+                output.style.display = "block";
+              };
+              reader.readAsDataURL(event.target.files[0]);
+            }
+          </script>
+          <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" onchange="previewImage(event)" required/>
+          <img id="imagePreview" src="#" alt="Aucune image disponible" style="display:none; max-width:200px;"/>
+
+        </div>
+
+        <div class="description-section">
+          <div>
+            <label for="nomArticle">Nom de l'article</label>
+            <input type="text" id="nomArticle" th:field="*{nomArticle}" required>
+          </div>
+          <div>
+            <label for="description">Description</label>
+            <textarea id="description" th:field="*{description}" required></textarea>
+          </div>
+          <div>
+            <label for="category">Catégorie</label>
+            <select id="category" th:field="*{categorie.noCategorie}">
+              <option th:each="c : ${categories}" th:value="${c.noCategorie}" th:text="${c.libelle}"></option>
+            </select>
+          </div>
+          <div>
+            <label for="prix_initial">Mise à prix</label>
+            <input type="number" id="prix_initial" th:field="*{prix_initial}" required>
+          </div>
+          <div>
+            <label for="dateDebutEncheres">Début de l'enchère</label>
+            <input type="date" id="dateDebutEncheres" th:field="*{dateDebutEncheres}" required>
+          </div>
+          <div>
+            <label for="dateFinEncheres">Fin de l'enchère</label>
+            <input type="date" id="dateFinEncheres" th:field="*{dateFinEncheres}" required>
+          </div>
+          <div class="button-container">
+            <button type="submit">Enregistrer</button>
+            <a href="/">
+              <button type="button">Annuler</button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <div th:if="${message}" class="alert alert-danger">
+      <p th:text="${message}"></p>
+    </div>
+  </div>
+</main>
+
+</html>
